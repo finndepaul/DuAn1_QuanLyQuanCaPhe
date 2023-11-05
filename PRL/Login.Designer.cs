@@ -1,6 +1,6 @@
 ﻿namespace PRL
 {
-    partial class SignUp
+    partial class form_login
     {
         /// <summary>
         /// Required designer variable.
@@ -120,7 +120,7 @@
             btn_Login.Text = "Login";
             btn_Login.UseVisualStyleBackColor = false;
             // 
-            // SignUp
+            // form_login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -134,9 +134,9 @@
             Controls.Add(label2);
             Controls.Add(Login);
             Controls.Add(label1);
-            Name = "SignUp";
+            Name = "form_login";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "SignUp";
+            Text = "Login";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

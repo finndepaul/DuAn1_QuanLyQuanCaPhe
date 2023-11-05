@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PRL
 {
-    public partial class SignUp : Form
+    public partial class form_login : Form
     {
-        public SignUp()
+        public form_login()
         {
             InitializeComponent();
         }
