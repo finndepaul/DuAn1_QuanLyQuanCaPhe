@@ -1,8 +1,8 @@
 namespace PRL
 {
-    public partial class Form1 : Form
+    public partial class f_Home : Form
     {
-        public Form1()
+        public f_Home()
         {
             InitializeComponent();
         }
