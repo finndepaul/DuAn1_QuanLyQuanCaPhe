@@ -37,6 +37,17 @@ namespace PRL
             objForm.Show();
         }
 
-
+        private void btn_Logout_Click(object sender, EventArgs e)
+        {
+            var mess = MessageBox.Show("B xac nhan dang xuat", "Xac nhan", MessageBoxButtons.OKCancel);
+            if (mess == DialogResult.OK)
+            {
+                this.Close();
+            }
+            if (mess == DialogResult.Cancel)
+            {
+                return;
+            }
+        }
     }
 }

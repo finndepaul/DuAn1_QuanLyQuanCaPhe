@@ -11,12 +11,12 @@ using System.Windows.Forms;
 
 namespace PRL
 {
-    public partial class f_login : Form
+    public partial class f_Login : Form
     {
         CoffeeServce _ser = new();
         f_Admin f_Admin = new f_Admin();
         f_Staff f_Staff = new f_Staff();
-        public f_login()
+        public f_Login()
         {
             InitializeComponent();
         }

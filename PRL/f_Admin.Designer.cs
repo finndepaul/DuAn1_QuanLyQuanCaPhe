@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f_Admin));
             btn_Home = new Button();
-            button10 = new Button();
+            btn_Logout = new Button();
             button2 = new Button();
             button4 = new Button();
             button3 = new Button();
@@ -55,21 +55,22 @@
             btn_Home.TextAlign = ContentAlignment.BottomCenter;
             btn_Home.UseVisualStyleBackColor = false;
             // 
-            // button10
+            // btn_Logout
             // 
-            button10.Anchor = AnchorStyles.Bottom;
-            button10.BackColor = Color.White;
-            button10.Font = new Font("Times New Roman", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            button10.ForeColor = SystemColors.ControlText;
-            button10.Image = (Image)resources.GetObject("button10.Image");
-            button10.ImageAlign = ContentAlignment.TopCenter;
-            button10.Location = new Point(12, 961);
-            button10.Name = "button10";
-            button10.Size = new Size(157, 68);
-            button10.TabIndex = 3;
-            button10.Text = "Đăng Xuất";
-            button10.TextAlign = ContentAlignment.BottomCenter;
-            button10.UseVisualStyleBackColor = false;
+            btn_Logout.Anchor = AnchorStyles.Bottom;
+            btn_Logout.BackColor = Color.White;
+            btn_Logout.Font = new Font("Times New Roman", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_Logout.ForeColor = SystemColors.ControlText;
+            btn_Logout.Image = (Image)resources.GetObject("btn_Logout.Image");
+            btn_Logout.ImageAlign = ContentAlignment.TopCenter;
+            btn_Logout.Location = new Point(12, 961);
+            btn_Logout.Name = "btn_Logout";
+            btn_Logout.Size = new Size(157, 68);
+            btn_Logout.TabIndex = 3;
+            btn_Logout.Text = "Đăng Xuất";
+            btn_Logout.TextAlign = ContentAlignment.BottomCenter;
+            btn_Logout.UseVisualStyleBackColor = false;
+            btn_Logout.Click += btn_Logout_Click;
             // 
             // button2
             // 
@@ -180,7 +181,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1924, 1055);
             Controls.Add(btn_Home);
-            Controls.Add(button10);
+            Controls.Add(btn_Logout);
             Controls.Add(button2);
             Controls.Add(button4);
             Controls.Add(button3);
@@ -199,7 +200,7 @@
         #endregion
 
         private Button btn_Home;
-        private Button button10;
+        private Button btn_Logout;
         private Button button2;
         private Button button4;
         private Button button3;

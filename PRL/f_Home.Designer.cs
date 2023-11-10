@@ -28,20 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox3 = new TextBox();
             textBox5 = new TextBox();
             textBox2 = new TextBox();
             textBox4 = new TextBox();
             textBox1 = new TextBox();
             label4 = new Label();
-            label7 = new Label();
-            label5 = new Label();
             label3 = new Label();
             label9 = new Label();
-            label6 = new Label();
             label2 = new Label();
             groupBox3 = new GroupBox();
-            button68 = new Button();
             label8 = new Label();
             label1 = new Label();
             dataGridView1 = new DataGridView();
@@ -53,22 +48,10 @@
             button49 = new Button();
             comboBox2 = new ComboBox();
             comboBox1 = new ComboBox();
-            button66 = new Button();
-            button67 = new Button();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
-            // 
-            // textBox3
-            // 
-            textBox3.Enabled = false;
-            textBox3.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox3.Location = new Point(666, 619);
-            textBox3.Multiline = true;
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(317, 39);
-            textBox3.TabIndex = 4;
             // 
             // textBox5
             // 
@@ -111,26 +94,6 @@
             label4.Size = new Size(0, 26);
             label4.TabIndex = 3;
             // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Times New Roman", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.Location = new Point(651, 836);
-            label7.Name = "label7";
-            label7.Size = new Size(78, 19);
-            label7.TabIndex = 3;
-            label7.Text = "Bàn Trống";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Times New Roman", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(90, 836);
-            label5.Name = "label5";
-            label5.Size = new Size(114, 19);
-            label5.TabIndex = 3;
-            label5.Text = "Bàn Đang Chọn";
-            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -151,16 +114,6 @@
             label9.TabIndex = 3;
             label9.Text = "Trả Lại";
             // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Times New Roman", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(369, 836);
-            label6.Name = "label6";
-            label6.Size = new Size(129, 19);
-            label6.TabIndex = 3;
-            label6.Text = "Bàn Đã Có Khách";
-            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -174,19 +127,14 @@
             // groupBox3
             // 
             groupBox3.Anchor = AnchorStyles.None;
-            groupBox3.Controls.Add(textBox3);
             groupBox3.Controls.Add(textBox5);
             groupBox3.Controls.Add(textBox2);
             groupBox3.Controls.Add(textBox4);
             groupBox3.Controls.Add(textBox1);
             groupBox3.Controls.Add(label4);
-            groupBox3.Controls.Add(label7);
-            groupBox3.Controls.Add(label6);
-            groupBox3.Controls.Add(label5);
             groupBox3.Controls.Add(label3);
             groupBox3.Controls.Add(label9);
             groupBox3.Controls.Add(label2);
-            groupBox3.Controls.Add(button68);
             groupBox3.Controls.Add(label8);
             groupBox3.Controls.Add(label1);
             groupBox3.Controls.Add(dataGridView1);
@@ -198,8 +146,6 @@
             groupBox3.Controls.Add(button49);
             groupBox3.Controls.Add(comboBox2);
             groupBox3.Controls.Add(comboBox1);
-            groupBox3.Controls.Add(button66);
-            groupBox3.Controls.Add(button67);
             groupBox3.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox3.Location = new Point(697, 12);
             groupBox3.Name = "groupBox3";
@@ -208,17 +154,6 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "Tác Vụ";
             groupBox3.Enter += groupBox3_Enter;
-            // 
-            // button68
-            // 
-            button68.BackColor = Color.Green;
-            button68.ForeColor = Color.Green;
-            button68.Location = new Point(291, 827);
-            button68.Name = "button68";
-            button68.Size = new Size(72, 37);
-            button68.TabIndex = 0;
-            button68.Text = "button1";
-            button68.UseVisualStyleBackColor = false;
             // 
             // label8
             // 
@@ -320,28 +255,6 @@
             comboBox1.Size = new Size(265, 25);
             comboBox1.TabIndex = 0;
             // 
-            // button66
-            // 
-            button66.BackColor = Color.Red;
-            button66.ForeColor = Color.Red;
-            button66.Location = new Point(11, 827);
-            button66.Name = "button66";
-            button66.Size = new Size(72, 37);
-            button66.TabIndex = 0;
-            button66.Text = "button1";
-            button66.UseVisualStyleBackColor = false;
-            // 
-            // button67
-            // 
-            button67.BackColor = SystemColors.Control;
-            button67.ForeColor = SystemColors.Control;
-            button67.Location = new Point(570, 827);
-            button67.Name = "button67";
-            button67.Size = new Size(72, 37);
-            button67.TabIndex = 0;
-            button67.Text = "button1";
-            button67.UseVisualStyleBackColor = false;
-            // 
             // f_Home
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -360,21 +273,15 @@
         }
 
         #endregion
-
-        private TextBox textBox3;
         private TextBox textBox5;
         private TextBox textBox2;
         private TextBox textBox4;
         private TextBox textBox1;
         private Label label4;
-        private Label label7;
-        private Label label5;
         private Label label3;
         private Label label9;
-        private Label label6;
         private Label label2;
         private GroupBox groupBox3;
-        private Button button68;
         private Label label8;
         private Label label1;
         private DataGridView dataGridView1;
@@ -386,7 +293,5 @@
         private Button button49;
         private ComboBox comboBox2;
         private ComboBox comboBox1;
-        private Button button66;
-        private Button button67;
     }
 }
