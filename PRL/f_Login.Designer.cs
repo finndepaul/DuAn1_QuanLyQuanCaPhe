@@ -1,6 +1,6 @@
 ﻿namespace PRL
 {
-    partial class f_login
+    partial class f_Login
     {
         /// <summary>
         /// Required designer variable.
@@ -122,7 +122,7 @@
             btn_Login.UseVisualStyleBackColor = false;
             btn_Login.Click += btn_Login_Click;
             // 
-            // f_login
+            // f_Login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -136,7 +136,7 @@
             Controls.Add(label2);
             Controls.Add(Login);
             Controls.Add(label1);
-            Name = "f_login";
+            Name = "f_Login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

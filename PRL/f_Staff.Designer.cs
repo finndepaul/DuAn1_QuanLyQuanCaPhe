@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f_Staff));
             btn_Home = new Button();
-            button10 = new Button();
+            btn_Logout = new Button();
             button4 = new Button();
             panel1 = new Panel();
             SuspendLayout();
@@ -48,23 +48,24 @@
             btn_Home.Text = "Trang Chủ";
             btn_Home.TextAlign = ContentAlignment.BottomCenter;
             btn_Home.UseVisualStyleBackColor = false;
+            btn_Home.Click += btn_Home_Click;
             // 
-            // button10
+            // btn_Logout
             // 
-            button10.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button10.BackColor = Color.White;
-            button10.Font = new Font("Times New Roman", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            button10.ForeColor = SystemColors.ControlText;
-            button10.Image = (Image)resources.GetObject("button10.Image");
-            button10.ImageAlign = ContentAlignment.TopCenter;
-            button10.Location = new Point(12, 955);
-            button10.Name = "button10";
-            button10.Size = new Size(157, 68);
-            button10.TabIndex = 13;
-            button10.Text = "Đăng Xuất";
-            button10.TextAlign = ContentAlignment.BottomCenter;
-            button10.UseVisualStyleBackColor = false;
-            button10.Click += button10_Click;
+            btn_Logout.Anchor = AnchorStyles.Bottom;
+            btn_Logout.BackColor = Color.White;
+            btn_Logout.Font = new Font("Times New Roman", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_Logout.ForeColor = SystemColors.ControlText;
+            btn_Logout.Image = (Image)resources.GetObject("btn_Logout.Image");
+            btn_Logout.ImageAlign = ContentAlignment.TopCenter;
+            btn_Logout.Location = new Point(12, 955);
+            btn_Logout.Name = "btn_Logout";
+            btn_Logout.Size = new Size(157, 68);
+            btn_Logout.TabIndex = 13;
+            btn_Logout.Text = "Đăng Xuất";
+            btn_Logout.TextAlign = ContentAlignment.BottomCenter;
+            btn_Logout.UseVisualStyleBackColor = false;
+            btn_Logout.Click += btn_Logout_Click;
             // 
             // button4
             // 
@@ -82,7 +83,7 @@
             // 
             // panel1
             // 
-            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.Anchor = AnchorStyles.None;
             panel1.Location = new Point(175, 31);
             panel1.Name = "panel1";
             panel1.Size = new Size(1737, 992);
@@ -94,18 +95,20 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1924, 1055);
             Controls.Add(btn_Home);
-            Controls.Add(button10);
+            Controls.Add(btn_Logout);
             Controls.Add(button4);
             Controls.Add(panel1);
             Name = "f_Staff";
             Text = "f_Staff";
+            WindowState = FormWindowState.Maximized;
+            Load += f_Staff_Load;
             ResumeLayout(false);
         }
 
         #endregion
 
         private Button btn_Home;
-        private Button button10;
+        private Button btn_Logout;
         private Button button4;
         private Panel panel1;
     }
