@@ -1,6 +1,6 @@
 ﻿namespace PRL
 {
-    partial class f_Main
+    partial class f_Admin
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f_Main));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f_Admin));
             btn_Home = new Button();
             button10 = new Button();
             button2 = new Button();
@@ -57,13 +57,13 @@
             // 
             // button10
             // 
-            button10.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button10.Anchor = AnchorStyles.Bottom;
             button10.BackColor = Color.White;
             button10.Font = new Font("Times New Roman", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             button10.ForeColor = SystemColors.ControlText;
             button10.Image = (Image)resources.GetObject("button10.Image");
             button10.ImageAlign = ContentAlignment.TopCenter;
-            button10.Location = new Point(12, 975);
+            button10.Location = new Point(12, 961);
             button10.Name = "button10";
             button10.Size = new Size(157, 68);
             button10.TabIndex = 3;
@@ -112,10 +112,10 @@
             // 
             // panel1
             // 
-            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.Anchor = AnchorStyles.None;
             panel1.Location = new Point(175, 51);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1737, 992);
+            panel1.Size = new Size(1737, 978);
             panel1.TabIndex = 11;
             // 
             // button8
@@ -174,7 +174,7 @@
             button9.TextAlign = ContentAlignment.BottomCenter;
             button9.UseVisualStyleBackColor = false;
             // 
-            // f_Main
+            // f_Admin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -189,7 +189,7 @@
             Controls.Add(button6);
             Controls.Add(button7);
             Controls.Add(button9);
-            Name = "f_Main";
+            Name = "f_Admin";
             Text = "f_Main";
             WindowState = FormWindowState.Maximized;
             Load += f_Main_Load;

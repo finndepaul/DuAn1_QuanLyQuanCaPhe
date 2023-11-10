@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PRL
 {
-    public partial class f_Main : Form
+    public partial class f_Admin : Form
     {
-        public f_Main()
+        public f_Admin()
         {
             InitializeComponent();
         }
@@ -36,5 +36,7 @@ namespace PRL
             objForm.Dock = DockStyle.Fill;
             objForm.Show();
         }
+
+
     }
 }
