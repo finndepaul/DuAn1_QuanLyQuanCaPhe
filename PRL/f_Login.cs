@@ -14,7 +14,8 @@ namespace PRL
     public partial class f_login : Form
     {
         CoffeeServce _ser = new();
-        f_Main f_Main = new f_Main();
+        f_Admin f_Admin = new f_Admin();
+        f_Staff f_Staff = new f_Staff();
         public f_login()
         {
             InitializeComponent();
@@ -29,13 +30,13 @@ namespace PRL
             {
                 if (user.Role)
                 {
-                    this.Close();
-                    f_Main.ShowDialog();
+                    this.Hide();
+                    f_Admin.ShowDialog();
                 }
                 else if (!user.Role)
                 {
-                    this.Close();
-                    f_Main.ShowDialog();
+                    this.Hide();
+                    f_Staff.ShowDialog();
                 }
 
             }
@@ -43,6 +44,11 @@ namespace PRL
             {
                 MessageBox.Show("Sai thông tin !!!");
             }
+        }
+
+        private void btn_Cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
