@@ -1,6 +1,6 @@
 ﻿namespace PRL
 {
-    partial class form_login
+    partial class f_login
     {
         /// <summary>
         /// Required designer variable.
@@ -30,8 +30,8 @@
         {
             label1 = new Label();
             label2 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            txt_loginName = new TextBox();
+            txt_Password = new TextBox();
             pictureBox1 = new PictureBox();
             Login = new Label();
             btn_Cancel = new Button();
@@ -45,9 +45,9 @@
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label1.Location = new Point(48, 230);
             label1.Name = "label1";
-            label1.Size = new Size(70, 28);
+            label1.Size = new Size(113, 28);
             label1.TabIndex = 0;
-            label1.Text = "UserID";
+            label1.Text = "LoginName";
             // 
             // label2
             // 
@@ -59,22 +59,22 @@
             label2.TabIndex = 1;
             label2.Text = "Password";
             // 
-            // textBox1
+            // txt_loginName
             // 
-            textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.Location = new Point(48, 261);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(400, 34);
-            textBox1.TabIndex = 3;
+            txt_loginName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txt_loginName.Location = new Point(48, 261);
+            txt_loginName.Name = "txt_loginName";
+            txt_loginName.Size = new Size(400, 34);
+            txt_loginName.TabIndex = 3;
             // 
-            // textBox2
+            // txt_Password
             // 
-            textBox2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox2.Location = new Point(48, 337);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(400, 34);
-            textBox2.TabIndex = 3;
-            textBox2.UseSystemPasswordChar = true;
+            txt_Password.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txt_Password.Location = new Point(48, 337);
+            txt_Password.Name = "txt_Password";
+            txt_Password.Size = new Size(400, 34);
+            txt_Password.TabIndex = 3;
+            txt_Password.UseSystemPasswordChar = true;
             // 
             // pictureBox1
             // 
@@ -119,22 +119,23 @@
             btn_Login.TabIndex = 2;
             btn_Login.Text = "Login";
             btn_Login.UseVisualStyleBackColor = false;
+            btn_Login.Click += btn_Login_Click;
             // 
-            // form_login
+            // f_login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.PeachPuff;
             ClientSize = new Size(497, 563);
             Controls.Add(pictureBox1);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(txt_Password);
+            Controls.Add(txt_loginName);
             Controls.Add(btn_Cancel);
             Controls.Add(btn_Login);
             Controls.Add(label2);
             Controls.Add(Login);
             Controls.Add(label1);
-            Name = "form_login";
+            Name = "f_login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -147,8 +148,8 @@
         private Label label1;
         private Label label2;
         private Button button1;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox txt_loginName;
+        private TextBox txt_Password;
         private PictureBox pictureBox1;
         private Label Login;
         private Button btn_Cancel;
