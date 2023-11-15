@@ -9,3 +9,4 @@
 - Winform c# .Net core 7.0
 - Entity Framework core 7.0.9
 - Model 3 layer ( DAL - BUS - PRL )
+- DBFirst
