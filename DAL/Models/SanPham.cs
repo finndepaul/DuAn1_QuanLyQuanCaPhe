@@ -15,6 +15,8 @@ public partial class SanPham
 
     public double? Thue { get; set; }
 
+    public string? HinhAnh { get; set; }
+
     public string? IdloaiSanPham { get; set; }
 
     public virtual ICollection<HoaDonChiTiet> HoaDonChiTiets { get; set; } = new List<HoaDonChiTiet>();

@@ -16,11 +16,11 @@ namespace PRL
         {
             InitializeComponent();
         }
-        private void btn_Home_Click(object sender, EventArgs e)
+        private void btn_Home_Click(object sender, EventArgs e) //
         {
-            f_Home objForm = new f_Home();
+            f_TrangChu objForm = new f_TrangChu();
             objForm.TopLevel = false;
-            panel1.Controls.Add(objForm);
+            pn_Staff.Controls.Add(objForm);
             objForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             objForm.Dock = DockStyle.Fill;
             objForm.Show();
@@ -28,9 +28,9 @@ namespace PRL
 
         private void f_Staff_Load(object sender, EventArgs e)
         {
-            f_Home objForm = new f_Home();
+            f_TrangChu objForm = new f_TrangChu();
             objForm.TopLevel = false;
-            panel1.Controls.Add(objForm);
+            pn_Staff.Controls.Add(objForm);
             objForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             objForm.Dock = DockStyle.Fill;
             objForm.Show();
@@ -38,15 +38,26 @@ namespace PRL
 
         private void btn_Logout_Click(object sender, EventArgs e)
         {
-            var mess = MessageBox.Show("B xac nhan dang xuat", "Xac nhan", MessageBoxButtons.OKCancel);
+            var mess = MessageBox.Show("Bạn xác nhận đăng xuất?", "Xác nhận", MessageBoxButtons.OKCancel);
+
             if (mess == DialogResult.OK)
             {
+                // Ẩn form hiện tại
+                this.Hide();
+
+                // Tạo và hiển thị form đăng nhập mới
+                f_Login f_Login = new f_Login();
+                f_Login.ShowDialog();
+
+                // Đóng form hiện tại khi form đăng nhập đóng
                 this.Close();
             }
-            if (mess == DialogResult.Cancel)
+            else if (mess == DialogResult.Cancel)
             {
+                // Do nothing or handle as needed
                 return;
             }
+
         }
     }
 }
