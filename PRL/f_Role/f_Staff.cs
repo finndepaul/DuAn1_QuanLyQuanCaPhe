@@ -23,7 +23,7 @@ namespace PRL
             pn_Staff.Controls.Add(objForm);
             objForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             objForm.Dock = DockStyle.Fill;
-            objForm.Show();
+            objForm.Show();   
         }
 
         private void f_Staff_Load(object sender, EventArgs e)

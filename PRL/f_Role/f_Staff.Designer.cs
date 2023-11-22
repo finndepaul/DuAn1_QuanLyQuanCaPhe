@@ -38,6 +38,7 @@
             btn_Home.BackColor = Color.Tan;
             btn_Home.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btn_Home.ForeColor = SystemColors.ControlText;
+            btn_Home.Image = Properties.Resources.Home;
             btn_Home.ImageAlign = ContentAlignment.TopCenter;
             btn_Home.Location = new Point(12, 31);
             btn_Home.Name = "btn_Home";
@@ -51,9 +52,10 @@
             // btn_Logout
             // 
             btn_Logout.Anchor = AnchorStyles.Bottom;
-            btn_Logout.BackColor = Color.White;
+            btn_Logout.BackColor = Color.Tan;
             btn_Logout.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btn_Logout.ForeColor = SystemColors.ControlText;
+            btn_Logout.Image = Properties.Resources.Logout;
             btn_Logout.ImageAlign = ContentAlignment.TopCenter;
             btn_Logout.Location = new Point(12, 959);
             btn_Logout.Name = "btn_Logout";
@@ -76,6 +78,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.background_app;
             ClientSize = new Size(1924, 1055);
             Controls.Add(btn_Home);
             Controls.Add(btn_Logout);
