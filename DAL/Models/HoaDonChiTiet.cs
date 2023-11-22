@@ -13,11 +13,7 @@ public partial class HoaDonChiTiet
 
     public double? GiaBan { get; set; }
 
-    public string Idcustomer { get; set; } = null!;
-
     public string IdsanPham { get; set; } = null!;
-
-    public string Idvoucher { get; set; } = null!;
 
     public string? IdhoaDon { get; set; }
 

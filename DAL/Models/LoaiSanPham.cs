@@ -11,7 +11,7 @@ public partial class LoaiSanPham
 
     public int? TrangThai { get; set; }
 
-    public int? IdnhanVien { get; set; }
+    public string? IdnhanVien { get; set; }
 
     public virtual ICollection<SanPham> SanPhams { get; set; } = new List<SanPham>();
 }

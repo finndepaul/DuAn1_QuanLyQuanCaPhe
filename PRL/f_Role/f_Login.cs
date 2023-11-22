@@ -50,5 +50,23 @@ namespace PRL
         {
             this.Close();
         }
+
+        private void txt_Password_KeyDown(object sender, KeyEventArgs e) // để enter
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Gọi hàm xử lý khi Enter được ấn
+                btn_Login.PerformClick();
+            }
+        }
+
+        private void txt_loginName_KeyDown(object sender, KeyEventArgs e) // để tab nma phải set tab index
+        {
+            if (e.KeyCode == Keys.Tab)
+            {
+                // Di chuyển tới TextBox kế tiếp
+                SelectNextControl((Control)sender, true, true, true, true);
+            }
+        }
     }
 }
