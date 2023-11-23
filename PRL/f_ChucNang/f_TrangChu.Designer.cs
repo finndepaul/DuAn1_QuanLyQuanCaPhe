@@ -50,9 +50,9 @@
             button64 = new Button();
             btn_Them = new Button();
             gb_SanPham = new GroupBox();
+            flp_Menu = new FlowLayoutPanel();
             label6 = new Label();
             textBox6 = new TextBox();
-            pn_SanPham = new Panel();
             dataGridView2 = new DataGridView();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
@@ -197,6 +197,7 @@
             cbx_LoaiSP.Size = new Size(265, 26);
             cbx_LoaiSP.TabIndex = 0;
             cbx_LoaiSP.SelectedIndexChanged += cbx_LoaiSP_SelectedIndexChanged;
+            cbx_LoaiSP.SelectedValueChanged += cbx_LoaiSP_SelectedValueChanged;
             // 
             // label8
             // 
@@ -277,14 +278,13 @@
             btn_Them.TabIndex = 0;
             btn_Them.Text = "Thêm";
             btn_Them.UseVisualStyleBackColor = true;
-            btn_Them.Click += btn_Them_Click;
             // 
             // gb_SanPham
             // 
             gb_SanPham.Anchor = AnchorStyles.Top;
+            gb_SanPham.Controls.Add(flp_Menu);
             gb_SanPham.Controls.Add(label6);
             gb_SanPham.Controls.Add(textBox6);
-            gb_SanPham.Controls.Add(pn_SanPham);
             gb_SanPham.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
             gb_SanPham.Location = new Point(6, 6);
             gb_SanPham.Name = "gb_SanPham";
@@ -292,6 +292,13 @@
             gb_SanPham.TabIndex = 5;
             gb_SanPham.TabStop = false;
             gb_SanPham.Text = "Order";
+            // 
+            // flp_Menu
+            // 
+            flp_Menu.Location = new Point(0, 106);
+            flp_Menu.Name = "flp_Menu";
+            flp_Menu.Size = new Size(781, 445);
+            flp_Menu.TabIndex = 8;
             // 
             // label6
             // 
@@ -310,13 +317,6 @@
             textBox6.PlaceholderText = "Nhập để tìm kiếm sản phẩm";
             textBox6.Size = new Size(349, 26);
             textBox6.TabIndex = 6;
-            // 
-            // pn_SanPham
-            // 
-            pn_SanPham.Location = new Point(6, 106);
-            pn_SanPham.Name = "pn_SanPham";
-            pn_SanPham.Size = new Size(769, 445);
-            pn_SanPham.TabIndex = 0;
             // 
             // dataGridView2
             // 
@@ -374,10 +374,10 @@
         private ComboBox cbx_LoaiSP;
         private GroupBox gb_SanPham;
         private TextBox textBox3;
-        private Panel pn_SanPham;
         private Label label5;
         private DataGridView dataGridView2;
         private Label label6;
         private TextBox textBox6;
+        private FlowLayoutPanel flp_Menu;
     }
 }

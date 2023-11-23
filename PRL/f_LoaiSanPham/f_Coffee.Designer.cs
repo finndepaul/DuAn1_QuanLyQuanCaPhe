@@ -34,8 +34,6 @@
             lbl_Price2CO1 = new Label();
             lbl_Price1CO1 = new Label();
             pb_CO1 = new PictureBox();
-            panel2 = new Panel();
-            panel3 = new Panel();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pb_CO1).BeginInit();
             SuspendLayout();
@@ -101,27 +99,11 @@
             pb_CO1.TabStop = false;
             pb_CO1.Click += pb_CO1_Click;
             // 
-            // panel2
-            // 
-            panel2.Location = new Point(281, 12);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(194, 196);
-            panel2.TabIndex = 0;
-            // 
-            // panel3
-            // 
-            panel3.Location = new Point(550, 12);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(194, 196);
-            panel3.TabIndex = 0;
-            // 
             // f_Coffee
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(757, 835);
-            Controls.Add(panel3);
-            Controls.Add(panel2);
+            ClientSize = new Size(212, 222);
             Controls.Add(panel1);
             Name = "f_Coffee";
             Text = "f_Coffee";
@@ -135,8 +117,6 @@
         #endregion
 
         private Panel panel1;
-        private Panel panel2;
-        private Panel panel3;
         private Label lbl_Price2CO1;
         private Label lbl_Price1CO1;
         private PictureBox pb_CO1;

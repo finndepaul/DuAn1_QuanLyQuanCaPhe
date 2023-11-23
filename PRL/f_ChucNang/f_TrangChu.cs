@@ -1,74 +1,109 @@
 using BUS.Services;
+using DAL.Models;
+using DAL.Repositories;
+using System.Data;
 
 namespace PRL
 {
     public partial class f_TrangChu : Form
     {
         ThucDonServce _ser = new ThucDonServce();
+        LoaiSanPhamRepos _LSPres = new LoaiSanPhamRepos();
         public f_TrangChu()
         {
             InitializeComponent();
         }
         private void f_TrangChu_Load(object sender, EventArgs e)
         {
+
             LoadCBX_LoaiSP();
         }
 
         private void LoadCBX_LoaiSP()
         {
+            cbx_LoaiSP.Items.Clear();
             foreach (var item in _ser.GetLoaiSanPhams())
             {
                 cbx_LoaiSP.Items.Add(item.TenLoaiSanPham);
             }
-            cbx_LoaiSP.SelectedIndex = 0;
+            //cbx_LoaiSP.SelectedIndex = 0;
+
+        }
+        private void cbx_LoaiSP_SelectedValueChanged(object sender, EventArgs e)
+        {
+            //string sanPham = (string)cbx_LoaiSP.SelectedValue;
+
+            //if (sanPham != null)
+            //{
+            //    var sp1 = _LSPres.GetSanPhams(sanPham);
+            //    flp_Menu.Controls.Clear();
+
+            //    foreach (var item in sp1)
+            //    {
+            //        Button bt = new Button
+            //        {
+            //            Text = item.SanPham.TenSanPham,
+            //        };
+
+            //        flp_Menu.Controls.Add(bt);
+            //    }
+            //}
+            //else
+            //{
+            //    return;
+            //}
         }
 
         private void cbx_LoaiSP_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int selectedIndex = cbx_LoaiSP.SelectedIndex;
-            pn_SanPham.Controls.Clear();
-            switch (selectedIndex)
+            //string sanPham = (string)cbx_LoaiSP.SelectedItem;
+            //MessageBox.Show(sanPham);
+            //if (sanPham != null)
+            //{
+            //    var sp = _LSPres.GetSanPhams(sanPham);
+            //    flp_Menu.Controls.Clear();
+
+            //    foreach (var item in sp)
+            //    {
+            //        Button bt = new Button
+            //        {
+            //            Text = item.SanPham.TenSanPham + item.SanPham.Gia,
+            //            AutoSize = true,
+            //            Name = item.SanPham.IdsanPham,
+            //            BackgroundImage = item.SanPham.HinhAnh,
+
+            //        };
+
+            //        flp_Menu.Controls.Add(bt);
+            //    }
+            //}
+            //else
+            //{
+            //    return;
+            //}
+
+            string sanPham = (string)cbx_LoaiSP.SelectedItem;
+            MessageBox.Show(sanPham);
+            if (sanPham != null)
             {
-                case 0:
-                    f_Coffee f_Coffee = new();
-                    f_Coffee.TopLevel = false;
-                    pn_SanPham.Controls.Add(f_Coffee);
-                    f_Coffee.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-                    f_Coffee.Dock = DockStyle.Fill;
-                    f_Coffee.Show();
-                    break;
-                case 1:
-                    f_NuocEp f_NuocEp = new();
-                    f_NuocEp.TopLevel = false;
-                    pn_SanPham.Controls.Add(f_NuocEp);
-                    f_NuocEp.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-                    f_NuocEp.Dock = DockStyle.Fill;
-                    f_NuocEp.Show();
-                    break;
-                case 2:
-                    f_SinhTo f_SinhTo = new();
-                    f_SinhTo.TopLevel = false;
-                    pn_SanPham.Controls.Add(f_SinhTo);
-                    f_SinhTo.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-                    f_SinhTo.Dock = DockStyle.Fill;
-                    f_SinhTo.Show();
-                    break;
-                case 3:
-                    f_SuaChua f_SuaChua = new();
-                    f_SuaChua.TopLevel = false;
-                    pn_SanPham.Controls.Add(f_SuaChua);
-                    f_SuaChua.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-                    f_SuaChua.Dock = DockStyle.Fill;
-                    f_SuaChua.Show();
-                    break;
-                default:
-                    break;
+                var sp = _LSPres.GetSanPhams(sanPham);
+                flp_Menu.Controls.Clear();
+
+                foreach (var item in sp)
+                {
+                    Button bt = new Button();
+                    bt.BackgroundImage = Image.FromFile(item.SanPham.HinhAnh);
+                    bt.Text = item.SanPham.TenSanPham + item.SanPham.Gia;
+                    bt.AutoSize = true;
+                    bt.Name = item.SanPham.IdsanPham;
+
+                    flp_Menu.Controls.Add(bt);
+                }
+            }
+            else
+            {
+                return;
             }
         }
-        private void btn_Them_Click(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }
