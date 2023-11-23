@@ -23,7 +23,11 @@ namespace PRL
         {
             foreach (var item in _TDser.GetSanPhams(null, null, 3))
             {
-                //pb_CO1.Image = Image.FromFile(item.SanPham.HinhAnh);
+                if (item.SanPham.IdloaiSanPham.Equals("CO1") && item.SanPham.TrangThai == 1)
+                {
+                    string duongDanHinhAnh = Path.Combine("duongdanthumuc", item.SanPham.HinhAnh);
+                    pb_CO1.Image = Image.FromFile(duongDanHinhAnh);
+                }
             }
         }
 
