@@ -16,7 +16,7 @@ namespace PRL.f_ChucNang
 {
     public partial class f_ThucDon : Form
     {
-        ThucDonServce _ser = new ThucDonServce();
+        ThucDonServce _TDser = new ThucDonServce();
         List<SanPhamVM> _lstSanPham;
         List<LoaiSanPham> _lstLoaiSP;
         List<string> _lstIdLoaiSP = new List<string>();
@@ -57,7 +57,7 @@ namespace PRL.f_ChucNang
 
         private void Load_CBX_IDLoaiSP()
         {
-            foreach (var item in _ser.GetLoaiSanPhams())
+            foreach (var item in _TDser.GetLoaiSanPhams())
             {
                 cbx_IDLoaiSP.Items.Add(item.IdloaiSanPham);
                 _lstIdLoaiSP.Add(item.IdloaiSanPham);
@@ -73,8 +73,8 @@ namespace PRL.f_ChucNang
             dgv_LoaiSP.Columns[2].Name = "Tên Loại Sản Phẩm";
             dgv_LoaiSP.Columns[3].Name = "Trạng Thái";
             dgv_LoaiSP.Columns[4].Name = "ID nhân viên";
-            _lstLoaiSP = _ser.GetLoaiSanPhams();
-            foreach (var item in _ser.GetLoaiSanPhams())
+            _lstLoaiSP = _TDser.GetLoaiSanPhams();
+            foreach (var item in _TDser.GetLoaiSanPhams())
             {
                 int stt = _lstLoaiSP.IndexOf(item) + 1;
                 dgv_LoaiSP.Rows.Add(stt++, item.IdloaiSanPham, item.TenLoaiSanPham, item.TrangThai == 1 ? "Đang Bán" : "Ngừng Bán",
@@ -102,7 +102,7 @@ namespace PRL.f_ChucNang
         {
             cbx_LocLoaiSanPham.Items.Clear();
             cbx_LocLoaiSanPham.Items.Add("All");
-            foreach (var item in _ser.GetLoaiSanPhams())
+            foreach (var item in _TDser.GetLoaiSanPhams())
             {
                 cbx_LocLoaiSanPham.Items.Add(item.TenLoaiSanPham);
             }
@@ -125,7 +125,7 @@ namespace PRL.f_ChucNang
             dgv_SanPham.Columns[7].Visible = false;
             dgv_SanPham.Columns[8].Visible = false;
 
-            _lstSanPham = _ser.GetSanPhams(searchText, cbxLoaiSP, cbxLocTrangThai);
+            _lstSanPham = _TDser.GetSanPhams(searchText, cbxLoaiSP, cbxLocTrangThai);
             foreach (var item in _lstSanPham)
             {
                 int stt = _lstSanPham.IndexOf(item) + 1;
@@ -177,8 +177,7 @@ namespace PRL.f_ChucNang
             txt_thue.Text = result.SanPham.Thue.ToString();
             var indexCBX_IDLoaiSP = _lstIdLoaiSP.FindIndex(x => x == result.SanPham.IdloaiSanPham);
             cbx_IDLoaiSP.SelectedIndex = indexCBX_IDLoaiSP;
-
-            if (result.SanPham.HinhAnh == null)
+            if (string.IsNullOrEmpty(result.SanPham.HinhAnh))
             {
                 pb_AnhSP.Image = null;
             }
@@ -237,7 +236,7 @@ namespace PRL.f_ChucNang
                     lsp.TrangThai = 0;
                 }
                 lsp.IdnhanVien = txt_IDNhanVien.Text;
-                var result = _ser.AddLoaiSP(lsp);
+                var result = _TDser.AddLoaiSP(lsp);
                 if (result)
                 {
                     MessageBox.Show("B them thanh cong");
@@ -273,7 +272,7 @@ namespace PRL.f_ChucNang
                     lsp.TrangThai = 0;
                 }
                 lsp.IdnhanVien = txt_IDNhanVien.Text;
-                var result = _ser.UpdateLoaiSP(_idLSPWhenClick, lsp);
+                var result = _TDser.UpdateLoaiSP(_idLSPWhenClick, lsp);
                 if (result)
                 {
                     MessageBox.Show("B cap nhat thanh cong");
@@ -294,7 +293,7 @@ namespace PRL.f_ChucNang
             var alert = MessageBox.Show("B xac nhan xoa loai san pham", "Xac nhan", MessageBoxButtons.OK);
             if (alert == DialogResult.OK)
             {
-                var result = _ser.DeleteLoaiSP(_idLSPWhenClick);
+                var result = _TDser.DeleteLoaiSP(_idLSPWhenClick);
                 if (result)
                 {
                     MessageBox.Show("B xoa thanh cong");
@@ -320,7 +319,7 @@ namespace PRL.f_ChucNang
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     selectedImagePath = openFileDialog.FileName;
-                    var result = _ser.GetImgage(_idSPWhenClick, selectedImagePath);
+                    var result = _TDser.GetImgage(_idSPWhenClick, selectedImagePath);
                     if (result)
                     {
                         MessageBox.Show("Them anh thanh cong !!!");
@@ -340,7 +339,7 @@ namespace PRL.f_ChucNang
             var alert = MessageBox.Show("B xac nhan them moi san pham", "Xac nhan", MessageBoxButtons.OK);
             if (alert == DialogResult.OK)
             {
-                var regexTenSP = _ser.RegexTenSP(txt_TenSP.Text);
+                var regexTenSP = _TDser.RegexTenSP(txt_TenSP.Text);
                 if (regexTenSP)
                 {
                     MessageBox.Show("Tên sản phẩm đã có trong database!");
@@ -360,7 +359,7 @@ namespace PRL.f_ChucNang
                 }
                 sp.Thue = double.Parse(txt_thue.Text);
                 sp.IdloaiSanPham = _lstIdLoaiSP[cbx_IDLoaiSP.SelectedIndex];
-                var result = _ser.AddSP(sp);
+                var result = _TDser.AddSP(sp);
                 if (result)
                 {
                     MessageBox.Show("B them thanh cong");
@@ -397,7 +396,7 @@ namespace PRL.f_ChucNang
                 sp.Thue = double.Parse(txt_thue.Text);
                 sp.IdloaiSanPham = _lstIdLoaiSP[cbx_IDLoaiSP.SelectedIndex];
                 sp.HinhAnh = pb_AnhSP.ImageLocation;
-                var result = _ser.UpdateSP(_idSPWhenClick, sp);
+                var result = _TDser.UpdateSP(_idSPWhenClick, sp);
                 if (result)
                 {
                     MessageBox.Show("B sua thanh cong");
@@ -419,7 +418,7 @@ namespace PRL.f_ChucNang
             var alert = MessageBox.Show("B xac nhan xoa san pham", "Xac nhan", MessageBoxButtons.OK);
             if (alert == DialogResult.OK)
             {
-                var result = _ser.DeleteSP(_idSPWhenClick);
+                var result = _TDser.DeleteSP(_idSPWhenClick);
                 if (result)
                 {
                     MessageBox.Show("B xoa thanh cong");
