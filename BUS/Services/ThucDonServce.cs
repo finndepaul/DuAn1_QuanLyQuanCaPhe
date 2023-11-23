@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace BUS.Services
 {
-    public class CoffeeServce : ICoffeeService
+    public class ThucDonServce : IThucDonService
     {
-        CoffeeRepos _res;
-        public CoffeeServce()
+        ThucDonRepos _res;
+        public ThucDonServce()
         {
-            _res = new CoffeeRepos();
+            _res = new ThucDonRepos();
         }
 
         public bool AddLoaiSP(LoaiSanPham loaiSanPham)
@@ -66,6 +66,11 @@ namespace BUS.Services
         public bool DeleteLoaiSP(string id)
         {
             return (_res.DeleteLoaiSP(id));
+        }
+
+        public bool RegexTenSP(string tenSP)
+        {
+            return _res.RegexTenSP(tenSP);
         }
     }
 }

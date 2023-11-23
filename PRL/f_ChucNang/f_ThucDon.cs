@@ -16,7 +16,7 @@ namespace PRL.f_ChucNang
 {
     public partial class f_ThucDon : Form
     {
-        CoffeeServce _ser = new CoffeeServce();
+        ThucDonServce _ser = new ThucDonServce();
         List<SanPhamVM> _lstSanPham;
         List<LoaiSanPham> _lstLoaiSP;
         List<string> _lstIdLoaiSP = new List<string>();
@@ -340,6 +340,12 @@ namespace PRL.f_ChucNang
             var alert = MessageBox.Show("B xac nhan them moi san pham", "Xac nhan", MessageBoxButtons.OK);
             if (alert == DialogResult.OK)
             {
+                var regexTenSP = _ser.RegexTenSP(txt_TenSP.Text);
+                if (regexTenSP)
+                {
+                    MessageBox.Show("Tên sản phẩm đã có trong database!");
+                    return;
+                }
                 SanPham sp = new SanPham();
                 sp.IdsanPham = txt_IDSanPham.Text;
                 sp.TenSanPham = txt_TenSP.Text;
