@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BUS.IServices
 {
-    public interface ICoffeeService
+    public interface IThucDonService
     {
         // Nhân viên
         public List<NhanVien> GetNhanViens();
@@ -20,6 +20,8 @@ namespace BUS.IServices
         public bool AddSP(SanPham sanPham);
         public bool UpdateSP(string id, SanPham sanPham);
         public bool DeleteSP(string id);
+        public bool RegexTenSP(string tenSP);
+
 
 
         // Loại SP

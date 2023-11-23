@@ -4,7 +4,7 @@ namespace PRL
 {
     public partial class f_TrangChu : Form
     {
-        CoffeeServce _ser = new CoffeeServce();
+        ThucDonServce _ser = new ThucDonServce();
         public f_TrangChu()
         {
             InitializeComponent();

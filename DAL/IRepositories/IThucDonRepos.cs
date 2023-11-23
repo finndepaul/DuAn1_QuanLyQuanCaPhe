@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL.IRepositories
 {
-    public interface ICoffeeRepos
+    public interface IThucDonRepos
     {
         // Nhân viên
         public List<NhanVien> GetNhanViens();
@@ -20,6 +20,7 @@ namespace DAL.IRepositories
         public bool AddSP(SanPham sanPham);
         public bool UpdateSP(string id,SanPham sanPham);
         public bool DeleteSP(string id);
+        public bool RegexTenSP(string tenSP);
 
         // Loại SP
         public List<LoaiSanPham> GetLoaiSanPhams();

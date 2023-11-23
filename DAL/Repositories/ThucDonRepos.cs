@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
-    public class CoffeeRepos : ICoffeeRepos
+    public class ThucDonRepos : IThucDonRepos
     {
         Da1CoffeeContext _db;
-        public CoffeeRepos()
+        public ThucDonRepos()
         {
             _db = new();
         }
@@ -37,7 +37,7 @@ namespace DAL.Repositories
                         SanPham = c,
                         TenLoaiSP = c.IdloaiSanPham == null ? "N/A" : _db.LoaiSanPhams.FirstOrDefault(lsp => lsp.IdloaiSanPham == c.IdloaiSanPham)!.TenLoaiSanPham,
                     }).Where(x => x.SanPham.TenSanPham.Contains(searchText)).ToList();
-            }          
+            }
             if (cbxTrangThai == 0 && string.Equals(cbxLoaiSP, "All")) // TH: 2 cbx để All
             {
                 return _db.SanPhams
@@ -47,7 +47,7 @@ namespace DAL.Repositories
                     TenLoaiSP = s.IdloaiSanPham == null ? "N/A" : _db.LoaiSanPhams.FirstOrDefault(lsp => lsp.IdloaiSanPham == s.IdloaiSanPham)!.TenLoaiSanPham,
                 }).ToList();
             }
-            else if(cbxTrangThai == 1 && string.Equals(cbxLoaiSP,"All")) // TH: cbx trạng thái là đang bán , cbx loại SP là All 
+            else if (cbxTrangThai == 1 && string.Equals(cbxLoaiSP, "All")) // TH: cbx trạng thái là đang bán , cbx loại SP là All 
             {
                 return _db.SanPhams.Where(x => x.TrangThai == 1)
                     .Select(c => new SanPhamVM()
@@ -240,6 +240,17 @@ namespace DAL.Repositories
             {
                 return false;
             }
+        }
+
+        public bool RegexTenSP(string tenSP)
+        {
+
+            var result = _db.SanPhams.FirstOrDefault(x => x.TenSanPham.Contains(tenSP));
+            if (result != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
