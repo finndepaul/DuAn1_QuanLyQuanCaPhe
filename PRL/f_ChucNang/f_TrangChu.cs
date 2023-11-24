@@ -20,6 +20,8 @@ namespace PRL
         private int _btnWidth = 180;
         private int _labelHeight = 40;
         private int _labelWidth = 40;
+
+        string _idSPWhenClick;
         public f_TrangChu()
         {
             InitializeComponent();
@@ -58,11 +60,17 @@ namespace PRL
 
                         // Create a Button
                         Button bt = new Button();
+                        bt.Name = item.SanPham.IdsanPham.ToString();
                         bt.BackgroundImage = Image.FromFile(item.SanPham.HinhAnh);
                         bt.BackgroundImageLayout = ImageLayout.Stretch;
                         bt.ImageAlign = ContentAlignment.TopCenter;
                         bt.Width = _btnWidth;
                         bt.Height = _btnHeight;
+
+                        bt.Click += (sender, e) =>
+                        {
+                            _idSPWhenClick = bt.Name;
+                        };
 
                         // Create a Label
                         Label lbl = new Label();
