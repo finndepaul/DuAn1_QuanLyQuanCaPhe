@@ -13,6 +13,8 @@ public partial class HoaDonChiTiet
 
     public double? GiaBan { get; set; }
 
+    public string? GhiChu { get; set; }
+
     public string IdsanPham { get; set; } = null!;
 
     public string? IdhoaDon { get; set; }

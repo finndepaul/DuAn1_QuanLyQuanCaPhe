@@ -11,6 +11,8 @@ public partial class SanPham
 
     public double? Gia { get; set; }
 
+    public double? GiaSale { get; set; }
+
     public int? TrangThai { get; set; }
 
     public double? Thue { get; set; }
@@ -18,6 +20,8 @@ public partial class SanPham
     public string? HinhAnh { get; set; }
 
     public string? IdloaiSanPham { get; set; }
+
+    public virtual DatHangChiTiet? DatHangChiTiet { get; set; }
 
     public virtual ICollection<HoaDonChiTiet> HoaDonChiTiets { get; set; } = new List<HoaDonChiTiet>();
 

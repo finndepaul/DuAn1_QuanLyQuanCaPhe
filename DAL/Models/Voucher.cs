@@ -19,5 +19,7 @@ public partial class Voucher
 
     public string? DieuKienApDung { get; set; }
 
+    public int? TrangThai { get; set; }
+
     public virtual ICollection<HoaDon> HoaDons { get; set; } = new List<HoaDon>();
 }
