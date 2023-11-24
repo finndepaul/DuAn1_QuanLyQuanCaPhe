@@ -295,9 +295,9 @@
             // 
             // flp_Menu
             // 
-            flp_Menu.Location = new Point(0, 106);
+            flp_Menu.Location = new Point(6, 106);
             flp_Menu.Name = "flp_Menu";
-            flp_Menu.Size = new Size(781, 445);
+            flp_Menu.Size = new Size(769, 445);
             flp_Menu.TabIndex = 8;
             // 
             // label6
