@@ -197,7 +197,6 @@
             cbx_LoaiSP.Size = new Size(265, 26);
             cbx_LoaiSP.TabIndex = 0;
             cbx_LoaiSP.SelectedIndexChanged += cbx_LoaiSP_SelectedIndexChanged;
-            cbx_LoaiSP.SelectedValueChanged += cbx_LoaiSP_SelectedValueChanged;
             // 
             // label8
             // 
