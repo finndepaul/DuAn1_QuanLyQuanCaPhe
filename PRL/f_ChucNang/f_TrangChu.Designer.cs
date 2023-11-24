@@ -37,26 +37,31 @@
             label9 = new Label();
             label2 = new Label();
             groupBox3 = new GroupBox();
-            textBox3 = new TextBox();
             label5 = new Label();
+            lb_TenSP = new Label();
+            lb_SP = new Label();
+            lbGhiChu = new Label();
+            textBox7 = new TextBox();
+            textBox3 = new TextBox();
+            lb_LSP = new Label();
             numericUpDown1 = new NumericUpDown();
             cbx_LoaiSP = new ComboBox();
             label8 = new Label();
             label1 = new Label();
-            dataGridView1 = new DataGridView();
+            dgv_Order = new DataGridView();
             button51 = new Button();
             button65 = new Button();
             button50 = new Button();
             button64 = new Button();
             btn_Them = new Button();
             gb_SanPham = new GroupBox();
+            flp_Menu = new FlowLayoutPanel();
             label6 = new Label();
             textBox6 = new TextBox();
-            pn_SanPham = new Panel();
             dataGridView2 = new DataGridView();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_Order).BeginInit();
             gb_SanPham.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             SuspendLayout();
@@ -72,7 +77,7 @@
             // textBox2
             // 
             textBox2.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox2.Location = new Point(197, 682);
+            textBox2.Location = new Point(197, 683);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(349, 34);
             textBox2.TabIndex = 4;
@@ -80,7 +85,7 @@
             // textBox4
             // 
             textBox4.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox4.Location = new Point(197, 746);
+            textBox4.Location = new Point(197, 747);
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(349, 34);
             textBox4.TabIndex = 4;
@@ -116,7 +121,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Tahoma", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            label9.Location = new Point(6, 810);
+            label9.Location = new Point(6, 811);
             label9.Name = "label9";
             label9.Size = new Size(80, 28);
             label9.TabIndex = 3;
@@ -135,9 +140,14 @@
             // groupBox3
             // 
             groupBox3.Anchor = AnchorStyles.Top;
+            groupBox3.Controls.Add(label5);
+            groupBox3.Controls.Add(lb_TenSP);
+            groupBox3.Controls.Add(lb_SP);
+            groupBox3.Controls.Add(lbGhiChu);
+            groupBox3.Controls.Add(textBox7);
             groupBox3.Controls.Add(textBox3);
             groupBox3.Controls.Add(textBox5);
-            groupBox3.Controls.Add(label5);
+            groupBox3.Controls.Add(lb_LSP);
             groupBox3.Controls.Add(numericUpDown1);
             groupBox3.Controls.Add(textBox2);
             groupBox3.Controls.Add(cbx_LoaiSP);
@@ -149,19 +159,67 @@
             groupBox3.Controls.Add(label2);
             groupBox3.Controls.Add(label8);
             groupBox3.Controls.Add(label1);
-            groupBox3.Controls.Add(dataGridView1);
+            groupBox3.Controls.Add(dgv_Order);
             groupBox3.Controls.Add(button51);
             groupBox3.Controls.Add(button65);
             groupBox3.Controls.Add(button50);
             groupBox3.Controls.Add(button64);
             groupBox3.Controls.Add(btn_Them);
             groupBox3.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            groupBox3.Location = new Point(793, 6);
+            groupBox3.Location = new Point(793, 5);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(922, 937);
             groupBox3.TabIndex = 4;
             groupBox3.TabStop = false;
             groupBox3.Text = "Tác Vụ";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Location = new Point(573, 35);
+            label5.Name = "label5";
+            label5.Size = new Size(95, 24);
+            label5.TabIndex = 10;
+            label5.Text = "Số lượng:";
+            // 
+            // lb_TenSP
+            // 
+            lb_TenSP.AutoSize = true;
+            lb_TenSP.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lb_TenSP.Location = new Point(283, 67);
+            lb_TenSP.Name = "lb_TenSP";
+            lb_TenSP.Size = new Size(0, 24);
+            lb_TenSP.TabIndex = 9;
+            // 
+            // lb_SP
+            // 
+            lb_SP.AutoSize = true;
+            lb_SP.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lb_SP.Location = new Point(283, 35);
+            lb_SP.Name = "lb_SP";
+            lb_SP.Size = new Size(94, 24);
+            lb_SP.TabIndex = 8;
+            lb_SP.Text = "Tên Món:";
+            lb_SP.Click += label7_Click;
+            // 
+            // lbGhiChu
+            // 
+            lbGhiChu.AutoSize = true;
+            lbGhiChu.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbGhiChu.Location = new Point(7, 111);
+            lbGhiChu.Name = "lbGhiChu";
+            lbGhiChu.Size = new Size(79, 24);
+            lbGhiChu.TabIndex = 7;
+            lbGhiChu.Text = "Ghi Chú";
+            // 
+            // textBox7
+            // 
+            textBox7.Location = new Point(89, 112);
+            textBox7.Margin = new Padding(3, 4, 3, 4);
+            textBox7.Name = "textBox7";
+            textBox7.Size = new Size(429, 26);
+            textBox7.TabIndex = 6;
             // 
             // textBox3
             // 
@@ -172,19 +230,19 @@
             textBox3.Size = new Size(307, 34);
             textBox3.TabIndex = 4;
             // 
-            // label5
+            // lb_LSP
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(6, 34);
-            label5.Name = "label5";
-            label5.Size = new Size(90, 24);
-            label5.TabIndex = 5;
-            label5.Text = "Loại Món";
+            lb_LSP.AutoSize = true;
+            lb_LSP.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lb_LSP.Location = new Point(6, 35);
+            lb_LSP.Name = "lb_LSP";
+            lb_LSP.Size = new Size(90, 24);
+            lb_LSP.TabIndex = 5;
+            lb_LSP.Text = "Loại Món";
             // 
             // numericUpDown1
             // 
-            numericUpDown1.Location = new Point(322, 67);
+            numericUpDown1.Location = new Point(573, 67);
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(73, 26);
             numericUpDown1.TabIndex = 1;
@@ -218,20 +276,20 @@
             label1.TabIndex = 3;
             label1.Text = "Mã Thành Viên";
             // 
-            // dataGridView1
+            // dgv_Order
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(6, 106);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.RowTemplate.Height = 29;
-            dataGridView1.Size = new Size(916, 459);
-            dataGridView1.TabIndex = 2;
+            dgv_Order.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_Order.Location = new Point(6, 165);
+            dgv_Order.Name = "dgv_Order";
+            dgv_Order.RowHeadersWidth = 51;
+            dgv_Order.RowTemplate.Height = 29;
+            dgv_Order.Size = new Size(917, 400);
+            dgv_Order.TabIndex = 2;
             // 
             // button51
             // 
             button51.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            button51.Location = new Point(810, 50);
+            button51.Location = new Point(810, 111);
             button51.Name = "button51";
             button51.Size = new Size(112, 43);
             button51.TabIndex = 0;
@@ -241,7 +299,7 @@
             // button65
             // 
             button65.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            button65.Location = new Point(785, 746);
+            button65.Location = new Point(785, 747);
             button65.Name = "button65";
             button65.Size = new Size(123, 53);
             button65.TabIndex = 0;
@@ -251,7 +309,7 @@
             // button50
             // 
             button50.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            button50.Location = new Point(685, 50);
+            button50.Location = new Point(691, 111);
             button50.Name = "button50";
             button50.Size = new Size(112, 43);
             button50.TabIndex = 0;
@@ -261,7 +319,7 @@
             // button64
             // 
             button64.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            button64.Location = new Point(601, 746);
+            button64.Location = new Point(601, 747);
             button64.Name = "button64";
             button64.Size = new Size(123, 53);
             button64.TabIndex = 0;
@@ -271,7 +329,7 @@
             // btn_Them
             // 
             btn_Them.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_Them.Location = new Point(560, 50);
+            btn_Them.Location = new Point(573, 111);
             btn_Them.Name = "btn_Them";
             btn_Them.Size = new Size(112, 43);
             btn_Them.TabIndex = 0;
@@ -282,22 +340,29 @@
             // gb_SanPham
             // 
             gb_SanPham.Anchor = AnchorStyles.Top;
+            gb_SanPham.Controls.Add(flp_Menu);
             gb_SanPham.Controls.Add(label6);
             gb_SanPham.Controls.Add(textBox6);
-            gb_SanPham.Controls.Add(pn_SanPham);
             gb_SanPham.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            gb_SanPham.Location = new Point(6, 6);
+            gb_SanPham.Location = new Point(6, 5);
             gb_SanPham.Name = "gb_SanPham";
             gb_SanPham.Size = new Size(781, 557);
             gb_SanPham.TabIndex = 5;
             gb_SanPham.TabStop = false;
             gb_SanPham.Text = "Order";
             // 
+            // flp_Menu
+            // 
+            flp_Menu.Location = new Point(6, 107);
+            flp_Menu.Name = "flp_Menu";
+            flp_Menu.Size = new Size(769, 445);
+            flp_Menu.TabIndex = 8;
+            // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(6, 58);
+            label6.Location = new Point(6, 59);
             label6.Name = "label6";
             label6.Size = new Size(146, 24);
             label6.TabIndex = 7;
@@ -305,18 +370,11 @@
             // 
             // textBox6
             // 
-            textBox6.Location = new Point(173, 58);
+            textBox6.Location = new Point(173, 59);
             textBox6.Name = "textBox6";
             textBox6.PlaceholderText = "Nhập để tìm kiếm sản phẩm";
             textBox6.Size = new Size(349, 26);
             textBox6.TabIndex = 6;
-            // 
-            // pn_SanPham
-            // 
-            pn_SanPham.Location = new Point(6, 106);
-            pn_SanPham.Name = "pn_SanPham";
-            pn_SanPham.Size = new Size(769, 445);
-            pn_SanPham.TabIndex = 0;
             // 
             // dataGridView2
             // 
@@ -326,7 +384,7 @@
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowHeadersWidth = 51;
             dataGridView2.RowTemplate.Height = 29;
-            dataGridView2.Size = new Size(781, 374);
+            dataGridView2.Size = new Size(781, 373);
             dataGridView2.TabIndex = 1;
             // 
             // f_TrangChu
@@ -345,7 +403,7 @@
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_Order).EndInit();
             gb_SanPham.ResumeLayout(false);
             gb_SanPham.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
@@ -364,7 +422,7 @@
         private GroupBox groupBox3;
         private Label label8;
         private Label label1;
-        private DataGridView dataGridView1;
+        private DataGridView dgv_Order;
         private NumericUpDown numericUpDown1;
         private Button button51;
         private Button button65;
@@ -374,10 +432,15 @@
         private ComboBox cbx_LoaiSP;
         private GroupBox gb_SanPham;
         private TextBox textBox3;
-        private Panel pn_SanPham;
-        private Label label5;
+        private Label lb_LSP;
         private DataGridView dataGridView2;
         private Label label6;
         private TextBox textBox6;
+        private FlowLayoutPanel flp_Menu;
+        private Label lbGhiChu;
+        private TextBox textBox7;
+        private Label lb_SP;
+        private Label label5;
+        private Label lb_TenSP;
     }
 }
