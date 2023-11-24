@@ -177,7 +177,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(523, 35);
+            label5.Location = new Point(573, 35);
             label5.Name = "label5";
             label5.Size = new Size(95, 24);
             label5.TabIndex = 10;
@@ -218,7 +218,7 @@
             textBox7.Location = new Point(89, 112);
             textBox7.Margin = new Padding(3, 4, 3, 4);
             textBox7.Name = "textBox7";
-            textBox7.Size = new Size(388, 26);
+            textBox7.Size = new Size(429, 26);
             textBox7.TabIndex = 6;
             // 
             // textBox3
@@ -242,7 +242,7 @@
             // 
             // numericUpDown1
             // 
-            numericUpDown1.Location = new Point(523, 67);
+            numericUpDown1.Location = new Point(573, 67);
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(73, 26);
             numericUpDown1.TabIndex = 1;
@@ -255,7 +255,6 @@
             cbx_LoaiSP.Size = new Size(265, 26);
             cbx_LoaiSP.TabIndex = 0;
             cbx_LoaiSP.SelectedIndexChanged += cbx_LoaiSP_SelectedIndexChanged;
-            cbx_LoaiSP.SelectedValueChanged += cbx_LoaiSP_SelectedValueChanged;
             // 
             // label8
             // 

@@ -41,7 +41,7 @@ public partial class Da1CoffeeContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=ISORA;Initial Catalog=DA1_Coffee;Persist Security Info=True;\n        Integrated Security = True; Trust Server Certificate=True;");
+        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-F3IJIL6\\SQLEXPRESS01;Initial Catalog=DA1_Coffee;Persist Security Info=True;User ID=sa;\nPassword=123456;Integrated Security=True;Trust Server Certificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
