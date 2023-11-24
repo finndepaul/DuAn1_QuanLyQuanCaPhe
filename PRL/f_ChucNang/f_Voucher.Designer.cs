@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            cbx_DieuKienApDung = new ComboBox();
             label6 = new Label();
             txt_SoLuong = new TextBox();
             label5 = new Label();
@@ -37,9 +36,11 @@
             label3 = new Label();
             txt_IdVocher = new TextBox();
             groupBox1 = new GroupBox();
+            button1 = new Button();
             label1 = new Label();
+            textBox1 = new TextBox();
             txt_MaVocher = new TextBox();
-            cbx_PhanTramVocher = new ComboBox();
+            textBox2 = new TextBox();
             label2 = new Label();
             label7 = new Label();
             label4 = new Label();
@@ -49,24 +50,20 @@
             label8 = new Label();
             txt_TimKiemVocher = new TextBox();
             groupBox2 = new GroupBox();
+            label9 = new Label();
+            comboBox1 = new ComboBox();
+            button2 = new Button();
+            button3 = new Button();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox2.SuspendLayout();
             SuspendLayout();
             // 
-            // cbx_DieuKienApDung
-            // 
-            cbx_DieuKienApDung.FormattingEnabled = true;
-            cbx_DieuKienApDung.Location = new Point(278, 469);
-            cbx_DieuKienApDung.Name = "cbx_DieuKienApDung";
-            cbx_DieuKienApDung.Size = new Size(383, 28);
-            cbx_DieuKienApDung.TabIndex = 16;
-            // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(44, 468);
+            label6.Location = new Point(44, 467);
             label6.Name = "label6";
             label6.Size = new Size(179, 24);
             label6.TabIndex = 5;
@@ -74,16 +71,16 @@
             // 
             // txt_SoLuong
             // 
-            txt_SoLuong.Location = new Point(278, 265);
+            txt_SoLuong.Location = new Point(287, 261);
             txt_SoLuong.Name = "txt_SoLuong";
-            txt_SoLuong.Size = new Size(383, 27);
+            txt_SoLuong.Size = new Size(383, 26);
             txt_SoLuong.TabIndex = 15;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(49, 404);
+            label5.Location = new Point(49, 399);
             label5.Name = "label5";
             label5.Size = new Size(140, 24);
             label5.TabIndex = 4;
@@ -92,17 +89,17 @@
             // dtpNgayBatDau
             // 
             dtpNgayBatDau.CustomFormat = "dd/MM/yyyy";
-            dtpNgayBatDau.Location = new Point(280, 333);
+            dtpNgayBatDau.Location = new Point(289, 328);
             dtpNgayBatDau.Name = "dtpNgayBatDau";
-            dtpNgayBatDau.Size = new Size(253, 27);
+            dtpNgayBatDau.Size = new Size(253, 26);
             dtpNgayBatDau.TabIndex = 10;
             // 
             // dtpNgayKetThuc
             // 
             dtpNgayKetThuc.CustomFormat = "dd/MM/yyyy";
-            dtpNgayKetThuc.Location = new Point(280, 401);
+            dtpNgayKetThuc.Location = new Point(289, 395);
             dtpNgayKetThuc.Name = "dtpNgayKetThuc";
-            dtpNgayKetThuc.Size = new Size(253, 27);
+            dtpNgayKetThuc.Size = new Size(253, 26);
             dtpNgayKetThuc.TabIndex = 11;
             // 
             // label3
@@ -117,65 +114,87 @@
             // 
             // txt_IdVocher
             // 
-            txt_IdVocher.Location = new Point(278, 60);
+            txt_IdVocher.Location = new Point(287, 60);
             txt_IdVocher.Name = "txt_IdVocher";
-            txt_IdVocher.Size = new Size(383, 27);
+            txt_IdVocher.Size = new Size(383, 26);
             txt_IdVocher.TabIndex = 18;
             // 
             // groupBox1
             // 
             groupBox1.BackColor = SystemColors.Control;
+            groupBox1.Controls.Add(label9);
+            groupBox1.Controls.Add(comboBox1);
+            groupBox1.Controls.Add(button3);
+            groupBox1.Controls.Add(button2);
+            groupBox1.Controls.Add(button1);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(txt_IdVocher);
             groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(cbx_DieuKienApDung);
             groupBox1.Controls.Add(label6);
+            groupBox1.Controls.Add(textBox1);
             groupBox1.Controls.Add(txt_MaVocher);
+            groupBox1.Controls.Add(textBox2);
             groupBox1.Controls.Add(txt_SoLuong);
             groupBox1.Controls.Add(label5);
-            groupBox1.Controls.Add(cbx_PhanTramVocher);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(dtpNgayBatDau);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(dtpNgayKetThuc);
+            groupBox1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(723, 931);
             groupBox1.TabIndex = 19;
             groupBox1.TabStop = false;
+            groupBox1.Text = "Thông Tin Voucher";
+            // 
+            // button1
+            // 
+            button1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            button1.Location = new Point(64, 634);
+            button1.Name = "button1";
+            button1.Size = new Size(143, 52);
+            button1.TabIndex = 19;
+            button1.Text = "Thêm";
+            button1.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(49, 128);
+            label1.Location = new Point(49, 127);
             label1.Name = "label1";
-            label1.Size = new Size(108, 24);
+            label1.Size = new Size(62, 24);
             label1.TabIndex = 0;
-            label1.Text = "Mã vocher:";
+            label1.Text = "Code:";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(287, 194);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(383, 26);
+            textBox1.TabIndex = 6;
             // 
             // txt_MaVocher
             // 
-            txt_MaVocher.Location = new Point(278, 128);
+            txt_MaVocher.Location = new Point(287, 127);
             txt_MaVocher.Name = "txt_MaVocher";
-            txt_MaVocher.Size = new Size(383, 27);
+            txt_MaVocher.Size = new Size(383, 26);
             txt_MaVocher.TabIndex = 6;
             // 
-            // cbx_PhanTramVocher
+            // textBox2
             // 
-            cbx_PhanTramVocher.FormattingEnabled = true;
-            cbx_PhanTramVocher.Items.AddRange(new object[] { "5%", "10%", "15%", "20%", "25%" });
-            cbx_PhanTramVocher.Location = new Point(278, 196);
-            cbx_PhanTramVocher.Name = "cbx_PhanTramVocher";
-            cbx_PhanTramVocher.Size = new Size(383, 28);
-            cbx_PhanTramVocher.TabIndex = 14;
+            textBox2.Location = new Point(287, 462);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(383, 26);
+            textBox2.TabIndex = 15;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(44, 197);
+            label2.Location = new Point(44, 195);
             label2.Name = "label2";
             label2.Size = new Size(174, 24);
             label2.TabIndex = 1;
@@ -185,7 +204,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.Location = new Point(49, 266);
+            label7.Location = new Point(49, 263);
             label7.Name = "label7";
             label7.Size = new Size(95, 24);
             label7.TabIndex = 13;
@@ -195,7 +214,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(49, 335);
+            label4.Location = new Point(49, 331);
             label4.Name = "label4";
             label4.Size = new Size(136, 24);
             label4.TabIndex = 3;
@@ -226,7 +245,7 @@
             cbx_TrangThai.FormattingEnabled = true;
             cbx_TrangThai.Location = new Point(327, 75);
             cbx_TrangThai.Name = "cbx_TrangThai";
-            cbx_TrangThai.Size = new Size(263, 28);
+            cbx_TrangThai.Size = new Size(263, 26);
             cbx_TrangThai.TabIndex = 6;
             // 
             // label8
@@ -243,7 +262,7 @@
             // 
             txt_TimKiemVocher.Location = new Point(6, 76);
             txt_TimKiemVocher.Name = "txt_TimKiemVocher";
-            txt_TimKiemVocher.Size = new Size(206, 27);
+            txt_TimKiemVocher.Size = new Size(206, 26);
             txt_TimKiemVocher.TabIndex = 5;
             // 
             // groupBox2
@@ -254,11 +273,52 @@
             groupBox2.Controls.Add(dataGridView1);
             groupBox2.Controls.Add(cbx_TrangThai);
             groupBox2.Controls.Add(label8);
+            groupBox2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox2.Location = new Point(741, 12);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(966, 931);
             groupBox2.TabIndex = 20;
             groupBox2.TabStop = false;
+            groupBox2.Text = "Tác Vụ";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label9.Location = new Point(49, 535);
+            label9.Name = "label9";
+            label9.Size = new Size(102, 24);
+            label9.TabIndex = 20;
+            label9.Text = "Trạng thái";
+            // 
+            // comboBox1
+            // 
+            comboBox1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(287, 533);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(263, 26);
+            comboBox1.TabIndex = 21;
+            // 
+            // button2
+            // 
+            button2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            button2.Location = new Point(290, 634);
+            button2.Name = "button2";
+            button2.Size = new Size(143, 52);
+            button2.TabIndex = 19;
+            button2.Text = "Sửa";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            button3.Location = new Point(516, 634);
+            button3.Name = "button3";
+            button3.Size = new Size(143, 52);
+            button3.TabIndex = 19;
+            button3.Text = "Xóa";
+            button3.UseVisualStyleBackColor = true;
             // 
             // f_Voucher
             // 
@@ -279,8 +339,6 @@
         }
 
         #endregion
-
-        private ComboBox cbx_DieuKienApDung;
         private Label label6;
         private TextBox txt_SoLuong;
         private Label label5;
@@ -291,7 +349,6 @@
         private GroupBox groupBox1;
         private Label label1;
         private TextBox txt_MaVocher;
-        private ComboBox cbx_PhanTramVocher;
         private Label label2;
         private Label label7;
         private Label label4;
@@ -301,5 +358,12 @@
         private Label label8;
         private TextBox txt_TimKiemVocher;
         private GroupBox groupBox2;
+        private Button button1;
+        private TextBox textBox1;
+        private TextBox textBox2;
+        private Label label9;
+        private ComboBox comboBox1;
+        private Button button3;
+        private Button button2;
     }
 }
