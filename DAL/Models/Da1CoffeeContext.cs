@@ -41,13 +41,13 @@ public partial class Da1CoffeeContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-F3IJIL6\\SQLEXPRESS01;Initial Catalog=DA1_Coffee;Persist Security Info=True;User ID=sa;\n        Password=123456;Integrated Security = True; Trust Server Certificate=True;");
+        => optionsBuilder.UseSqlServer("Data Source=SURINRIN\\SQLEXPRESS01;Initial Catalog=DA1_Coffee;Integrated Security = True;Trust Server Certificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<DichVuPhatSinh>(entity =>
         {
-            entity.HasKey(e => e.IddichVuPhatSinh).HasName("PK__DichVuPh__87E4E2CEA6015F0F");
+            entity.HasKey(e => e.IddichVuPhatSinh).HasName("PK__DichVuPh__87E4E2CE149FD25E");
 
             entity.ToTable("DichVuPhatSinh");
 
@@ -68,7 +68,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<HoaDon>(entity =>
         {
-            entity.HasKey(e => e.IdhoaDon).HasName("PK__HoaDon__5B896F49AD788A91");
+            entity.HasKey(e => e.IdhoaDon).HasName("PK__HoaDon__5B896F4953699328");
 
             entity.ToTable("HoaDon");
 
@@ -107,7 +107,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<HoaDonChiTiet>(entity =>
         {
-            entity.HasKey(e => e.IdhoaDonChiTiet).HasName("PK__HoaDonCh__21C2367756B5946E");
+            entity.HasKey(e => e.IdhoaDonChiTiet).HasName("PK__HoaDonCh__21C23677CFF7E5C8");
 
             entity.ToTable("HoaDonChiTiet");
 
@@ -137,7 +137,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<KhachHang>(entity =>
         {
-            entity.HasKey(e => e.IdkhachHang).HasName("PK__KhachHan__5A7167B5F3BE4020");
+            entity.HasKey(e => e.IdkhachHang).HasName("PK__KhachHan__5A7167B5B6E3B919");
 
             entity.ToTable("KhachHang");
 
@@ -164,7 +164,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<LoaiSanPham>(entity =>
         {
-            entity.HasKey(e => e.IdloaiSanPham).HasName("PK__LoaiSanP__6CB987C5F92C44E4");
+            entity.HasKey(e => e.IdloaiSanPham).HasName("PK__LoaiSanP__6CB987C5F56C7007");
 
             entity.ToTable("LoaiSanPham");
 
@@ -181,7 +181,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<MemberShipRank>(entity =>
         {
-            entity.HasKey(e => e.Idrank).HasName("PK__MemberSh__AFFF681D5594D262");
+            entity.HasKey(e => e.Idrank).HasName("PK__MemberSh__AFFF681DD8BA3DCF");
 
             entity.ToTable("MemberShipRank");
 
@@ -194,7 +194,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<NguyenLieu>(entity =>
         {
-            entity.HasKey(e => e.IdnguyenLieu).HasName("PK__NguyenLi__209F08FF0C99F5CB");
+            entity.HasKey(e => e.IdnguyenLieu).HasName("PK__NguyenLi__209F08FF1F102931");
 
             entity.ToTable("NguyenLieu");
 
@@ -209,7 +209,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<NhanVien>(entity =>
         {
-            entity.HasKey(e => e.IdnhanVien).HasName("PK__NhanVien__7AC2D9F754D236BD");
+            entity.HasKey(e => e.IdnhanVien).HasName("PK__NhanVien__7AC2D9F7E06B41D6");
 
             entity.ToTable("NhanVien");
 
@@ -227,7 +227,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<PhaChe>(entity =>
         {
-            entity.HasKey(e => e.IdphaChe).HasName("PK__PhaChe__1035F7DE292D911C");
+            entity.HasKey(e => e.IdphaChe).HasName("PK__PhaChe__1035F7DE4496400F");
 
             entity.ToTable("PhaChe");
 
@@ -235,6 +235,7 @@ public partial class Da1CoffeeContext : DbContext
                 .HasMaxLength(20)
                 .IsUnicode(false)
                 .HasColumnName("IDPhaChe");
+            entity.Property(e => e.CongThuc).HasMaxLength(50);
             entity.Property(e => e.IdnguyenLieu)
                 .HasMaxLength(20)
                 .IsUnicode(false)
@@ -257,7 +258,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<Sale>(entity =>
         {
-            entity.HasKey(e => e.Idsale).HasName("PK__Sale__C6F3BA0B0FCBAB93");
+            entity.HasKey(e => e.Idsale).HasName("PK__Sale__C6F3BA0B60FB05FF");
 
             entity.ToTable("Sale");
 
@@ -281,7 +282,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<SanPham>(entity =>
         {
-            entity.HasKey(e => e.IdsanPham).HasName("PK__SanPham__9D45E58A53D8F413");
+            entity.HasKey(e => e.IdsanPham).HasName("PK__SanPham__9D45E58A16888E17");
 
             entity.ToTable("SanPham");
 
@@ -303,7 +304,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<Voucher>(entity =>
         {
-            entity.HasKey(e => e.Idvoucher).HasName("PK__Voucher__50249A27E1DEB5F2");
+            entity.HasKey(e => e.Idvoucher).HasName("PK__Voucher__50249A27C10E1D34");
 
             entity.ToTable("Voucher");
 

@@ -7,6 +7,8 @@ public partial class PhaChe
 {
     public string IdphaChe { get; set; } = null!;
 
+    public string? CongThuc { get; set; }
+
     public string IdsanPham { get; set; } = null!;
 
     public string IdnguyenLieu { get; set; } = null!;
