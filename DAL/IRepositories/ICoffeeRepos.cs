@@ -11,9 +11,6 @@ namespace DAL.IRepositories
 {
     public interface ICoffeeRepos
     {
-        // Nhân viên
-        public List<NhanVien> GetNhanViens();
-
         // Sản Phẩm
         public List<SanPhamVM> GetSanPhams(string searchText, string cbxLocLoaiSP, int cbxLocTrangThai);
         public bool GetImgage(string id, string fileImage);
@@ -27,6 +24,10 @@ namespace DAL.IRepositories
         public bool UpdateLoaiSP(string id,LoaiSanPham loaiSanPham);
         public bool DeleteLoaiSP(string id);
 
-
+        //Nhân viên
+        List<NhanVien> GetNhanViens(string id, string loc);
+        public bool AddNhanVien(NhanVien nhanVien);
+        public bool UpdateNhanVien(string? id, NhanVien nhanVien);
+        public bool DeleteNhanVien(string? id);
     }
 }

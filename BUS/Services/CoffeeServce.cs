@@ -38,11 +38,6 @@ namespace BUS.Services
             return _res.GetLoaiSanPhams();
         }
 
-        public List<NhanVien> GetNhanViens()
-        {
-            return _res.GetNhanViens();
-        }
-
         public List<SanPhamVM> GetSanPhams(string searchText, string cbxLoaiSP, int cbxLocTrangTha)
         {
             return _res.GetSanPhams(searchText,cbxLoaiSP, cbxLocTrangTha);
@@ -67,5 +62,51 @@ namespace BUS.Services
         {
             return (_res.DeleteLoaiSP(id));
         }
+
+        public List<MemberShipRank> GetMemberShipRanks()
+        {
+            return _res.MemberShipRanks();
+        }
+
+        public List<KhachHangVM> GetKhachHangVMs(string id)
+        {
+            return _res.GetKhachHangVMs(id);
+        }
+
+        public bool AddKhachHang(KhachHang khachHang)
+        {
+            return _res.AddKhachHang(khachHang);
+        }
+
+        public bool UpdateKhachHang(string id,KhachHang khachHang)
+        {
+            return _res.UpdateKhachHang(id, khachHang);
+        }
+
+        public bool DeleteKhachHang(string id)
+        {
+            return _res.DeleteKhachHang(id);
+        }
+
+        public List<NhanVien> GetNhanViens(string id, string loc)
+        {
+            return _res.GetNhanViens(id,loc);
+        }
+
+        public bool AddNhanVien(NhanVien nhanVien)
+        {
+            return _res.AddNhanVien(nhanVien);
+        }
+
+        public bool UpdateNhanVien(string ?id, NhanVien nhanVien)
+        {
+            return _res.UpdateNhanVien(id, nhanVien);
+        }
+
+        public bool DeleteNhanVien(string ?id)
+        {
+            return _res.DeleteNhanVien(id);
+        }
+
     }
 }

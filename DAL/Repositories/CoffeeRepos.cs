@@ -22,10 +22,6 @@ namespace DAL.Repositories
             return _db.LoaiSanPhams.ToList();
         }
 
-        public List<NhanVien> GetNhanViens()
-        {
-            return _db.NhanViens.ToList();
-        }
 
         public List<SanPhamVM> GetSanPhams(string searchText, string cbxLoaiSP, int cbxTrangThai)
         {
@@ -37,7 +33,7 @@ namespace DAL.Repositories
                         SanPham = c,
                         TenLoaiSP = c.IdloaiSanPham == null ? "N/A" : _db.LoaiSanPhams.FirstOrDefault(lsp => lsp.IdloaiSanPham == c.IdloaiSanPham)!.TenLoaiSanPham,
                     }).Where(x => x.SanPham.TenSanPham.Contains(searchText)).ToList();
-            }          
+            }
             if (cbxTrangThai == 0 && string.Equals(cbxLoaiSP, "All")) // TH: 2 cbx để All
             {
                 return _db.SanPhams
@@ -47,7 +43,7 @@ namespace DAL.Repositories
                     TenLoaiSP = s.IdloaiSanPham == null ? "N/A" : _db.LoaiSanPhams.FirstOrDefault(lsp => lsp.IdloaiSanPham == s.IdloaiSanPham)!.TenLoaiSanPham,
                 }).ToList();
             }
-            else if(cbxTrangThai == 1 && string.Equals(cbxLoaiSP,"All")) // TH: cbx trạng thái là đang bán , cbx loại SP là All 
+            else if (cbxTrangThai == 1 && string.Equals(cbxLoaiSP, "All")) // TH: cbx trạng thái là đang bán , cbx loại SP là All 
             {
                 return _db.SanPhams.Where(x => x.TrangThai == 1)
                     .Select(c => new SanPhamVM()
@@ -241,5 +237,159 @@ namespace DAL.Repositories
                 return false;
             }
         }
+
+        // MemberShipRank
+        public List<MemberShipRank> MemberShipRanks()
+        {
+            return _db.MemberShipRanks.ToList();
+        }
+
+        //Khách hàng
+        public List<KhachHangVM> GetKhachHangVMs(string idKhachHang)
+        {
+            if (!string.IsNullOrEmpty(idKhachHang))
+            {
+                return _db.KhachHangs.Select(c => new KhachHangVM()
+                {
+                    KhachHang = c,
+                    NameRank = c.Idrank == null ? "null" : _db.MemberShipRanks.FirstOrDefault(x => x.Idrank == c.Idrank).RankName,
+                }).Where(x => x.KhachHang.IdkhachHang.Contains(idKhachHang)).ToList();
+            }
+            return _db.KhachHangs.Select(e => new KhachHangVM()
+            {
+                KhachHang = e,
+                NameRank = e.Idrank == null ? "null" : _db.MemberShipRanks.FirstOrDefault(x => x.Idrank == e.Idrank).RankName,
+            }).ToList();
+        }
+        public bool AddKhachHang(KhachHang khachHang)
+        {
+            if (khachHang != null)
+            {
+                _db.Add(khachHang);
+                _db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool UpdateKhachHang(string idKhachHang, KhachHang khachHang)
+        {
+            var result = _db.KhachHangs.FirstOrDefault(x => x.IdkhachHang == idKhachHang);
+            if (idKhachHang != null || result != null)
+            {
+                result.IdkhachHang = khachHang.IdkhachHang;
+                result.Name = khachHang.Name;
+                result.Sdt = khachHang.Sdt;
+                result.Email = khachHang.Email;
+                result.DiaChi = khachHang.DiaChi;
+                result.Point = khachHang.Point;
+                result.Idrank = khachHang.Idrank;
+                _db.Update(result);
+                _db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool DeleteKhachHang(string idKhachHang)
+        {
+            var result = _db.KhachHangs.FirstOrDefault(x => x.IdkhachHang == idKhachHang);
+            if (idKhachHang != null || result != null)
+            {
+                _db.Remove(result);
+                _db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+       
+
+        public List<NhanVien> GetNhanViens(string id, string loc)
+        {
+            if (!string.IsNullOrEmpty(id) && !string.IsNullOrEmpty(loc))
+            {
+                if (bool.TryParse(loc, out bool isActive))
+                {
+                    return _db.NhanViens
+                        .Where(x => x.IdnhanVien.Trim().Contains(id) && x.Active == isActive)
+                        .ToList();
+                }
+            }
+            else if (!string.IsNullOrEmpty(id))
+            {
+                return _db.NhanViens
+                    .Where(x => x.IdnhanVien.Trim().Contains(id))
+                    .ToList();
+            }
+            else if (!string.IsNullOrEmpty(loc))
+            {
+                if (bool.TryParse(loc, out bool isActive))
+                {
+                    return _db.NhanViens
+                        .Where(x => x.Active == isActive)
+                        .ToList();
+                }
+            }
+            else
+            {
+                return _db.NhanViens.ToList();
+            }
+            return new List<NhanVien>();
+        }
+        public bool AddNhanVien(NhanVien nhanVien)
+        {
+            if(nhanVien != null)
+            {
+                _db.Add(nhanVien);
+                _db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateNhanVien(string ?id , NhanVien nhanVien)
+        {
+            var result = _db.NhanViens.FirstOrDefault(x => x.IdnhanVien == id);
+            if (id != null && nhanVien != null)
+            {
+                result.LoginName = nhanVien.LoginName;
+                result.Password = nhanVien.Password;
+                result.Role = nhanVien.Role;
+                result.Active = nhanVien.Active;
+                _db.NhanViens.Update(result);
+                _db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool DeleteNhanVien(string ?id)
+        {
+            var result = _db.NhanViens.FirstOrDefault(x => x.IdnhanVien == id);
+            if (id != null)
+            {
+                _db.NhanViens.Remove(result);
+                _db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+       
     }
 }

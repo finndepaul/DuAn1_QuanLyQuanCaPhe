@@ -25,7 +25,7 @@ namespace PRL
         {
             string loginName = txt_loginName.Text;
             string pass = txt_Password.Text;
-            var user = _ser.GetNhanViens().FirstOrDefault(x => x.LoginName == loginName && x.Password == pass);
+            var user = _ser.GetNhanViens(null,null).FirstOrDefault(x => x.LoginName == loginName && x.Password == pass);
             if (user != null)
             {
                 if (user.Role)
