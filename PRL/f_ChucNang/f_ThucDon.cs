@@ -16,7 +16,7 @@ namespace PRL.f_ChucNang
 {
     public partial class f_ThucDon : Form
     {
-        ThucDonServce _TDser = new ThucDonServce();
+        ThucDonService _TDser = new ThucDonService();
         List<SanPhamVM> _lstSanPham;
         List<LoaiSanPham> _lstLoaiSP;
         List<string> _lstIdLoaiSP = new List<string>();

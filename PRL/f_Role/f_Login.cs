@@ -13,7 +13,7 @@ namespace PRL
 {
     public partial class f_Login : Form
     {
-        ThucDonServce _ser = new();
+        ThucDonService _ser = new();
         f_Admin f_Admin = new f_Admin();
         f_Staff f_Staff = new f_Staff();
         public f_Login()
