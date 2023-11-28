@@ -37,7 +37,14 @@ namespace PRL
             cbx_LoaiSP.Items.Clear();
             foreach (var item in _ser.GetLoaiSanPhams())
             {
-                cbx_LoaiSP.Items.Add(item.TenLoaiSanPham);
+                if (item.TrangThai == 1)
+                {
+                    cbx_LoaiSP.Items.Add(item.TenLoaiSanPham);
+                }
+                else
+                {
+                    continue;
+                }
             }
             cbx_LoaiSP.SelectedIndex = 0;
 
@@ -61,7 +68,17 @@ namespace PRL
                         // Create a Button
                         Button bt = new Button();
                         bt.Name = item.SanPham.IdsanPham.ToString();
-                        bt.BackgroundImage = Image.FromFile(item.SanPham.HinhAnh);
+
+                        if (string.IsNullOrEmpty(item.SanPham.HinhAnh))
+                        {
+                            bt.BackgroundImage = null;
+                        }
+                        else
+                        {
+                            bt.BackgroundImage = Image.FromFile(item.SanPham.HinhAnh);
+                        }
+
+                        //bt.BackgroundImage = Image.FromFile(item.SanPham.HinhAnh);
                         bt.BackgroundImageLayout = ImageLayout.Stretch;
                         bt.ImageAlign = ContentAlignment.TopCenter;
                         bt.Width = _btnWidth;
@@ -99,6 +116,10 @@ namespace PRL
 
                         // Add the Panel to the FlowLayoutPanel
                         flp_Menu.Controls.Add(panel);
+                    }
+                    else if (item.SanPham.TrangThai == 0)
+                    {
+                        continue;
                     }
                     else
                     {

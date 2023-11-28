@@ -58,19 +58,24 @@ namespace BUS.Services
             return _res.UpdateSP(id, sanPham);
         }
 
-        public bool DeleteSP(string id)
+        public bool Add_RegexTenSP(string tenSP)
         {
-            return _res.DeleteSP(id);
+            return _res.Add_RegexTenSP(tenSP);
         }
 
-        public bool DeleteLoaiSP(string id)
+        public bool Update_RegexTenSP(string tenSP, string Id)
         {
-            return (_res.DeleteLoaiSP(id));
+            return _res.Update_RegexTenSP(tenSP, Id);
         }
 
-        public bool RegexTenSP(string tenSP)
+        public bool Add_RegexTenLSP(string tenLSP)
         {
-            return _res.RegexTenSP(tenSP);
+            return _res.Add_RegexTenLSP(tenLSP);
+        }
+
+        public bool Update_RegexTenLSP(string tenLSP, string Id)
+        {
+            return _res.Update_RegexTenLSP(tenLSP, Id);
         }
     }
 }

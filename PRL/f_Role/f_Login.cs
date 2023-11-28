@@ -25,6 +25,16 @@ namespace PRL
         {
             string loginName = txt_loginName.Text;
             string pass = txt_Password.Text;
+            if (string.IsNullOrEmpty(txt_loginName.Text))
+            {
+                MessageBox.Show("Username không được để trống");
+                return;
+            }
+            if (string.IsNullOrEmpty(txt_Password.Text))
+            {
+                MessageBox.Show("Password không được để trống");
+                return;
+            }
             var user = _ser.GetNhanViens().FirstOrDefault(x => x.LoginName == loginName && x.Password == pass);
             if (user != null)
             {

@@ -353,6 +353,7 @@
             // 
             // flp_Menu
             // 
+            flp_Menu.AutoScroll = true;
             flp_Menu.Location = new Point(6, 107);
             flp_Menu.Name = "flp_Menu";
             flp_Menu.Size = new Size(769, 445);

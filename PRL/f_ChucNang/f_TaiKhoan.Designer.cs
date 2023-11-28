@@ -29,15 +29,14 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            comboBox1 = new ComboBox();
             cbx_Loc = new ComboBox();
             dgv_TaiKhoan = new DataGridView();
             txt_TimKiem = new TextBox();
             lbl_TimKiem = new Label();
             cbx_ChucVu = new ComboBox();
             lbl_ChucVu = new Label();
-            txt_Password = new TextBox();
             lbl_Password = new Label();
-            btn_Xoa = new Button();
             lbl_status = new Label();
             btn_Sua = new Button();
             txt_LoginName = new TextBox();
@@ -53,15 +52,14 @@
             // groupBox1
             // 
             groupBox1.Anchor = AnchorStyles.Top;
+            groupBox1.Controls.Add(comboBox1);
             groupBox1.Controls.Add(cbx_Loc);
             groupBox1.Controls.Add(dgv_TaiKhoan);
             groupBox1.Controls.Add(txt_TimKiem);
             groupBox1.Controls.Add(lbl_TimKiem);
             groupBox1.Controls.Add(cbx_ChucVu);
             groupBox1.Controls.Add(lbl_ChucVu);
-            groupBox1.Controls.Add(txt_Password);
             groupBox1.Controls.Add(lbl_Password);
-            groupBox1.Controls.Add(btn_Xoa);
             groupBox1.Controls.Add(lbl_status);
             groupBox1.Controls.Add(btn_Sua);
             groupBox1.Controls.Add(txt_LoginName);
@@ -77,6 +75,14 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Thông Tin Tài Khoản";
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(245, 370);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(213, 30);
+            comboBox1.TabIndex = 34;
             // 
             // cbx_Loc
             // 
@@ -132,13 +138,6 @@
             lbl_ChucVu.TabIndex = 28;
             lbl_ChucVu.Text = "Chức Vụ";
             // 
-            // txt_Password
-            // 
-            txt_Password.Location = new Point(246, 369);
-            txt_Password.Name = "txt_Password";
-            txt_Password.Size = new Size(539, 29);
-            txt_Password.TabIndex = 24;
-            // 
             // lbl_Password
             // 
             lbl_Password.AutoSize = true;
@@ -148,16 +147,6 @@
             lbl_Password.Size = new Size(107, 28);
             lbl_Password.TabIndex = 23;
             lbl_Password.Text = "Password";
-            // 
-            // btn_Xoa
-            // 
-            btn_Xoa.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_Xoa.Location = new Point(648, 568);
-            btn_Xoa.Name = "btn_Xoa";
-            btn_Xoa.Size = new Size(136, 63);
-            btn_Xoa.TabIndex = 27;
-            btn_Xoa.Text = "Xóa";
-            btn_Xoa.UseVisualStyleBackColor = true;
             // 
             // lbl_status
             // 
@@ -172,7 +161,7 @@
             // btn_Sua
             // 
             btn_Sua.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_Sua.Location = new Point(401, 568);
+            btn_Sua.Location = new Point(492, 627);
             btn_Sua.Name = "btn_Sua";
             btn_Sua.Size = new Size(136, 63);
             btn_Sua.TabIndex = 26;
@@ -189,7 +178,7 @@
             // btn_Them
             // 
             btn_Them.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_Them.Location = new Point(154, 568);
+            btn_Them.Location = new Point(245, 627);
             btn_Them.Name = "btn_Them";
             btn_Them.Size = new Size(136, 63);
             btn_Them.TabIndex = 25;
@@ -250,9 +239,7 @@
         private GroupBox groupBox1;
         private ComboBox cbx_ChucVu;
         private Label lbl_ChucVu;
-        private TextBox txt_Password;
         private Label lbl_Password;
-        private Button btn_Xoa;
         private Label lbl_status;
         private Button btn_Sua;
         private TextBox txt_LoginName;
@@ -265,5 +252,6 @@
         private DataGridView dgv_TaiKhoan;
         private TextBox txt_TimKiem;
         private Label lbl_TimKiem;
+        private ComboBox comboBox1;
     }
 }

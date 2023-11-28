@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             groupBox2 = new GroupBox();
+            textBox1 = new TextBox();
             label5 = new Label();
             btn_Loc = new Button();
             label1 = new Label();
@@ -37,21 +38,26 @@
             label2 = new Label();
             dateTimePicker1 = new DateTimePicker();
             dataGridView1 = new DataGridView();
+            label4 = new Label();
             label3 = new Label();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             btn_BayNgay = new Button();
             btn_TrongNgay = new Button();
             btn_MuoiBonNgay = new Button();
             groupBox1 = new GroupBox();
+            dataGridView2 = new DataGridView();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             SuspendLayout();
             // 
             // groupBox2
             // 
             groupBox2.Anchor = AnchorStyles.Bottom;
             groupBox2.BackColor = SystemColors.Control;
+            groupBox2.Controls.Add(dataGridView2);
+            groupBox2.Controls.Add(textBox1);
             groupBox2.Controls.Add(label5);
             groupBox2.Controls.Add(btn_Loc);
             groupBox2.Controls.Add(label1);
@@ -60,12 +66,20 @@
             groupBox2.Controls.Add(label2);
             groupBox2.Controls.Add(dateTimePicker1);
             groupBox2.Controls.Add(dataGridView1);
+            groupBox2.Controls.Add(label4);
             groupBox2.Controls.Add(label3);
             groupBox2.Location = new Point(12, 223);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(1695, 720);
             groupBox2.TabIndex = 15;
             groupBox2.TabStop = false;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(1299, 269);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(390, 27);
+            textBox1.TabIndex = 13;
             // 
             // label5
             // 
@@ -80,9 +94,9 @@
             // btn_Loc
             // 
             btn_Loc.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_Loc.Location = new Point(1269, 357);
+            btn_Loc.Location = new Point(1044, 180);
             btn_Loc.Name = "btn_Loc";
-            btn_Loc.Size = new Size(157, 91);
+            btn_Loc.Size = new Size(645, 57);
             btn_Loc.TabIndex = 12;
             btn_Loc.Text = "Lọc";
             btn_Loc.UseVisualStyleBackColor = true;
@@ -91,7 +105,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(1033, 96);
+            label1.Location = new Point(1044, 70);
             label1.Name = "label1";
             label1.Size = new Size(90, 24);
             label1.TabIndex = 6;
@@ -100,7 +114,7 @@
             // dateTimePicker2
             // 
             dateTimePicker2.CustomFormat = "dd/MM/yyyy";
-            dateTimePicker2.Location = new Point(1347, 143);
+            dateTimePicker2.Location = new Point(1439, 117);
             dateTimePicker2.Name = "dateTimePicker2";
             dateTimePicker2.Size = new Size(250, 27);
             dateTimePicker2.TabIndex = 5;
@@ -109,7 +123,7 @@
             // 
             cbx_LoaiSanPham.FormattingEnabled = true;
             cbx_LoaiSanPham.Items.AddRange(new object[] { "Đồ uống", "Đồ ăn" });
-            cbx_LoaiSanPham.Location = new Point(1033, 262);
+            cbx_LoaiSanPham.Location = new Point(1439, 385);
             cbx_LoaiSanPham.Name = "cbx_LoaiSanPham";
             cbx_LoaiSanPham.Size = new Size(250, 28);
             cbx_LoaiSanPham.TabIndex = 11;
@@ -118,7 +132,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(1347, 96);
+            label2.Location = new Point(1439, 70);
             label2.Name = "label2";
             label2.Size = new Size(102, 24);
             label2.TabIndex = 7;
@@ -128,9 +142,9 @@
             // 
             dateTimePicker1.CalendarFont = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
             dateTimePicker1.CustomFormat = "dd/MM/yyyy";
-            dateTimePicker1.Location = new Point(1033, 143);
+            dateTimePicker1.Location = new Point(1044, 117);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(250, 27);
+            dateTimePicker1.Size = new Size(262, 27);
             dateTimePicker1.TabIndex = 4;
             // 
             // dataGridView1
@@ -143,11 +157,21 @@
             dataGridView1.Size = new Size(966, 644);
             dataGridView1.TabIndex = 3;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(1187, 272);
+            label4.Name = "label4";
+            label4.Size = new Size(107, 24);
+            label4.TabIndex = 8;
+            label4.Text = "Tổng Tiền:";
+            // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(1033, 207);
+            label3.Location = new Point(1286, 385);
             label3.Name = "label3";
             label3.Size = new Size(147, 24);
             label3.TabIndex = 8;
@@ -202,6 +226,16 @@
             groupBox1.TabIndex = 14;
             groupBox1.TabStop = false;
             // 
+            // dataGridView2
+            // 
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Location = new Point(1044, 419);
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.RowHeadersWidth = 51;
+            dataGridView2.RowTemplate.Height = 29;
+            dataGridView2.Size = new Size(645, 285);
+            dataGridView2.TabIndex = 14;
+            // 
             // f_DanhThu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -216,6 +250,7 @@
             groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);
         }
 
@@ -236,5 +271,8 @@
         private Button btn_TrongNgay;
         private Button btn_MuoiBonNgay;
         private GroupBox groupBox1;
+        private TextBox textBox1;
+        private Label label4;
+        private DataGridView dataGridView2;
     }
 }

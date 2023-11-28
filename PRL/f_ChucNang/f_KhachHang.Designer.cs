@@ -30,7 +30,6 @@
         {
             cbx_TimKiemTheoRank = new ComboBox();
             txt_TimKiemRank = new TextBox();
-            btn_Xoa = new Button();
             btn_Sua = new Button();
             btn_Them = new Button();
             txt_IDRank = new TextBox();
@@ -76,18 +75,9 @@
             txt_TimKiemRank.Size = new Size(292, 27);
             txt_TimKiemRank.TabIndex = 6;
             // 
-            // btn_Xoa
-            // 
-            btn_Xoa.Location = new Point(444, 488);
-            btn_Xoa.Name = "btn_Xoa";
-            btn_Xoa.Size = new Size(140, 51);
-            btn_Xoa.TabIndex = 16;
-            btn_Xoa.Text = "Xóa";
-            btn_Xoa.UseVisualStyleBackColor = true;
-            // 
             // btn_Sua
             // 
-            btn_Sua.Location = new Point(250, 488);
+            btn_Sua.Location = new Point(360, 531);
             btn_Sua.Name = "btn_Sua";
             btn_Sua.Size = new Size(140, 51);
             btn_Sua.TabIndex = 15;
@@ -96,7 +86,7 @@
             // 
             // btn_Them
             // 
-            btn_Them.Location = new Point(56, 488);
+            btn_Them.Location = new Point(141, 531);
             btn_Them.Name = "btn_Them";
             btn_Them.Size = new Size(140, 51);
             btn_Them.TabIndex = 14;
@@ -272,7 +262,6 @@
             // groupBox1
             // 
             groupBox1.BackColor = SystemColors.Control;
-            groupBox1.Controls.Add(btn_Xoa);
             groupBox1.Controls.Add(btn_Sua);
             groupBox1.Controls.Add(btn_Them);
             groupBox1.Controls.Add(txt_IDRank);
@@ -345,7 +334,6 @@
 
         private ComboBox cbx_TimKiemTheoRank;
         private TextBox txt_TimKiemRank;
-        private Button btn_Xoa;
         private Button btn_Sua;
         private Button btn_Them;
         private TextBox txt_IDRank;

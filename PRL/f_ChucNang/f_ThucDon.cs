@@ -20,10 +20,10 @@ namespace PRL.f_ChucNang
         List<SanPhamVM> _lstSanPham;
         List<LoaiSanPham> _lstLoaiSP;
         List<string> _lstIdLoaiSP = new List<string>();
-        List<string> _lstIdNhanVien = new List<string>();
         string _idSPWhenClick;
         string _idLSPWhenClick;
         private string selectedImagePath;
+        string _imageWhenClick;
         public f_ThucDon()
         {
             InitializeComponent();
@@ -40,14 +40,7 @@ namespace PRL.f_ChucNang
             Load_DGV_LoaiSP();
             Load_CBX_LocLoaiSP();
             Load_CBX_TrangThaiLSP();
-            //Load_cbx_IDNhanVien();
         }
-
-        private void Load_cbx_IDNhanVien()
-        {
-            throw new NotImplementedException();
-        }
-
         private void Load_CBX_TrangThaiLSP()
         {
             cbx_TrangThaiLSP.Items.Clear();
@@ -59,8 +52,15 @@ namespace PRL.f_ChucNang
         {
             foreach (var item in _TDser.GetLoaiSanPhams())
             {
-                cbx_IDLoaiSP.Items.Add(item.IdloaiSanPham);
-                _lstIdLoaiSP.Add(item.IdloaiSanPham);
+                if (item.TrangThai == 1)
+                {
+                    cbx_IDLoaiSP.Items.Add(item.IdloaiSanPham);
+                    _lstIdLoaiSP.Add(item.IdloaiSanPham);
+                }
+                else
+                {
+                    continue;
+                }
             }
         }
 
@@ -104,7 +104,14 @@ namespace PRL.f_ChucNang
             cbx_LocLoaiSanPham.Items.Add("All");
             foreach (var item in _TDser.GetLoaiSanPhams())
             {
-                cbx_LocLoaiSanPham.Items.Add(item.TenLoaiSanPham);
+                if (item.TrangThai == 1)
+                {
+                    cbx_LocLoaiSanPham.Items.Add(item.TenLoaiSanPham);
+                }
+                else
+                {
+                    continue;
+                }
             }
             cbx_LocLoaiSanPham.SelectedIndex = 0;
         }
@@ -112,7 +119,7 @@ namespace PRL.f_ChucNang
         private void Load_DGV_SanPham(string searchText, string cbxLoaiSP, int cbxLocTrangThai)
         {
             dgv_SanPham.Rows.Clear();
-            dgv_SanPham.ColumnCount = 9;
+            dgv_SanPham.ColumnCount = 10;
             dgv_SanPham.Columns[0].Name = "STT";
             dgv_SanPham.Columns[1].Name = "ID";
             dgv_SanPham.Columns[2].Name = "Tên Sản Phẩm";
@@ -122,6 +129,7 @@ namespace PRL.f_ChucNang
             dgv_SanPham.Columns[6].Name = "Loại Sản Phẩm";
             dgv_SanPham.Columns[7].Name = "ID Loại SP";
             dgv_SanPham.Columns[8].Name = "ImagePath";
+            dgv_SanPham.Columns[9].Name = "ID Nhân Viên";
             dgv_SanPham.Columns[7].Visible = false;
             dgv_SanPham.Columns[8].Visible = false;
 
@@ -130,7 +138,7 @@ namespace PRL.f_ChucNang
             {
                 int stt = _lstSanPham.IndexOf(item) + 1;
                 dgv_SanPham.Rows.Add(stt++, item.SanPham.IdsanPham, item.SanPham.TenSanPham, item.SanPham.Gia,
-                    item.SanPham.TrangThai == 1 ? "Đang Bán" : "Ngừng Bán", item.SanPham.Thue, item.TenLoaiSP, item.SanPham.IdloaiSanPham, item.SanPham.HinhAnh);
+                    item.SanPham.TrangThai == 1 ? "Đang Bán" : "Ngừng Bán", item.SanPham.Thue, item.TenLoaiSP, item.SanPham.IdloaiSanPham, item.SanPham.HinhAnh, item.SanPham.IdnhanVien);
             }
         }
 
@@ -180,11 +188,15 @@ namespace PRL.f_ChucNang
             if (string.IsNullOrEmpty(result.SanPham.HinhAnh))
             {
                 pb_AnhSP.Image = null;
+                _imageWhenClick = null;
             }
             else
             {
                 pb_AnhSP.Image = Image.FromFile(result.SanPham.HinhAnh);
+                _imageWhenClick = result.SanPham.HinhAnh;
             }
+            txt_IDNVinSP.Text = result.SanPham.IdnhanVien;
+
         }
         private void Clear_SP()
         {
@@ -195,7 +207,13 @@ namespace PRL.f_ChucNang
             txt_thue.Text = "";
             cbx_TrangThaiSP.SelectedItem = null;
             cbx_IDLoaiSP.SelectedItem = null;
-
+        }
+        private void Clear_LoaiSP()
+        {
+            txt_IDLoaiSanPham.Text = "";
+            txt_TenLoaiSanPham.Text = "";
+            cbx_TrangThaiLSP.SelectedItem = null;
+            txt_IDNhanVien.Text = "";
         }
         private void dgv_LoaiSP_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -221,9 +239,28 @@ namespace PRL.f_ChucNang
         }
         private void btn_ThemLSP_Click(object sender, EventArgs e)
         {
-            var alert = MessageBox.Show("B xac nhan them moi loai san pham", "Xac nhan", MessageBoxButtons.OK);
+            var alert = MessageBox.Show("B xác nhận thêm mới loại sản phẩm", "Xác nhận", MessageBoxButtons.OKCancel);
             if (alert == DialogResult.OK)
             {
+                if (string.IsNullOrEmpty(txt_TenLoaiSanPham.Text))
+                {
+                    MessageBox.Show("Tên Loại sản phẩm không được NULL or Empty");
+                    Clear_LoaiSP();
+                    return;
+                }
+                if (string.IsNullOrEmpty(txt_IDNhanVien.Text))
+                {
+                    MessageBox.Show("ID nhân viên không được NULL or Empty");
+                    Clear_LoaiSP();
+                    return;
+                }
+                var regexTenSP = _TDser.Add_RegexTenLSP(txt_TenLoaiSanPham.Text);
+                if (!regexTenSP)
+                {
+                    MessageBox.Show("Tên Loại sản phẩm đã có trong database!");
+                    Clear_LoaiSP();
+                    return;
+                }
                 LoaiSanPham lsp = new LoaiSanPham();
                 lsp.IdloaiSanPham = txt_IDLoaiSanPham.Text;
                 lsp.TenLoaiSanPham = txt_TenLoaiSanPham.Text;
@@ -239,27 +276,46 @@ namespace PRL.f_ChucNang
                 var result = _TDser.AddLoaiSP(lsp);
                 if (result)
                 {
-                    MessageBox.Show("B them thanh cong");
+                    MessageBox.Show("B thêm thành công");
                     Load_DGV_LoaiSP();
                     Load_CBX_LocLoaiSP();
                     Load_CBX_TrangThaiFind();
                 }
                 else
                 {
-                    MessageBox.Show("B them that bai");
+                    MessageBox.Show("B thêm that bai");
                 }
             }
-            else
+            else if (alert == DialogResult.Cancel)
             {
-                MessageBox.Show("B xac nhan KHONG them");
+                return;
             }
         }
 
         private void btn_SuaLSP_Click(object sender, EventArgs e)
         {
-            var alert = MessageBox.Show("B xac nhan cap nhat loai san pham", "Xac nhan", MessageBoxButtons.OK);
+            var alert = MessageBox.Show("B xác nhận cập nhật loại sản phẩm", "Xác nhận", MessageBoxButtons.OKCancel);
             if (alert == DialogResult.OK)
             {
+                if (string.IsNullOrEmpty(txt_TenLoaiSanPham.Text))
+                {
+                    MessageBox.Show("Tên Loại sản phẩm không được NULL or Empty");
+                    Clear_LoaiSP();
+                    return;
+                }
+                if (string.IsNullOrEmpty(txt_IDNhanVien.Text))
+                {
+                    MessageBox.Show("ID nhân viên không được NULL or Empty");
+                    Clear_LoaiSP();
+                    return;
+                }
+                var regexTenSP = _TDser.Update_RegexTenLSP(txt_TenLoaiSanPham.Text, _idLSPWhenClick);
+                if (!regexTenSP)
+                {
+                    MessageBox.Show("Tên Loại sản phẩm đã có trong database!");
+                    Clear_LoaiSP();
+                    return;
+                }
                 LoaiSanPham lsp = new LoaiSanPham();
                 lsp.IdloaiSanPham = txt_IDLoaiSanPham.Text;
                 lsp.TenLoaiSanPham = txt_TenLoaiSanPham.Text;
@@ -275,38 +331,17 @@ namespace PRL.f_ChucNang
                 var result = _TDser.UpdateLoaiSP(_idLSPWhenClick, lsp);
                 if (result)
                 {
-                    MessageBox.Show("B cap nhat thanh cong");
+                    MessageBox.Show("B cập nhật thành công");
                     Load_DGV_LoaiSP();
                 }
                 else
                 {
-                    MessageBox.Show("B cap nhat that bai");
+                    MessageBox.Show("B cập nhật thất bại");
                 }
             }
-            else
+            else if (alert == DialogResult.Cancel)
             {
-                MessageBox.Show("B xac nhan KHONG them");
-            }
-        }
-        private void btn_XoaLSP_Click(object sender, EventArgs e)
-        {
-            var alert = MessageBox.Show("B xac nhan xoa loai san pham", "Xac nhan", MessageBoxButtons.OK);
-            if (alert == DialogResult.OK)
-            {
-                var result = _TDser.DeleteLoaiSP(_idLSPWhenClick);
-                if (result)
-                {
-                    MessageBox.Show("B xoa thanh cong");
-                    Load_DGV_LoaiSP();
-                }
-                else
-                {
-                    MessageBox.Show("B xoa that bai");
-                }
-            }
-            else
-            {
-                MessageBox.Show("B xac nhan KHONG xoa");
+                return;
             }
         }
         private void btn_AddImages_Click(object sender, EventArgs e) // Thêm hoặc cập nhật ảnh
@@ -314,7 +349,7 @@ namespace PRL.f_ChucNang
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Filter = "Image Files (*.png;*.jpg;*.jpeg;*.gif;*.bmp)|*.png;*.jpg;*.jpeg;*.gif;*.bmp|All files (*.*)|*.*";
-                openFileDialog.Title = "Chon anh san pham";
+                openFileDialog.Title = "Chọn ảnh sản phẩm";
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -322,13 +357,13 @@ namespace PRL.f_ChucNang
                     var result = _TDser.GetImgage(_idSPWhenClick, selectedImagePath);
                     if (result)
                     {
-                        MessageBox.Show("Them anh thanh cong !!!");
+                        MessageBox.Show("Thêm ảnh thành công !!!");
                         Load_DGV_SanPham(null, null, 3);
                         Clear_SP();
                     }
                     else
                     {
-                        MessageBox.Show("Them anh that bai");
+                        MessageBox.Show("Thêm ảnh thất bại");
                     }
                 }
             }
@@ -336,13 +371,94 @@ namespace PRL.f_ChucNang
 
         private void btn_ThemSP_Click(object sender, EventArgs e)
         {
-            var alert = MessageBox.Show("B xac nhan them moi san pham", "Xac nhan", MessageBoxButtons.OK);
+            var alert = MessageBox.Show("B xác nhận thêm mới sản phẩm", "Xác nhận", MessageBoxButtons.OKCancel);
             if (alert == DialogResult.OK)
             {
-                var regexTenSP = _TDser.RegexTenSP(txt_TenSP.Text);
-                if (regexTenSP)
+                if (string.IsNullOrEmpty(txt_TenSP.Text))
+                {
+                    MessageBox.Show("Tên sản phẩm không được NULL or Empty");
+                    Clear_SP();
+                    return;
+                }
+                if (string.IsNullOrEmpty(txt_thue.Text))
+                {
+                    MessageBox.Show("Thuế không được NULL or Empty");
+                    Clear_SP();
+                    return;
+                }
+                if (string.IsNullOrEmpty(txt_Gia.Text))
+                {
+                    MessageBox.Show("Giá không được NULL or Empty");
+                    Clear_SP();
+                    return;
+                }
+                var regexTenSP = _TDser.Add_RegexTenSP(txt_TenSP.Text);
+                if (!regexTenSP)
                 {
                     MessageBox.Show("Tên sản phẩm đã có trong database!");
+                    Clear_SP();
+                    return;
+                }
+                SanPham sp = new SanPham();
+                sp.IdsanPham = txt_IDSanPham.Text;
+                sp.TenSanPham = txt_TenSP.Text;
+                sp.Gia = double.Parse(txt_Gia.Text);
+                if (cbx_TrangThaiSP.SelectedIndex == 0)
+                {
+                    sp.TrangThai = 1;
+                }
+                else if (cbx_TrangThaiSP.SelectedIndex == 1)
+                {
+                    sp.TrangThai = 0;
+                }
+                sp.Thue = double.Parse(txt_thue.Text);
+
+                sp.IdloaiSanPham = _lstIdLoaiSP[cbx_IDLoaiSP.SelectedIndex];
+                var result = _TDser.AddSP(sp);
+                if (result)
+                {
+                    MessageBox.Show("B thêm thành công");
+                    Load_DGV_SanPham(null, null, 3);
+                }
+                else
+                {
+                    MessageBox.Show("B thêm thất bại");
+                }
+            }
+            else if (alert == DialogResult.Cancel)
+            {
+                return;
+            }
+        }
+
+        private void btn_SuaSP_Click(object sender, EventArgs e)
+        {
+            var alert = MessageBox.Show("B xác nhận sửa sản phẩm", "Xác nhận", MessageBoxButtons.OKCancel);
+            if (alert == DialogResult.OK)
+            {
+                if (string.IsNullOrEmpty(txt_TenSP.Text))
+                {
+                    MessageBox.Show("Tên sản phẩm không được NULL or Empty");
+                    Clear_SP();
+                    return;
+                }
+                if (string.IsNullOrEmpty(txt_thue.Text))
+                {
+                    MessageBox.Show("Thuế không được NULL or Empty");
+                    Clear_SP();
+                    return;
+                }
+                if (string.IsNullOrEmpty(txt_Gia.Text))
+                {
+                    MessageBox.Show("Giá không được NULL or Empty");
+                    Clear_SP();
+                    return;
+                }
+                var regexTenSP = _TDser.Update_RegexTenSP(txt_TenSP.Text, _idSPWhenClick);
+                if (!regexTenSP)
+                {
+                    MessageBox.Show("Tên sản phẩm đã có trong database!");
+                    Clear_SP();
                     return;
                 }
                 SanPham sp = new SanPham();
@@ -359,83 +475,23 @@ namespace PRL.f_ChucNang
                 }
                 sp.Thue = double.Parse(txt_thue.Text);
                 sp.IdloaiSanPham = _lstIdLoaiSP[cbx_IDLoaiSP.SelectedIndex];
-                var result = _TDser.AddSP(sp);
-                if (result)
-                {
-                    MessageBox.Show("B them thanh cong");
-                    Load_DGV_SanPham(null, null, 3);
-                }
-                else
-                {
-                    MessageBox.Show("B them that bai");
-                }
-            }
-            else
-            {
-                MessageBox.Show("B xac nhan KHONG them");
-            }
-        }
-
-        private void btn_SuaSP_Click(object sender, EventArgs e)
-        {
-            var alert = MessageBox.Show("B xac nhan sua san pham", "Xac nhan", MessageBoxButtons.OK);
-            if (alert == DialogResult.OK)
-            {
-                SanPham sp = new SanPham();
-                sp.IdsanPham = txt_IDSanPham.Text;
-                sp.TenSanPham = txt_TenSP.Text;
-                sp.Gia = double.Parse(txt_Gia.Text);
-                if (cbx_TrangThaiSP.SelectedIndex == 0)
-                {
-                    sp.TrangThai = 1;
-                }
-                else if (cbx_TrangThaiSP.SelectedIndex == 1)
-                {
-                    sp.TrangThai = 0;
-                }
-                sp.Thue = double.Parse(txt_thue.Text);
-                sp.IdloaiSanPham = _lstIdLoaiSP[cbx_IDLoaiSP.SelectedIndex];
-                sp.HinhAnh = pb_AnhSP.ImageLocation;
+                sp.HinhAnh = _imageWhenClick; // cho string file path biến toàn cục
                 var result = _TDser.UpdateSP(_idSPWhenClick, sp);
                 if (result)
                 {
-                    MessageBox.Show("B sua thanh cong");
+                    MessageBox.Show("B sửa thành công");
                     Load_DGV_SanPham(null, null, 3);
                 }
                 else
                 {
-                    MessageBox.Show("B sua that bai");
+                    MessageBox.Show("B sửa thất bại");
                 }
             }
-            else
+            else if (alert == DialogResult.Cancel)
             {
-                MessageBox.Show("B xac nhan KHONG sua");
+                return;
             }
         }
 
-        private void btn_XoaSP_Click(object sender, EventArgs e)
-        {
-            var alert = MessageBox.Show("B xac nhan xoa san pham", "Xac nhan", MessageBoxButtons.OK);
-            if (alert == DialogResult.OK)
-            {
-                var result = _TDser.DeleteSP(_idSPWhenClick);
-                if (result)
-                {
-                    MessageBox.Show("B xoa thanh cong");
-                    Load_DGV_SanPham(null, null, 3);
-                }
-                else
-                {
-                    MessageBox.Show("B xoa that bai");
-                }
-            }
-            else
-            {
-                MessageBox.Show("B xac nhan KHONG xoa");
-            }
-
-        }
-
-        
     }
 }
