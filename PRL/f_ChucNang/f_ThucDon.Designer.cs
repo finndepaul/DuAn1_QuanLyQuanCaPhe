@@ -33,9 +33,9 @@
             cbx_TrangThaiSP = new ComboBox();
             txt_thue = new TextBox();
             txt_Gia = new TextBox();
+            txt_IDNVinSP = new TextBox();
             txt_TenSP = new TextBox();
             txt_IDSanPham = new TextBox();
-            btn_XoaSP = new Button();
             btn_SuaSP = new Button();
             btn_ThemSP = new Button();
             btn_AddImages = new Button();
@@ -43,6 +43,7 @@
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
+            label14 = new Label();
             label2 = new Label();
             label1 = new Label();
             pb_AnhSP = new PictureBox();
@@ -55,7 +56,6 @@
             label7 = new Label();
             dgv_SanPham = new DataGridView();
             groupBox1 = new GroupBox();
-            btn_XoaLSP = new Button();
             btn_SuaLSP = new Button();
             btn_ThemLSP = new Button();
             label13 = new Label();
@@ -84,9 +84,9 @@
             gb_ChucNang.Controls.Add(cbx_TrangThaiSP);
             gb_ChucNang.Controls.Add(txt_thue);
             gb_ChucNang.Controls.Add(txt_Gia);
+            gb_ChucNang.Controls.Add(txt_IDNVinSP);
             gb_ChucNang.Controls.Add(txt_TenSP);
             gb_ChucNang.Controls.Add(txt_IDSanPham);
-            gb_ChucNang.Controls.Add(btn_XoaSP);
             gb_ChucNang.Controls.Add(btn_SuaSP);
             gb_ChucNang.Controls.Add(btn_ThemSP);
             gb_ChucNang.Controls.Add(btn_AddImages);
@@ -94,6 +94,7 @@
             gb_ChucNang.Controls.Add(label5);
             gb_ChucNang.Controls.Add(label4);
             gb_ChucNang.Controls.Add(label3);
+            gb_ChucNang.Controls.Add(label14);
             gb_ChucNang.Controls.Add(label2);
             gb_ChucNang.Controls.Add(label1);
             gb_ChucNang.Controls.Add(pb_AnhSP);
@@ -137,6 +138,15 @@
             txt_Gia.Size = new Size(217, 26);
             txt_Gia.TabIndex = 3;
             // 
+            // txt_IDNVinSP
+            // 
+            txt_IDNVinSP.Location = new Point(552, 389);
+            txt_IDNVinSP.Multiline = true;
+            txt_IDNVinSP.Name = "txt_IDNVinSP";
+            txt_IDNVinSP.ReadOnly = true;
+            txt_IDNVinSP.Size = new Size(217, 26);
+            txt_IDNVinSP.TabIndex = 3;
+            // 
             // txt_TenSP
             // 
             txt_TenSP.Location = new Point(552, 126);
@@ -150,24 +160,14 @@
             txt_IDSanPham.Location = new Point(552, 74);
             txt_IDSanPham.Multiline = true;
             txt_IDSanPham.Name = "txt_IDSanPham";
+            txt_IDSanPham.ReadOnly = true;
             txt_IDSanPham.Size = new Size(217, 26);
             txt_IDSanPham.TabIndex = 3;
-            // 
-            // btn_XoaSP
-            // 
-            btn_XoaSP.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_XoaSP.Location = new Point(643, 436);
-            btn_XoaSP.Name = "btn_XoaSP";
-            btn_XoaSP.Size = new Size(126, 58);
-            btn_XoaSP.TabIndex = 2;
-            btn_XoaSP.Text = "Xóa";
-            btn_XoaSP.UseVisualStyleBackColor = true;
-            btn_XoaSP.Click += btn_XoaSP_Click;
             // 
             // btn_SuaSP
             // 
             btn_SuaSP.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_SuaSP.Location = new Point(454, 436);
+            btn_SuaSP.Location = new Point(643, 480);
             btn_SuaSP.Name = "btn_SuaSP";
             btn_SuaSP.Size = new Size(126, 58);
             btn_SuaSP.TabIndex = 2;
@@ -178,7 +178,7 @@
             // btn_ThemSP
             // 
             btn_ThemSP.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_ThemSP.Location = new Point(267, 436);
+            btn_ThemSP.Location = new Point(454, 480);
             btn_ThemSP.Name = "btn_ThemSP";
             btn_ThemSP.Size = new Size(126, 58);
             btn_ThemSP.TabIndex = 2;
@@ -189,7 +189,7 @@
             // btn_AddImages
             // 
             btn_AddImages.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_AddImages.Location = new Point(80, 436);
+            btn_AddImages.Location = new Point(265, 480);
             btn_AddImages.Name = "btn_AddImages";
             btn_AddImages.Size = new Size(126, 58);
             btn_AddImages.TabIndex = 2;
@@ -236,6 +236,16 @@
             label3.Size = new Size(39, 24);
             label3.TabIndex = 1;
             label3.Text = "Giá";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label14.Location = new Point(352, 391);
+            label14.Name = "label14";
+            label14.Size = new Size(128, 24);
+            label14.TabIndex = 1;
+            label14.Text = "ID Nhân Viên";
             // 
             // label2
             // 
@@ -358,7 +368,6 @@
             // groupBox1
             // 
             groupBox1.Anchor = AnchorStyles.Bottom;
-            groupBox1.Controls.Add(btn_XoaLSP);
             groupBox1.Controls.Add(btn_SuaLSP);
             groupBox1.Controls.Add(btn_ThemLSP);
             groupBox1.Controls.Add(label13);
@@ -376,21 +385,10 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Thông Tin Loại Sản Phẩm";
             // 
-            // btn_XoaLSP
-            // 
-            btn_XoaLSP.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_XoaLSP.Location = new Point(643, 286);
-            btn_XoaLSP.Name = "btn_XoaLSP";
-            btn_XoaLSP.Size = new Size(126, 58);
-            btn_XoaLSP.TabIndex = 11;
-            btn_XoaLSP.Text = "Xóa";
-            btn_XoaLSP.UseVisualStyleBackColor = true;
-            btn_XoaLSP.Click += btn_XoaLSP_Click;
-            // 
             // btn_SuaLSP
             // 
             btn_SuaLSP.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_SuaLSP.Location = new Point(454, 286);
+            btn_SuaLSP.Location = new Point(643, 278);
             btn_SuaLSP.Name = "btn_SuaLSP";
             btn_SuaLSP.Size = new Size(126, 58);
             btn_SuaLSP.TabIndex = 11;
@@ -401,7 +399,7 @@
             // btn_ThemLSP
             // 
             btn_ThemLSP.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_ThemLSP.Location = new Point(265, 286);
+            btn_ThemLSP.Location = new Point(454, 278);
             btn_ThemLSP.Name = "btn_ThemLSP";
             btn_ThemLSP.Size = new Size(126, 58);
             btn_ThemLSP.TabIndex = 12;
@@ -425,7 +423,8 @@
             txt_IDNhanVien.Location = new Point(236, 218);
             txt_IDNhanVien.Multiline = true;
             txt_IDNhanVien.Name = "txt_IDNhanVien";
-            txt_IDNhanVien.Size = new Size(532, 28);
+            txt_IDNhanVien.ReadOnly = true;
+            txt_IDNhanVien.Size = new Size(533, 28);
             txt_IDNhanVien.TabIndex = 8;
             // 
             // cbx_TrangThaiLSP
@@ -472,6 +471,7 @@
             txt_IDLoaiSanPham.Location = new Point(237, 46);
             txt_IDLoaiSanPham.Multiline = true;
             txt_IDLoaiSanPham.Name = "txt_IDLoaiSanPham";
+            txt_IDLoaiSanPham.ReadOnly = true;
             txt_IDLoaiSanPham.Size = new Size(532, 28);
             txt_IDLoaiSanPham.TabIndex = 4;
             // 
@@ -574,7 +574,7 @@
         private Button btn_ThemSP;
         private Button btn_SuaLSP;
         private Button btn_ThemLSP;
-        private Button btn_XoaSP;
-        private Button btn_XoaLSP;
+        private TextBox txt_IDNVinSP;
+        private Label label14;
     }
 }

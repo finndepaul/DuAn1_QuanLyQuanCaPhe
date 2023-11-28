@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            textBox3 = new TextBox();
+            textBox2 = new TextBox();
+            textBox1 = new TextBox();
             label7 = new Label();
             label6 = new Label();
             label5 = new Label();
@@ -36,38 +39,36 @@
             label3 = new Label();
             label1 = new Label();
             groupBox2 = new GroupBox();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
+            btn_ShowAll = new Button();
+            chb_All = new CheckBox();
+            cbx_LocTrangThai = new ComboBox();
+            label16 = new Label();
+            label15 = new Label();
+            txt_TimKhuyenMai = new TextBox();
+            label2 = new Label();
+            txt_TimSanPham = new TextBox();
+            dgv_GiamGia = new DataGridView();
+            dgv_SanPham = new DataGridView();
             groupBox3 = new GroupBox();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
-            textBox6 = new TextBox();
+            btn_Sua = new Button();
+            btn_Them = new Button();
+            cbx_TrangThai = new ComboBox();
+            dtp_NgayKetThuc = new DateTimePicker();
+            dtp_NgayBatDau = new DateTimePicker();
+            txt_PhanTram = new TextBox();
+            txt_TenChuongTrinh = new TextBox();
+            txt_IDGiamGia = new TextBox();
             label8 = new Label();
             label9 = new Label();
             label10 = new Label();
             label11 = new Label();
             label12 = new Label();
             label13 = new Label();
-            dateTimePicker1 = new DateTimePicker();
-            dateTimePicker2 = new DateTimePicker();
-            comboBox1 = new ComboBox();
-            dataGridView1 = new DataGridView();
-            dataGridView2 = new DataGridView();
-            textBox7 = new TextBox();
-            label2 = new Label();
-            comboBox2 = new ComboBox();
-            label14 = new Label();
-            checkBox1 = new CheckBox();
-            textBox8 = new TextBox();
-            label15 = new Label();
-            label16 = new Label();
-            comboBox3 = new ComboBox();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv_GiamGia).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_SanPham).BeginInit();
             groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
@@ -87,6 +88,27 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "groupBox1";
+            // 
+            // textBox3
+            // 
+            textBox3.Location = new Point(264, 294);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(458, 27);
+            textBox3.TabIndex = 1;
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(264, 198);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(458, 27);
+            textBox2.TabIndex = 1;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(264, 102);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(458, 27);
+            textBox1.TabIndex = 1;
             // 
             // label7
             // 
@@ -150,17 +172,16 @@
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(checkBox1);
-            groupBox2.Controls.Add(comboBox3);
-            groupBox2.Controls.Add(comboBox2);
+            groupBox2.Controls.Add(btn_ShowAll);
+            groupBox2.Controls.Add(chb_All);
+            groupBox2.Controls.Add(cbx_LocTrangThai);
             groupBox2.Controls.Add(label16);
-            groupBox2.Controls.Add(label14);
             groupBox2.Controls.Add(label15);
-            groupBox2.Controls.Add(textBox8);
+            groupBox2.Controls.Add(txt_TimKhuyenMai);
             groupBox2.Controls.Add(label2);
-            groupBox2.Controls.Add(textBox7);
-            groupBox2.Controls.Add(dataGridView2);
-            groupBox2.Controls.Add(dataGridView1);
+            groupBox2.Controls.Add(txt_TimSanPham);
+            groupBox2.Controls.Add(dgv_GiamGia);
+            groupBox2.Controls.Add(dgv_SanPham);
             groupBox2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox2.Location = new Point(838, 12);
             groupBox2.Name = "groupBox2";
@@ -169,35 +190,118 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Tác Vụ";
             // 
-            // textBox1
+            // btn_ShowAll
             // 
-            textBox1.Location = new Point(264, 102);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(458, 27);
-            textBox1.TabIndex = 1;
+            btn_ShowAll.Location = new Point(364, 510);
+            btn_ShowAll.Name = "btn_ShowAll";
+            btn_ShowAll.Size = new Size(94, 26);
+            btn_ShowAll.TabIndex = 6;
+            btn_ShowAll.Text = "Show All";
+            btn_ShowAll.UseVisualStyleBackColor = true;
+            btn_ShowAll.Click += btn_ShowAll_Click;
             // 
-            // textBox2
+            // chb_All
             // 
-            textBox2.Location = new Point(264, 198);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(458, 27);
-            textBox2.TabIndex = 1;
+            chb_All.AutoSize = true;
+            chb_All.Location = new Point(790, 514);
+            chb_All.Name = "chb_All";
+            chb_All.Size = new Size(75, 22);
+            chb_All.TabIndex = 5;
+            chb_All.Text = "Tất Cả";
+            chb_All.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // cbx_LocTrangThai
             // 
-            textBox3.Location = new Point(264, 294);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(458, 27);
-            textBox3.TabIndex = 1;
+            cbx_LocTrangThai.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            cbx_LocTrangThai.FormattingEnabled = true;
+            cbx_LocTrangThai.Location = new Point(704, 57);
+            cbx_LocTrangThai.Name = "cbx_LocTrangThai";
+            cbx_LocTrangThai.Size = new Size(151, 26);
+            cbx_LocTrangThai.TabIndex = 3;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label16.Location = new Point(591, 59);
+            label16.Name = "label16";
+            label16.Size = new Size(107, 24);
+            label16.TabIndex = 4;
+            label16.Text = "Trạng Thái";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label15.Location = new Point(0, 59);
+            label15.Name = "label15";
+            label15.Size = new Size(162, 24);
+            label15.TabIndex = 4;
+            label15.Text = "Tìm Khuyến mại:";
+            // 
+            // txt_TimKhuyenMai
+            // 
+            txt_TimKhuyenMai.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txt_TimKhuyenMai.Location = new Point(168, 59);
+            txt_TimKhuyenMai.Name = "txt_TimKhuyenMai";
+            txt_TimKhuyenMai.PlaceholderText = "Nhập để tìm kiếm tên chương trình";
+            txt_TimKhuyenMai.Size = new Size(272, 26);
+            txt_TimKhuyenMai.TabIndex = 2;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(6, 510);
+            label2.Name = "label2";
+            label2.Size = new Size(146, 24);
+            label2.TabIndex = 4;
+            label2.Text = "Tìm Sản Phẩm:";
+            // 
+            // txt_TimSanPham
+            // 
+            txt_TimSanPham.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txt_TimSanPham.Location = new Point(158, 510);
+            txt_TimSanPham.Name = "txt_TimSanPham";
+            txt_TimSanPham.PlaceholderText = "Nhập để tìm kiếm sản phẩm";
+            txt_TimSanPham.Size = new Size(200, 26);
+            txt_TimSanPham.TabIndex = 2;
+            // 
+            // dgv_GiamGia
+            // 
+            dgv_GiamGia.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_GiamGia.Location = new Point(0, 95);
+            dgv_GiamGia.Name = "dgv_GiamGia";
+            dgv_GiamGia.RowHeadersWidth = 51;
+            dgv_GiamGia.RowTemplate.Height = 29;
+            dgv_GiamGia.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_GiamGia.Size = new Size(857, 322);
+            dgv_GiamGia.TabIndex = 0;
+            dgv_GiamGia.CellClick += dgv_GiamGia_CellClick;
+            // 
+            // dgv_SanPham
+            // 
+            dgv_SanPham.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_SanPham.Location = new Point(0, 546);
+            dgv_SanPham.Name = "dgv_SanPham";
+            dgv_SanPham.RowHeadersWidth = 51;
+            dgv_SanPham.RowTemplate.Height = 29;
+            dgv_SanPham.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_SanPham.Size = new Size(857, 379);
+            dgv_SanPham.TabIndex = 0;
+            dgv_SanPham.CellClick += dgv_SanPham_CellClick;
+            dgv_SanPham.CellContentClick += dgv_SanPham_CellContentClick;
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(comboBox1);
-            groupBox3.Controls.Add(dateTimePicker2);
-            groupBox3.Controls.Add(dateTimePicker1);
-            groupBox3.Controls.Add(textBox4);
-            groupBox3.Controls.Add(textBox5);
-            groupBox3.Controls.Add(textBox6);
+            groupBox3.Controls.Add(btn_Sua);
+            groupBox3.Controls.Add(btn_Them);
+            groupBox3.Controls.Add(cbx_TrangThai);
+            groupBox3.Controls.Add(dtp_NgayKetThuc);
+            groupBox3.Controls.Add(dtp_NgayBatDau);
+            groupBox3.Controls.Add(txt_PhanTram);
+            groupBox3.Controls.Add(txt_TenChuongTrinh);
+            groupBox3.Controls.Add(txt_IDGiamGia);
             groupBox3.Controls.Add(label8);
             groupBox3.Controls.Add(label9);
             groupBox3.Controls.Add(label10);
@@ -212,29 +316,73 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "Thông Tin Khuyến Mãi";
             // 
-            // textBox4
+            // btn_Sua
             // 
-            textBox4.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox4.Location = new Point(264, 294);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(458, 26);
-            textBox4.TabIndex = 1;
+            btn_Sua.Location = new Point(502, 719);
+            btn_Sua.Name = "btn_Sua";
+            btn_Sua.Size = new Size(140, 51);
+            btn_Sua.TabIndex = 17;
+            btn_Sua.Text = "Sửa";
+            btn_Sua.UseVisualStyleBackColor = true;
             // 
-            // textBox5
+            // btn_Them
             // 
-            textBox5.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox5.Location = new Point(264, 198);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(458, 26);
-            textBox5.TabIndex = 1;
+            btn_Them.Location = new Point(179, 719);
+            btn_Them.Name = "btn_Them";
+            btn_Them.Size = new Size(140, 51);
+            btn_Them.TabIndex = 16;
+            btn_Them.Text = "Thêm";
+            btn_Them.UseVisualStyleBackColor = true;
             // 
-            // textBox6
+            // cbx_TrangThai
             // 
-            textBox6.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox6.Location = new Point(264, 102);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(458, 26);
-            textBox6.TabIndex = 1;
+            cbx_TrangThai.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            cbx_TrangThai.FormattingEnabled = true;
+            cbx_TrangThai.Location = new Point(264, 582);
+            cbx_TrangThai.Name = "cbx_TrangThai";
+            cbx_TrangThai.Size = new Size(250, 26);
+            cbx_TrangThai.TabIndex = 3;
+            // 
+            // dtp_NgayKetThuc
+            // 
+            dtp_NgayKetThuc.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dtp_NgayKetThuc.Location = new Point(264, 486);
+            dtp_NgayKetThuc.Name = "dtp_NgayKetThuc";
+            dtp_NgayKetThuc.Size = new Size(250, 26);
+            dtp_NgayKetThuc.TabIndex = 2;
+            // 
+            // dtp_NgayBatDau
+            // 
+            dtp_NgayBatDau.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dtp_NgayBatDau.Location = new Point(264, 390);
+            dtp_NgayBatDau.Name = "dtp_NgayBatDau";
+            dtp_NgayBatDau.Size = new Size(250, 26);
+            dtp_NgayBatDau.TabIndex = 2;
+            // 
+            // txt_PhanTram
+            // 
+            txt_PhanTram.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txt_PhanTram.Location = new Point(264, 294);
+            txt_PhanTram.Name = "txt_PhanTram";
+            txt_PhanTram.Size = new Size(458, 26);
+            txt_PhanTram.TabIndex = 1;
+            // 
+            // txt_TenChuongTrinh
+            // 
+            txt_TenChuongTrinh.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txt_TenChuongTrinh.Location = new Point(264, 198);
+            txt_TenChuongTrinh.Name = "txt_TenChuongTrinh";
+            txt_TenChuongTrinh.Size = new Size(458, 26);
+            txt_TenChuongTrinh.TabIndex = 1;
+            // 
+            // txt_IDGiamGia
+            // 
+            txt_IDGiamGia.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txt_IDGiamGia.Location = new Point(264, 102);
+            txt_IDGiamGia.Name = "txt_IDGiamGia";
+            txt_IDGiamGia.ReadOnly = true;
+            txt_IDGiamGia.Size = new Size(458, 26);
+            txt_IDGiamGia.TabIndex = 1;
             // 
             // label8
             // 
@@ -292,140 +440,9 @@
             label13.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label13.Location = new Point(44, 105);
             label13.Name = "label13";
-            label13.Size = new Size(75, 24);
+            label13.Size = new Size(118, 24);
             label13.TabIndex = 0;
-            label13.Text = "ID Sale";
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dateTimePicker1.Location = new Point(264, 390);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(250, 26);
-            dateTimePicker1.TabIndex = 2;
-            // 
-            // dateTimePicker2
-            // 
-            dateTimePicker2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dateTimePicker2.Location = new Point(264, 486);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(250, 26);
-            dateTimePicker2.TabIndex = 2;
-            // 
-            // comboBox1
-            // 
-            comboBox1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(264, 582);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 26);
-            comboBox1.TabIndex = 3;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(6, 546);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.RowTemplate.Height = 29;
-            dataGridView1.Size = new Size(857, 379);
-            dataGridView1.TabIndex = 0;
-            // 
-            // dataGridView2
-            // 
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(0, 95);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.RowHeadersWidth = 51;
-            dataGridView2.RowTemplate.Height = 29;
-            dataGridView2.Size = new Size(857, 322);
-            dataGridView2.TabIndex = 0;
-            // 
-            // textBox7
-            // 
-            textBox7.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox7.Location = new Point(158, 510);
-            textBox7.Name = "textBox7";
-            textBox7.PlaceholderText = "Nhập để tìm kiếm sản phẩm";
-            textBox7.Size = new Size(272, 26);
-            textBox7.TabIndex = 2;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(6, 510);
-            label2.Name = "label2";
-            label2.Size = new Size(146, 24);
-            label2.TabIndex = 4;
-            label2.Text = "Tìm Sản Phẩm:";
-            // 
-            // comboBox2
-            // 
-            comboBox2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(621, 512);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(151, 26);
-            comboBox2.TabIndex = 3;
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label14.Location = new Point(473, 512);
-            label14.Name = "label14";
-            label14.Size = new Size(142, 24);
-            label14.TabIndex = 4;
-            label14.Text = "Loại Sản Phẩm";
-            // 
-            // checkBox1
-            // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(790, 514);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(75, 22);
-            checkBox1.TabIndex = 5;
-            checkBox1.Text = "Tất Cả";
-            checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // textBox8
-            // 
-            textBox8.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox8.Location = new Point(168, 59);
-            textBox8.Name = "textBox8";
-            textBox8.PlaceholderText = "Nhập để tìm kiếm sản phẩm";
-            textBox8.Size = new Size(272, 26);
-            textBox8.TabIndex = 2;
-            // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label15.Location = new Point(0, 59);
-            label15.Name = "label15";
-            label15.Size = new Size(162, 24);
-            label15.TabIndex = 4;
-            label15.Text = "Tìm Khuyến mại:";
-            // 
-            // label16
-            // 
-            label16.AutoSize = true;
-            label16.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label16.Location = new Point(591, 59);
-            label16.Name = "label16";
-            label16.Size = new Size(107, 24);
-            label16.TabIndex = 4;
-            label16.Text = "Trạng Thái";
-            // 
-            // comboBox3
-            // 
-            comboBox3.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(704, 57);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(151, 26);
-            comboBox3.TabIndex = 3;
+            label13.Text = "ID Giảm Giá";
             // 
             // f_Sale
             // 
@@ -436,16 +453,17 @@
             Controls.Add(groupBox3);
             Controls.Add(groupBox1);
             Name = "f_Sale";
-            Text = "Sale";
+            Text = "Giảm Giá";
             WindowState = FormWindowState.Maximized;
+            Load += f_Sale_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv_GiamGia).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_SanPham).EndInit();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);
         }
 
@@ -463,28 +481,29 @@
         private TextBox textBox2;
         private TextBox textBox1;
         private GroupBox groupBox3;
-        private ComboBox comboBox1;
-        private DateTimePicker dateTimePicker2;
-        private DateTimePicker dateTimePicker1;
-        private TextBox textBox4;
-        private TextBox textBox5;
-        private TextBox textBox6;
+        private ComboBox cbx_TrangThai;
+        private DateTimePicker dtp_NgayKetThuc;
+        private DateTimePicker dtp_NgayBatDau;
+        private TextBox txt_PhanTram;
+        private TextBox txt_TenChuongTrinh;
+        private TextBox txt_IDGiamGia;
         private Label label8;
         private Label label9;
         private Label label10;
         private Label label11;
         private Label label12;
         private Label label13;
-        private CheckBox checkBox1;
-        private ComboBox comboBox2;
-        private Label label14;
+        private CheckBox chb_All;
         private Label label2;
-        private TextBox textBox7;
-        private DataGridView dataGridView2;
-        private DataGridView dataGridView1;
-        private ComboBox comboBox3;
+        private TextBox txt_TimSanPham;
+        private DataGridView dgv_GiamGia;
+        private DataGridView dgv_SanPham;
+        private ComboBox cbx_LocTrangThai;
         private Label label16;
         private Label label15;
-        private TextBox textBox8;
+        private TextBox txt_TimKhuyenMai;
+        private Button btn_Sua;
+        private Button btn_Them;
+        private Button btn_ShowAll;
     }
 }

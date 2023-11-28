@@ -15,11 +15,11 @@ public partial class Da1CoffeeContext : DbContext
     {
     }
 
-    public virtual DbSet<DatHang> DatHangs { get; set; }
-
-    public virtual DbSet<DatHangChiTiet> DatHangChiTiets { get; set; }
-
     public virtual DbSet<DichVuPhatSinh> DichVuPhatSinhs { get; set; }
+
+    public virtual DbSet<GiamGiaChiTiet> GiamGiaChiTiets { get; set; }
+
+    public virtual DbSet<GiamGia> GiamGia { get; set; }
 
     public virtual DbSet<HoaDon> HoaDons { get; set; }
 
@@ -37,65 +37,19 @@ public partial class Da1CoffeeContext : DbContext
 
     public virtual DbSet<PhaChe> PhaChes { get; set; }
 
-    public virtual DbSet<Sale> Sales { get; set; }
-
     public virtual DbSet<SanPham> SanPhams { get; set; }
 
     public virtual DbSet<Voucher> Vouchers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-F3IJIL6\\SQLEXPRESS01;Initial Catalog=DA1_Coffee;Persist Security Info=True;User ID=sa;\n        Password=123456;Integrated Security = True; Trust Server Certificate=True;");
+        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-F3IJIL6\\SQLEXPRESS01;Initial Catalog=DA1_Coffee;Persist Security Info=True;User ID=sa;\nPassword=123456;Integrated Security=True;Trust Server Certificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<DatHang>(entity =>
-        {
-            entity.HasKey(e => e.IddatHang).HasName("PK__DatHang__43813BF1EB47A85E");
-
-            entity.ToTable("DatHang");
-
-            entity.Property(e => e.IddatHang)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("IDDatHang");
-            entity.Property(e => e.NgayBan).HasColumnType("date");
-        });
-
-        modelBuilder.Entity<DatHangChiTiet>(entity =>
-        {
-            entity.HasKey(e => e.IddatHangChiTiet).HasName("PK__DatHangC__2CCBFEC2032848B8");
-
-            entity.ToTable("DatHangChiTiet");
-
-            entity.Property(e => e.IddatHangChiTiet)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("IDDatHangChiTiet");
-            entity.Property(e => e.GhiChu).HasMaxLength(255);
-            entity.Property(e => e.IddatHang)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("IDDatHang");
-            entity.Property(e => e.IdsanPham)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("IDSanPham");
-
-            entity.HasOne(d => d.IddatHangChiTietNavigation).WithOne(p => p.DatHangChiTiet)
-                .HasForeignKey<DatHangChiTiet>(d => d.IddatHangChiTiet)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_DH_DHCT");
-
-            entity.HasOne(d => d.IddatHangChiTiet1).WithOne(p => p.DatHangChiTiet)
-                .HasForeignKey<DatHangChiTiet>(d => d.IddatHangChiTiet)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_SP_DHCT");
-        });
-
         modelBuilder.Entity<DichVuPhatSinh>(entity =>
         {
-            entity.HasKey(e => e.IddichVuPhatSinh).HasName("PK__DichVuPh__87E4E2CE51FAC60B");
+            entity.HasKey(e => e.IddichVuPhatSinh).HasName("PK__DichVuPh__87E4E2CEB4F3079E");
 
             entity.ToTable("DichVuPhatSinh");
 
@@ -111,12 +65,56 @@ public partial class Da1CoffeeContext : DbContext
 
             entity.HasOne(d => d.IdhoaDonNavigation).WithMany(p => p.DichVuPhatSinhs)
                 .HasForeignKey(d => d.IdhoaDon)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_HD_DVPS");
+        });
+
+        modelBuilder.Entity<GiamGiaChiTiet>(entity =>
+        {
+            entity.HasKey(e => e.IdgiamGiaChiTiet).HasName("PK__GiamGiaC__F7895F4A4CFFAB10");
+
+            entity.ToTable("GiamGiaChiTiet");
+
+            entity.Property(e => e.IdgiamGiaChiTiet)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("IDGiamGiaChiTiet");
+            entity.Property(e => e.IdgiamGia)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("IDGiamGia");
+            entity.Property(e => e.IdsanPham)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("IDSanPham");
+
+            entity.HasOne(d => d.IdgiamGiaNavigation).WithMany(p => p.GiamGiaChiTiets)
+                .HasForeignKey(d => d.IdgiamGia)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_GG_GGCT");
+
+            entity.HasOne(d => d.IdsanPhamNavigation).WithMany(p => p.GiamGiaChiTiets)
+                .HasForeignKey(d => d.IdsanPham)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_SP_GGCT");
+        });
+
+        modelBuilder.Entity<GiamGia>(entity =>
+        {
+            entity.HasKey(e => e.IdgiamGia).HasName("PK__GiamGia__F091CBDCE7DD2511");
+
+            entity.Property(e => e.IdgiamGia)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("IDGiamGia");
+            entity.Property(e => e.NgayBatDau).HasColumnType("date");
+            entity.Property(e => e.NgayKetThuc).HasColumnType("date");
+            entity.Property(e => e.TenChuongTrinh).HasMaxLength(50);
         });
 
         modelBuilder.Entity<HoaDon>(entity =>
         {
-            entity.HasKey(e => e.IdhoaDon).HasName("PK__HoaDon__5B896F491A468DE6");
+            entity.HasKey(e => e.IdhoaDon).HasName("PK__HoaDon__5B896F495C06B1AC");
 
             entity.ToTable("HoaDon");
 
@@ -136,11 +134,10 @@ public partial class Da1CoffeeContext : DbContext
                 .HasMaxLength(20)
                 .IsUnicode(false)
                 .HasColumnName("IDVoucher");
-            entity.Property(e => e.NgayBan).HasColumnType("date");
+            entity.Property(e => e.NgayXuatDon).HasColumnType("date");
 
             entity.HasOne(d => d.IdkhachHangNavigation).WithMany(p => p.HoaDons)
                 .HasForeignKey(d => d.IdkhachHang)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_KH_HD");
 
             entity.HasOne(d => d.IdnhanVienNavigation).WithMany(p => p.HoaDons)
@@ -155,7 +152,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<HoaDonChiTiet>(entity =>
         {
-            entity.HasKey(e => e.IdhoaDonChiTiet).HasName("PK__HoaDonCh__21C23677D497084E");
+            entity.HasKey(e => e.IdhoaDonChiTiet).HasName("PK__HoaDonCh__21C2367707B37768");
 
             entity.ToTable("HoaDonChiTiet");
 
@@ -172,10 +169,10 @@ public partial class Da1CoffeeContext : DbContext
                 .HasMaxLength(20)
                 .IsUnicode(false)
                 .HasColumnName("IDSanPham");
-            entity.Property(e => e.NgayXuatDon).HasColumnType("date");
 
             entity.HasOne(d => d.IdhoaDonNavigation).WithMany(p => p.HoaDonChiTiets)
                 .HasForeignKey(d => d.IdhoaDon)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_HD_HDCT");
 
             entity.HasOne(d => d.IdsanPhamNavigation).WithMany(p => p.HoaDonChiTiets)
@@ -186,7 +183,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<KhachHang>(entity =>
         {
-            entity.HasKey(e => e.IdkhachHang).HasName("PK__KhachHan__5A7167B53E2508AE");
+            entity.HasKey(e => e.IdkhachHang).HasName("PK__KhachHan__5A7167B5243D9A6B");
 
             entity.ToTable("KhachHang");
 
@@ -213,7 +210,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<LoaiSanPham>(entity =>
         {
-            entity.HasKey(e => e.IdloaiSanPham).HasName("PK__LoaiSanP__6CB987C50636E410");
+            entity.HasKey(e => e.IdloaiSanPham).HasName("PK__LoaiSanP__6CB987C5C5E45ACB");
 
             entity.ToTable("LoaiSanPham");
 
@@ -226,11 +223,16 @@ public partial class Da1CoffeeContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("IDNhanVien");
             entity.Property(e => e.TenLoaiSanPham).HasMaxLength(50);
+
+            entity.HasOne(d => d.IdnhanVienNavigation).WithMany(p => p.LoaiSanPhams)
+                .HasForeignKey(d => d.IdnhanVien)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_NV_LSP");
         });
 
         modelBuilder.Entity<MemberShipRank>(entity =>
         {
-            entity.HasKey(e => e.Idrank).HasName("PK__MemberSh__AFFF681DED1E053B");
+            entity.HasKey(e => e.Idrank).HasName("PK__MemberSh__AFFF681DDD823A62");
 
             entity.ToTable("MemberShipRank");
 
@@ -243,7 +245,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<NguyenLieu>(entity =>
         {
-            entity.HasKey(e => e.IdnguyenLieu).HasName("PK__NguyenLi__209F08FF5D4426E2");
+            entity.HasKey(e => e.IdnguyenLieu).HasName("PK__NguyenLi__209F08FF14FB9447");
 
             entity.ToTable("NguyenLieu");
 
@@ -251,14 +253,12 @@ public partial class Da1CoffeeContext : DbContext
                 .HasMaxLength(20)
                 .IsUnicode(false)
                 .HasColumnName("IDNguyenLieu");
-            entity.Property(e => e.NgayHetHan).HasColumnType("date");
-            entity.Property(e => e.NgayNhap).HasColumnType("date");
             entity.Property(e => e.TenNguyenLieu).HasMaxLength(50);
         });
 
         modelBuilder.Entity<NhanVien>(entity =>
         {
-            entity.HasKey(e => e.IdnhanVien).HasName("PK__NhanVien__7AC2D9F7B838B2A2");
+            entity.HasKey(e => e.IdnhanVien).HasName("PK__NhanVien__7AC2D9F7F13F78C4");
 
             entity.ToTable("NhanVien");
 
@@ -276,7 +276,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<PhaChe>(entity =>
         {
-            entity.HasKey(e => e.IdphaChe).HasName("PK__PhaChe__1035F7DE64AB1ACF");
+            entity.HasKey(e => e.IdphaChe).HasName("PK__PhaChe__1035F7DE825525C6");
 
             entity.ToTable("PhaChe");
 
@@ -304,33 +304,9 @@ public partial class Da1CoffeeContext : DbContext
                 .HasConstraintName("fk_SP_PC");
         });
 
-        modelBuilder.Entity<Sale>(entity =>
-        {
-            entity.HasKey(e => e.Idsale).HasName("PK__Sale__C6F3BA0B8AB5E152");
-
-            entity.ToTable("Sale");
-
-            entity.Property(e => e.Idsale)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("IDSale");
-            entity.Property(e => e.IdsanPham)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("IDSanPham");
-            entity.Property(e => e.NgayBatDau).HasColumnType("date");
-            entity.Property(e => e.NgayKetThuc).HasColumnType("date");
-            entity.Property(e => e.TenChuongTrinh).HasMaxLength(50);
-
-            entity.HasOne(d => d.IdsanPhamNavigation).WithMany(p => p.Sales)
-                .HasForeignKey(d => d.IdsanPham)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_SP_S");
-        });
-
         modelBuilder.Entity<SanPham>(entity =>
         {
-            entity.HasKey(e => e.IdsanPham).HasName("PK__SanPham__9D45E58A9A8A73C8");
+            entity.HasKey(e => e.IdsanPham).HasName("PK__SanPham__9D45E58AEED3EFDC");
 
             entity.ToTable("SanPham");
 
@@ -343,16 +319,26 @@ public partial class Da1CoffeeContext : DbContext
                 .HasMaxLength(20)
                 .IsUnicode(false)
                 .HasColumnName("IDLoaiSanPham");
+            entity.Property(e => e.IdnhanVien)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("IDNhanVien");
             entity.Property(e => e.TenSanPham).HasMaxLength(50);
 
             entity.HasOne(d => d.IdloaiSanPhamNavigation).WithMany(p => p.SanPhams)
                 .HasForeignKey(d => d.IdloaiSanPham)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_LSP_SP");
+
+            entity.HasOne(d => d.IdnhanVienNavigation).WithMany(p => p.SanPhams)
+                .HasForeignKey(d => d.IdnhanVien)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_NV_SP");
         });
 
         modelBuilder.Entity<Voucher>(entity =>
         {
-            entity.HasKey(e => e.Idvoucher).HasName("PK__Voucher__50249A27B736F33F");
+            entity.HasKey(e => e.Idvoucher).HasName("PK__Voucher__50249A2764BA4CBE");
 
             entity.ToTable("Voucher");
 

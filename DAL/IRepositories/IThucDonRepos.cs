@@ -19,14 +19,15 @@ namespace DAL.IRepositories
         public bool GetImgage(string id, string fileImage);
         public bool AddSP(SanPham sanPham);
         public bool UpdateSP(string id,SanPham sanPham);
-        public bool DeleteSP(string id);
-        public bool RegexTenSP(string tenSP);
+        public bool Add_RegexTenSP(string tenSP);
+        public bool Update_RegexTenSP(string tenSP, string Id);
 
         // Loại SP
         public List<LoaiSanPham> GetLoaiSanPhams();
         public bool AddLoaiSP(LoaiSanPham loaiSanPham);
         public bool UpdateLoaiSP(string id,LoaiSanPham loaiSanPham);
-        public bool DeleteLoaiSP(string id);
+        public bool Add_RegexTenLSP(string tenLSP);
+        public bool Update_RegexTenLSP(string tenLSP, string Id);
 
 
     }

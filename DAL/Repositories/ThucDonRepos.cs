@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace DAL.Repositories
@@ -127,14 +128,31 @@ namespace DAL.Repositories
         {
             try
             {
+                if (_db.LoaiSanPhams.Any())
+                {
+                    var maxId = _db.LoaiSanPhams.Max(lsp => lsp.IdloaiSanPham);
+
+                    int nextId = int.Parse(maxId.Substring(2)) + 1;
+
+                    loaiSanPham.IdloaiSanPham = "KP" + nextId.ToString("D3");
+
+                    loaiSanPham.IdnhanVien = "NV001";
+                }
+                else
+                {
+                    loaiSanPham.IdloaiSanPham = "KP001";
+                    loaiSanPham.IdnhanVien = "NV001";
+                }
                 _db.Add(loaiSanPham);
                 _db.SaveChanges();
+
                 return true;
             }
             catch
             {
                 return false;
             }
+
         }
 
         public bool UpdateLoaiSP(string id, LoaiSanPham loaiSanPham)
@@ -165,14 +183,39 @@ namespace DAL.Repositories
         {
             try
             {
+                // Kiểm tra xem có sản phẩm nào trong cơ sở dữ liệu hay không
+                if (_db.SanPhams.Any())
+                {
+                    // Truy vấn IdsanPham lớn nhất
+                    var maxId = _db.SanPhams.Max(sp => sp.IdsanPham);
+
+                    // Tăng giá trị lên 1
+                    int nextId = int.Parse(maxId.Substring(2)) + 1;
+
+                    // Tạo IdsanPham mới
+                    sanPham.IdsanPham = "SP" + nextId.ToString("D3");
+                    sanPham.GiaSale = 0;
+                    sanPham.IdnhanVien = "NV001";
+                }
+                else
+                {
+                    // Nếu không có sản phẩm, mặc định IdsanPham là "SP001"
+                    sanPham.IdsanPham = "SP001";
+                    sanPham.GiaSale = 0;
+                    sanPham.IdnhanVien = "NV001";
+                }
+
+                // Thêm sản phẩm và lưu thay đổi
                 _db.Add(sanPham);
                 _db.SaveChanges();
+
                 return true;
             }
             catch
             {
                 return false;
             }
+
         }
 
         public bool UpdateSP(string id, SanPham sanPham)
@@ -202,55 +245,64 @@ namespace DAL.Repositories
             }
         }
 
-        public bool DeleteSP(string id)
+        public bool Add_RegexTenSP(string tenSP)
         {
-            try
-            {
-                var result = _db.SanPhams.FirstOrDefault(x => x.IdsanPham == id);
-                if (result == null)
-                {
-                    return false;
-                }
-
-                _db.Remove(result);
-                _db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public bool DeleteLoaiSP(string id)
-        {
-            try
-            {
-                var result = _db.LoaiSanPhams.FirstOrDefault(x => x.IdloaiSanPham == id);
-                if (result == null)
-                {
-                    return false;
-                }
-
-                _db.Remove(result);
-                _db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public bool RegexTenSP(string tenSP)
-        {
-
-            var result = _db.SanPhams.FirstOrDefault(x => x.TenSanPham.Contains(tenSP));
+            var result = _db.SanPhams.FirstOrDefault(x => x.TenSanPham.Equals(tenSP));
             if (result != null)
             {
-                return true;
+                return false;
             }
-            return false;
+            return true;
+        }
+
+        public bool Update_RegexTenSP(string tenSP, string Id)
+        {
+            // Lấy sản phẩm có id = id
+            SanPham sp = _db.SanPhams.FirstOrDefault(x => x.IdsanPham == Id);
+
+            // Nếu sản phẩm không tồn tại
+            if (sp == null)
+            {
+                return false;
+            }
+
+            // Kiểm tra xem tên sản phẩm mới có trùng với tên sản phẩm của sản phẩm khác hay không
+            var result = _db.SanPhams.FirstOrDefault(x => x.TenSanPham == tenSP && x.IdsanPham != Id);
+            if (result != null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool Add_RegexTenLSP(string tenLSP)
+        {
+            var result = _db.LoaiSanPhams.FirstOrDefault(x => x.TenLoaiSanPham.Equals(tenLSP));
+            if (result != null)
+            {
+                return false;
+            }
+            return true; ;
+        }
+
+        public bool Update_RegexTenLSP(string tenLSP, string Id)
+        {
+            // Lấy sản phẩm có id = id
+            LoaiSanPham lsp = _db.LoaiSanPhams.FirstOrDefault(x => x.IdloaiSanPham == Id);
+
+            // Nếu sản phẩm không tồn tại
+            if (lsp == null)
+            {
+                return false;
+            }
+
+            // Kiểm tra xem tên sản phẩm mới có trùng với tên sản phẩm của sản phẩm khác hay không
+            var result = _db.LoaiSanPhams.FirstOrDefault(x => x.TenLoaiSanPham == tenLSP && x.IdloaiSanPham != Id);
+            if (result != null)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

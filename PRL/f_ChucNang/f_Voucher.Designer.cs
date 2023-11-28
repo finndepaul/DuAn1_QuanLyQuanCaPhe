@@ -36,6 +36,9 @@
             label3 = new Label();
             txt_IdVocher = new TextBox();
             groupBox1 = new GroupBox();
+            label9 = new Label();
+            comboBox1 = new ComboBox();
+            button2 = new Button();
             button1 = new Button();
             label1 = new Label();
             textBox1 = new TextBox();
@@ -50,10 +53,6 @@
             label8 = new Label();
             txt_TimKiemVocher = new TextBox();
             groupBox2 = new GroupBox();
-            label9 = new Label();
-            comboBox1 = new ComboBox();
-            button2 = new Button();
-            button3 = new Button();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox2.SuspendLayout();
@@ -124,7 +123,6 @@
             groupBox1.BackColor = SystemColors.Control;
             groupBox1.Controls.Add(label9);
             groupBox1.Controls.Add(comboBox1);
-            groupBox1.Controls.Add(button3);
             groupBox1.Controls.Add(button2);
             groupBox1.Controls.Add(button1);
             groupBox1.Controls.Add(label3);
@@ -149,10 +147,39 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Thông Tin Voucher";
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label9.Location = new Point(49, 535);
+            label9.Name = "label9";
+            label9.Size = new Size(102, 24);
+            label9.TabIndex = 20;
+            label9.Text = "Trạng thái";
+            // 
+            // comboBox1
+            // 
+            comboBox1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(287, 533);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(263, 26);
+            comboBox1.TabIndex = 21;
+            // 
+            // button2
+            // 
+            button2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            button2.Location = new Point(403, 666);
+            button2.Name = "button2";
+            button2.Size = new Size(143, 52);
+            button2.TabIndex = 19;
+            button2.Text = "Sửa";
+            button2.UseVisualStyleBackColor = true;
+            // 
             // button1
             // 
             button1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.Location = new Point(64, 634);
+            button1.Location = new Point(177, 666);
             button1.Name = "button1";
             button1.Size = new Size(143, 52);
             button1.TabIndex = 19;
@@ -281,45 +308,6 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Tác Vụ";
             // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label9.Location = new Point(49, 535);
-            label9.Name = "label9";
-            label9.Size = new Size(102, 24);
-            label9.TabIndex = 20;
-            label9.Text = "Trạng thái";
-            // 
-            // comboBox1
-            // 
-            comboBox1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(287, 533);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(263, 26);
-            comboBox1.TabIndex = 21;
-            // 
-            // button2
-            // 
-            button2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.Location = new Point(290, 634);
-            button2.Name = "button2";
-            button2.Size = new Size(143, 52);
-            button2.TabIndex = 19;
-            button2.Text = "Sửa";
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            button3.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            button3.Location = new Point(516, 634);
-            button3.Name = "button3";
-            button3.Size = new Size(143, 52);
-            button3.TabIndex = 19;
-            button3.Text = "Xóa";
-            button3.UseVisualStyleBackColor = true;
-            // 
             // f_Voucher
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -363,7 +351,6 @@
         private TextBox textBox2;
         private Label label9;
         private ComboBox comboBox1;
-        private Button button3;
         private Button button2;
     }
 }

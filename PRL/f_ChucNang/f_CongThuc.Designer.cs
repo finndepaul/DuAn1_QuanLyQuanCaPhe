@@ -36,9 +36,6 @@
             btn_SuaNL = new Button();
             btn_ThemNL = new Button();
             groupBox2 = new GroupBox();
-            dateTimePicker2 = new DateTimePicker();
-            dateTimePicker1 = new DateTimePicker();
-            btn_XoaPC = new Button();
             txt_TimKiemPC = new TextBox();
             lbl_TimKiemPC = new Label();
             btn_SuaPC = new Button();
@@ -47,13 +44,13 @@
             btn_ThemPC = new Button();
             lbl_IdNguyenLieus = new Label();
             txt_PC_IdSanPham = new TextBox();
-            label3 = new Label();
-            label2 = new Label();
             lbl_IdSanPham = new Label();
             textBox1 = new TextBox();
             txt_IdPhaChe = new TextBox();
             label1 = new Label();
             lbl_IdPhaChe = new Label();
+            label2 = new Label();
+            label3 = new Label();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_NguyenLieu).BeginInit();
             groupBox2.SuspendLayout();
@@ -68,6 +65,8 @@
             groupBox1.Controls.Add(btn_XoaNL);
             groupBox1.Controls.Add(btn_SuaNL);
             groupBox1.Controls.Add(btn_ThemNL);
+            groupBox1.Controls.Add(label3);
+            groupBox1.Controls.Add(label2);
             groupBox1.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
@@ -79,7 +78,7 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(217, 140);
+            comboBox1.Location = new Point(217, 177);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(410, 29);
             comboBox1.TabIndex = 41;
@@ -87,7 +86,7 @@
             // cbx_LocNguyenLieu
             // 
             cbx_LocNguyenLieu.FormattingEnabled = true;
-            cbx_LocNguyenLieu.Location = new Point(217, 54);
+            cbx_LocNguyenLieu.Location = new Point(217, 59);
             cbx_LocNguyenLieu.Name = "cbx_LocNguyenLieu";
             cbx_LocNguyenLieu.Size = new Size(410, 29);
             cbx_LocNguyenLieu.TabIndex = 41;
@@ -95,49 +94,46 @@
             // dgv_NguyenLieu
             // 
             dgv_NguyenLieu.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_NguyenLieu.Location = new Point(0, 264);
+            dgv_NguyenLieu.Location = new Point(0, 252);
             dgv_NguyenLieu.Name = "dgv_NguyenLieu";
             dgv_NguyenLieu.RowHeadersWidth = 51;
             dgv_NguyenLieu.RowTemplate.Height = 29;
-            dgv_NguyenLieu.Size = new Size(844, 427);
+            dgv_NguyenLieu.Size = new Size(844, 439);
             dgv_NguyenLieu.TabIndex = 38;
             // 
             // btn_XoaNL
             // 
             btn_XoaNL.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_XoaNL.Location = new Point(625, 765);
+            btn_XoaNL.Location = new Point(615, 765);
             btn_XoaNL.Name = "btn_XoaNL";
-            btn_XoaNL.Size = new Size(140, 66);
+            btn_XoaNL.Size = new Size(173, 66);
             btn_XoaNL.TabIndex = 37;
-            btn_XoaNL.Text = "Xóa";
+            btn_XoaNL.Text = "Xóa Pha Chế";
             btn_XoaNL.UseVisualStyleBackColor = true;
             // 
             // btn_SuaNL
             // 
             btn_SuaNL.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_SuaNL.Location = new Point(352, 765);
+            btn_SuaNL.Location = new Point(336, 765);
             btn_SuaNL.Name = "btn_SuaNL";
-            btn_SuaNL.Size = new Size(140, 66);
+            btn_SuaNL.Size = new Size(173, 66);
             btn_SuaNL.TabIndex = 36;
-            btn_SuaNL.Text = "Sửa";
+            btn_SuaNL.Text = "Xóa Nguyên Liệu";
             btn_SuaNL.UseVisualStyleBackColor = true;
             // 
             // btn_ThemNL
             // 
             btn_ThemNL.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_ThemNL.Location = new Point(79, 765);
+            btn_ThemNL.Location = new Point(57, 765);
             btn_ThemNL.Name = "btn_ThemNL";
-            btn_ThemNL.Size = new Size(140, 66);
+            btn_ThemNL.Size = new Size(173, 66);
             btn_ThemNL.TabIndex = 35;
-            btn_ThemNL.Text = "Thêm";
+            btn_ThemNL.Text = "Thêm Pha Chế";
             btn_ThemNL.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
             groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            groupBox2.Controls.Add(dateTimePicker2);
-            groupBox2.Controls.Add(dateTimePicker1);
-            groupBox2.Controls.Add(btn_XoaPC);
             groupBox2.Controls.Add(txt_TimKiemPC);
             groupBox2.Controls.Add(lbl_TimKiemPC);
             groupBox2.Controls.Add(btn_SuaPC);
@@ -146,8 +142,6 @@
             groupBox2.Controls.Add(btn_ThemPC);
             groupBox2.Controls.Add(lbl_IdNguyenLieus);
             groupBox2.Controls.Add(txt_PC_IdSanPham);
-            groupBox2.Controls.Add(label3);
-            groupBox2.Controls.Add(label2);
             groupBox2.Controls.Add(lbl_IdSanPham);
             groupBox2.Controls.Add(textBox1);
             groupBox2.Controls.Add(txt_IdPhaChe);
@@ -160,30 +154,6 @@
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             groupBox2.Text = "Quản Lý Nguyên Liệu";
-            // 
-            // dateTimePicker2
-            // 
-            dateTimePicker2.Location = new Point(268, 279);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(250, 28);
-            dateTimePicker2.TabIndex = 42;
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Location = new Point(268, 223);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(250, 28);
-            dateTimePicker1.TabIndex = 42;
-            // 
-            // btn_XoaPC
-            // 
-            btn_XoaPC.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_XoaPC.Location = new Point(631, 848);
-            btn_XoaPC.Name = "btn_XoaPC";
-            btn_XoaPC.Size = new Size(140, 66);
-            btn_XoaPC.TabIndex = 41;
-            btn_XoaPC.Text = "Xóa";
-            btn_XoaPC.UseVisualStyleBackColor = true;
             // 
             // txt_TimKiemPC
             // 
@@ -205,7 +175,7 @@
             // btn_SuaPC
             // 
             btn_SuaPC.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_SuaPC.Location = new Point(352, 848);
+            btn_SuaPC.Location = new Point(492, 848);
             btn_SuaPC.Name = "btn_SuaPC";
             btn_SuaPC.Size = new Size(140, 66);
             btn_SuaPC.TabIndex = 40;
@@ -224,7 +194,7 @@
             // 
             // txt_PC_IdNguyenLieu
             // 
-            txt_PC_IdNguyenLieu.Location = new Point(268, 335);
+            txt_PC_IdNguyenLieu.Location = new Point(264, 299);
             txt_PC_IdNguyenLieu.Name = "txt_PC_IdNguyenLieu";
             txt_PC_IdNguyenLieu.Size = new Size(496, 28);
             txt_PC_IdNguyenLieu.TabIndex = 35;
@@ -232,7 +202,7 @@
             // btn_ThemPC
             // 
             btn_ThemPC.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_ThemPC.Location = new Point(73, 848);
+            btn_ThemPC.Location = new Point(213, 848);
             btn_ThemPC.Name = "btn_ThemPC";
             btn_ThemPC.Size = new Size(140, 66);
             btn_ThemPC.TabIndex = 39;
@@ -243,7 +213,7 @@
             // 
             lbl_IdNguyenLieus.AutoSize = true;
             lbl_IdNguyenLieus.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lbl_IdNguyenLieus.Location = new Point(81, 334);
+            lbl_IdNguyenLieus.Location = new Point(81, 299);
             lbl_IdNguyenLieus.Name = "lbl_IdNguyenLieus";
             lbl_IdNguyenLieus.Size = new Size(93, 24);
             lbl_IdNguyenLieus.TabIndex = 34;
@@ -251,36 +221,16 @@
             // 
             // txt_PC_IdSanPham
             // 
-            txt_PC_IdSanPham.Location = new Point(268, 167);
+            txt_PC_IdSanPham.Location = new Point(264, 219);
             txt_PC_IdSanPham.Name = "txt_PC_IdSanPham";
             txt_PC_IdSanPham.Size = new Size(496, 28);
             txt_PC_IdSanPham.TabIndex = 33;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(81, 279);
-            label3.Name = "label3";
-            label3.Size = new Size(135, 24);
-            label3.TabIndex = 32;
-            label3.Text = "Ngày Hết Hạn";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(81, 224);
-            label2.Name = "label2";
-            label2.Size = new Size(107, 24);
-            label2.TabIndex = 32;
-            label2.Text = "Ngày Nhập";
             // 
             // lbl_IdSanPham
             // 
             lbl_IdSanPham.AutoSize = true;
             lbl_IdSanPham.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lbl_IdSanPham.Location = new Point(81, 167);
+            lbl_IdSanPham.Location = new Point(81, 219);
             lbl_IdSanPham.Name = "lbl_IdSanPham";
             lbl_IdSanPham.Size = new Size(39, 24);
             lbl_IdSanPham.TabIndex = 32;
@@ -288,14 +238,14 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(268, 111);
+            textBox1.Location = new Point(264, 139);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(496, 28);
             textBox1.TabIndex = 29;
             // 
             // txt_IdPhaChe
             // 
-            txt_IdPhaChe.Location = new Point(268, 55);
+            txt_IdPhaChe.Location = new Point(264, 59);
             txt_IdPhaChe.Name = "txt_IdPhaChe";
             txt_IdPhaChe.Size = new Size(496, 28);
             txt_IdPhaChe.TabIndex = 29;
@@ -304,7 +254,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(81, 114);
+            label1.Location = new Point(81, 139);
             label1.Name = "label1";
             label1.Size = new Size(160, 24);
             label1.TabIndex = 28;
@@ -320,6 +270,26 @@
             lbl_IdPhaChe.TabIndex = 28;
             lbl_IdPhaChe.Text = "ID Nguyên Liệu";
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(217, 24);
+            label2.Name = "label2";
+            label2.Size = new Size(157, 24);
+            label2.TabIndex = 28;
+            label2.Text = "Chọn Sản Phẩm:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(217, 139);
+            label3.Name = "label3";
+            label3.Size = new Size(178, 24);
+            label3.TabIndex = 28;
+            label3.Text = "Chọn Nguyên Liệu:";
+            // 
             // f_CongThuc
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -331,6 +301,7 @@
             Text = "Công Thức";
             WindowState = FormWindowState.Maximized;
             groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_NguyenLieu).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
@@ -347,7 +318,6 @@
         private Button btn_XoaNL;
         private Button btn_SuaNL;
         private Button btn_ThemNL;
-        private Button btn_XoaPC;
         private Button btn_SuaPC;
         private Button btn_ThemPC;
         private TextBox txt_TimKiemPC;
@@ -362,8 +332,6 @@
         private ComboBox comboBox1;
         private TextBox textBox1;
         private Label label1;
-        private DateTimePicker dateTimePicker2;
-        private DateTimePicker dateTimePicker1;
         private Label label3;
         private Label label2;
     }
