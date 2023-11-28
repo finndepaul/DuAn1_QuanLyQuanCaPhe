@@ -29,20 +29,21 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
-            comboBox1 = new ComboBox();
+            cbx_ChucVu = new ComboBox();
             cbx_Loc = new ComboBox();
             dgv_TaiKhoan = new DataGridView();
             txt_TimKiem = new TextBox();
             lbl_TimKiem = new Label();
-            cbx_ChucVu = new ComboBox();
+            cbx_TrangThai = new ComboBox();
             lbl_ChucVu = new Label();
             lbl_Password = new Label();
+            label1 = new Label();
             lbl_status = new Label();
             btn_Sua = new Button();
-            txt_LoginName = new TextBox();
+            txt_Password = new TextBox();
             btn_Them = new Button();
             lbl_LoginName = new Label();
-            textBox1 = new TextBox();
+            txt_LoginName = new TextBox();
             txb_IdNhanVien = new TextBox();
             lbl_Id = new Label();
             groupBox1.SuspendLayout();
@@ -52,20 +53,21 @@
             // groupBox1
             // 
             groupBox1.Anchor = AnchorStyles.Top;
-            groupBox1.Controls.Add(comboBox1);
+            groupBox1.Controls.Add(cbx_ChucVu);
             groupBox1.Controls.Add(cbx_Loc);
             groupBox1.Controls.Add(dgv_TaiKhoan);
             groupBox1.Controls.Add(txt_TimKiem);
             groupBox1.Controls.Add(lbl_TimKiem);
-            groupBox1.Controls.Add(cbx_ChucVu);
+            groupBox1.Controls.Add(cbx_TrangThai);
             groupBox1.Controls.Add(lbl_ChucVu);
             groupBox1.Controls.Add(lbl_Password);
+            groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(lbl_status);
             groupBox1.Controls.Add(btn_Sua);
-            groupBox1.Controls.Add(txt_LoginName);
+            groupBox1.Controls.Add(txt_Password);
             groupBox1.Controls.Add(btn_Them);
             groupBox1.Controls.Add(lbl_LoginName);
-            groupBox1.Controls.Add(textBox1);
+            groupBox1.Controls.Add(txt_LoginName);
             groupBox1.Controls.Add(txb_IdNhanVien);
             groupBox1.Controls.Add(lbl_Id);
             groupBox1.Font = new Font("Tahoma", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
@@ -76,13 +78,14 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Thông Tin Tài Khoản";
             // 
-            // comboBox1
+            // cbx_ChucVu
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(245, 370);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(213, 30);
-            comboBox1.TabIndex = 34;
+            cbx_ChucVu.FormattingEnabled = true;
+            cbx_ChucVu.Items.AddRange(new object[] { "Admin", "Nhân Viên" });
+            cbx_ChucVu.Location = new Point(245, 370);
+            cbx_ChucVu.Name = "cbx_ChucVu";
+            cbx_ChucVu.Size = new Size(213, 30);
+            cbx_ChucVu.TabIndex = 34;
             // 
             // cbx_Loc
             // 
@@ -91,6 +94,7 @@
             cbx_Loc.Name = "cbx_Loc";
             cbx_Loc.Size = new Size(182, 30);
             cbx_Loc.TabIndex = 31;
+            cbx_Loc.SelectedIndexChanged += cbx_Loc_SelectedIndexChanged;
             // 
             // dgv_TaiKhoan
             // 
@@ -99,8 +103,10 @@
             dgv_TaiKhoan.Name = "dgv_TaiKhoan";
             dgv_TaiKhoan.RowHeadersWidth = 51;
             dgv_TaiKhoan.RowTemplate.Height = 29;
+            dgv_TaiKhoan.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_TaiKhoan.Size = new Size(840, 781);
             dgv_TaiKhoan.TabIndex = 33;
+            dgv_TaiKhoan.CellClick += dgv_TaiKhoan_CellClick;
             // 
             // txt_TimKiem
             // 
@@ -109,6 +115,7 @@
             txt_TimKiem.PlaceholderText = "Nhập Id nhân viên cần tìm";
             txt_TimKiem.Size = new Size(347, 29);
             txt_TimKiem.TabIndex = 32;
+            txt_TimKiem.TextChanged += txt_TimKiem_TextChanged;
             // 
             // lbl_TimKiem
             // 
@@ -120,13 +127,14 @@
             lbl_TimKiem.TabIndex = 30;
             lbl_TimKiem.Text = "Tìm Kiếm";
             // 
-            // cbx_ChucVu
+            // cbx_TrangThai
             // 
-            cbx_ChucVu.FormattingEnabled = true;
-            cbx_ChucVu.Location = new Point(245, 462);
-            cbx_ChucVu.Name = "cbx_ChucVu";
-            cbx_ChucVu.Size = new Size(539, 30);
-            cbx_ChucVu.TabIndex = 29;
+            cbx_TrangThai.FormattingEnabled = true;
+            cbx_TrangThai.Items.AddRange(new object[] { "Kích Hoạt", "Chưa Kích Hoạt" });
+            cbx_TrangThai.Location = new Point(245, 462);
+            cbx_TrangThai.Name = "cbx_TrangThai";
+            cbx_TrangThai.Size = new Size(539, 30);
+            cbx_TrangThai.TabIndex = 29;
             // 
             // lbl_ChucVu
             // 
@@ -148,6 +156,16 @@
             lbl_Password.TabIndex = 23;
             lbl_Password.Text = "Password";
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Tahoma", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(1385, 83);
+            label1.Name = "label1";
+            label1.Size = new Size(116, 28);
+            label1.TabIndex = 21;
+            label1.Text = "Trạng thái";
+            // 
             // lbl_status
             // 
             lbl_status.AutoSize = true;
@@ -167,13 +185,14 @@
             btn_Sua.TabIndex = 26;
             btn_Sua.Text = "Sửa";
             btn_Sua.UseVisualStyleBackColor = true;
+            btn_Sua.Click += btn_Sua_Click;
             // 
-            // txt_LoginName
+            // txt_Password
             // 
-            txt_LoginName.Location = new Point(245, 276);
-            txt_LoginName.Name = "txt_LoginName";
-            txt_LoginName.Size = new Size(539, 29);
-            txt_LoginName.TabIndex = 20;
+            txt_Password.Location = new Point(245, 276);
+            txt_Password.Name = "txt_Password";
+            txt_Password.Size = new Size(539, 29);
+            txt_Password.TabIndex = 20;
             // 
             // btn_Them
             // 
@@ -184,6 +203,7 @@
             btn_Them.TabIndex = 25;
             btn_Them.Text = "Thêm";
             btn_Them.UseVisualStyleBackColor = true;
+            btn_Them.Click += btn_Them_Click;
             // 
             // lbl_LoginName
             // 
@@ -195,12 +215,12 @@
             lbl_LoginName.TabIndex = 19;
             lbl_LoginName.Text = "LoginName";
             // 
-            // textBox1
+            // txt_LoginName
             // 
-            textBox1.Location = new Point(245, 183);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(539, 29);
-            textBox1.TabIndex = 18;
+            txt_LoginName.Location = new Point(245, 183);
+            txt_LoginName.Name = "txt_LoginName";
+            txt_LoginName.Size = new Size(539, 29);
+            txt_LoginName.TabIndex = 18;
             // 
             // txb_IdNhanVien
             // 
@@ -237,21 +257,22 @@
         #endregion
 
         private GroupBox groupBox1;
-        private ComboBox cbx_ChucVu;
+        private ComboBox cbx_TrangThai;
         private Label lbl_ChucVu;
         private Label lbl_Password;
         private Label lbl_status;
         private Button btn_Sua;
-        private TextBox txt_LoginName;
+        private TextBox txt_Password;
         private Button btn_Them;
         private Label lbl_LoginName;
         private TextBox txb_IdNhanVien;
         private Label lbl_Id;
-        private TextBox textBox1;
+        private TextBox txt_LoginName;
         private ComboBox cbx_Loc;
         private DataGridView dgv_TaiKhoan;
         private TextBox txt_TimKiem;
         private Label lbl_TimKiem;
-        private ComboBox comboBox1;
+        private ComboBox cbx_ChucVu;
+        private Label label1;
     }
 }

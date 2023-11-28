@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace BUS.Services
 {
-    public class ThucDonServce : IThucDonService
+    public class ThucDonService : IThucDonService
     {
         ThucDonRepos _res;
-        public ThucDonServce()
+        public ThucDonService()
         {
             _res = new ThucDonRepos();
         }

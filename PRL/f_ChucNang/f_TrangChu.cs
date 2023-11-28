@@ -14,7 +14,7 @@ namespace PRL
 {
     public partial class f_TrangChu : Form
     {
-        ThucDonServce _ser = new ThucDonServce();
+        ThucDonService _ser = new ThucDonService();
         LoaiSanPhamService _LSPSer = new LoaiSanPhamService();
         private int _btnHeight = 180;
         private int _btnWidth = 180;
