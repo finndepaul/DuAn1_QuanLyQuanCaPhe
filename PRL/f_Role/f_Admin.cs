@@ -14,7 +14,7 @@ namespace PRL
 {
     public partial class f_Admin : Form
     {
-        ThucDonServce _ser = new ThucDonServce();
+        ThucDonService _ser = new ThucDonService();
         private Button lastClickedButton;
         public f_Admin()
         {
