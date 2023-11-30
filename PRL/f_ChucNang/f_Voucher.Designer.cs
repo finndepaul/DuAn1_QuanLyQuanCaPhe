@@ -37,24 +37,24 @@
             txt_IdVocher = new TextBox();
             groupBox1 = new GroupBox();
             label9 = new Label();
-            comboBox1 = new ComboBox();
-            button2 = new Button();
-            button1 = new Button();
+            cmb_TrangThai = new ComboBox();
+            btn_Update = new Button();
+            btn_Add = new Button();
             label1 = new Label();
-            textBox1 = new TextBox();
+            txt_GiamTien = new TextBox();
             txt_MaVocher = new TextBox();
-            textBox2 = new TextBox();
+            txt_DKApDung = new TextBox();
             label2 = new Label();
             label7 = new Label();
             label4 = new Label();
             label10 = new Label();
-            dataGridView1 = new DataGridView();
-            cbx_TrangThai = new ComboBox();
+            dgv_Voucher = new DataGridView();
+            cbx_TrangThaiFind = new ComboBox();
             label8 = new Label();
             txt_TimKiemVocher = new TextBox();
             groupBox2 = new GroupBox();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_Voucher).BeginInit();
             groupBox2.SuspendLayout();
             SuspendLayout();
             // 
@@ -107,14 +107,15 @@
             label3.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label3.Location = new Point(49, 59);
             label3.Name = "label3";
-            label3.Size = new Size(105, 24);
+            label3.Size = new Size(116, 24);
             label3.TabIndex = 17;
-            label3.Text = "ID Vocher:";
+            label3.Text = "ID Voucher:";
             // 
             // txt_IdVocher
             // 
             txt_IdVocher.Location = new Point(287, 60);
             txt_IdVocher.Name = "txt_IdVocher";
+            txt_IdVocher.ReadOnly = true;
             txt_IdVocher.Size = new Size(383, 26);
             txt_IdVocher.TabIndex = 18;
             // 
@@ -122,16 +123,16 @@
             // 
             groupBox1.BackColor = SystemColors.Control;
             groupBox1.Controls.Add(label9);
-            groupBox1.Controls.Add(comboBox1);
-            groupBox1.Controls.Add(button2);
-            groupBox1.Controls.Add(button1);
+            groupBox1.Controls.Add(cmb_TrangThai);
+            groupBox1.Controls.Add(btn_Update);
+            groupBox1.Controls.Add(btn_Add);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(txt_IdVocher);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(label6);
-            groupBox1.Controls.Add(textBox1);
+            groupBox1.Controls.Add(txt_GiamTien);
             groupBox1.Controls.Add(txt_MaVocher);
-            groupBox1.Controls.Add(textBox2);
+            groupBox1.Controls.Add(txt_DKApDung);
             groupBox1.Controls.Add(txt_SoLuong);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(label2);
@@ -157,34 +158,36 @@
             label9.TabIndex = 20;
             label9.Text = "Trạng thái";
             // 
-            // comboBox1
+            // cmb_TrangThai
             // 
-            comboBox1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(287, 533);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(263, 26);
-            comboBox1.TabIndex = 21;
+            cmb_TrangThai.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            cmb_TrangThai.FormattingEnabled = true;
+            cmb_TrangThai.Location = new Point(287, 533);
+            cmb_TrangThai.Name = "cmb_TrangThai";
+            cmb_TrangThai.Size = new Size(263, 26);
+            cmb_TrangThai.TabIndex = 21;
             // 
-            // button2
+            // btn_Update
             // 
-            button2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.Location = new Point(403, 666);
-            button2.Name = "button2";
-            button2.Size = new Size(143, 52);
-            button2.TabIndex = 19;
-            button2.Text = "Sửa";
-            button2.UseVisualStyleBackColor = true;
+            btn_Update.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_Update.Location = new Point(403, 666);
+            btn_Update.Name = "btn_Update";
+            btn_Update.Size = new Size(143, 52);
+            btn_Update.TabIndex = 19;
+            btn_Update.Text = "Sửa";
+            btn_Update.UseVisualStyleBackColor = true;
+            btn_Update.Click += btn_Update_Click;
             // 
-            // button1
+            // btn_Add
             // 
-            button1.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.Location = new Point(177, 666);
-            button1.Name = "button1";
-            button1.Size = new Size(143, 52);
-            button1.TabIndex = 19;
-            button1.Text = "Thêm";
-            button1.UseVisualStyleBackColor = true;
+            btn_Add.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_Add.Location = new Point(177, 666);
+            btn_Add.Name = "btn_Add";
+            btn_Add.Size = new Size(143, 52);
+            btn_Add.TabIndex = 19;
+            btn_Add.Text = "Thêm";
+            btn_Add.UseVisualStyleBackColor = true;
+            btn_Add.Click += btn_Add_Click;
             // 
             // label1
             // 
@@ -196,12 +199,12 @@
             label1.TabIndex = 0;
             label1.Text = "Code:";
             // 
-            // textBox1
+            // txt_GiamTien
             // 
-            textBox1.Location = new Point(287, 194);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(383, 26);
-            textBox1.TabIndex = 6;
+            txt_GiamTien.Location = new Point(287, 194);
+            txt_GiamTien.Name = "txt_GiamTien";
+            txt_GiamTien.Size = new Size(383, 26);
+            txt_GiamTien.TabIndex = 6;
             // 
             // txt_MaVocher
             // 
@@ -210,12 +213,12 @@
             txt_MaVocher.Size = new Size(383, 26);
             txt_MaVocher.TabIndex = 6;
             // 
-            // textBox2
+            // txt_DKApDung
             // 
-            textBox2.Location = new Point(287, 462);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(383, 26);
-            textBox2.TabIndex = 15;
+            txt_DKApDung.Location = new Point(287, 462);
+            txt_DKApDung.Name = "txt_DKApDung";
+            txt_DKApDung.Size = new Size(383, 26);
+            txt_DKApDung.TabIndex = 15;
             // 
             // label2
             // 
@@ -257,23 +260,26 @@
             label10.TabIndex = 2;
             label10.Text = "Trạng thái";
             // 
-            // dataGridView1
+            // dgv_Voucher
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(6, 131);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.RowTemplate.Height = 29;
-            dataGridView1.Size = new Size(960, 794);
-            dataGridView1.TabIndex = 9;
+            dgv_Voucher.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_Voucher.Location = new Point(6, 131);
+            dgv_Voucher.Name = "dgv_Voucher";
+            dgv_Voucher.RowHeadersWidth = 51;
+            dgv_Voucher.RowTemplate.Height = 29;
+            dgv_Voucher.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_Voucher.Size = new Size(960, 794);
+            dgv_Voucher.TabIndex = 9;
+            dgv_Voucher.CellClick += dgv_Voucher_CellClick;
             // 
-            // cbx_TrangThai
+            // cbx_TrangThaiFind
             // 
-            cbx_TrangThai.FormattingEnabled = true;
-            cbx_TrangThai.Location = new Point(327, 75);
-            cbx_TrangThai.Name = "cbx_TrangThai";
-            cbx_TrangThai.Size = new Size(263, 26);
-            cbx_TrangThai.TabIndex = 6;
+            cbx_TrangThaiFind.FormattingEnabled = true;
+            cbx_TrangThaiFind.Location = new Point(327, 75);
+            cbx_TrangThaiFind.Name = "cbx_TrangThaiFind";
+            cbx_TrangThaiFind.Size = new Size(263, 26);
+            cbx_TrangThaiFind.TabIndex = 6;
+            cbx_TrangThaiFind.SelectedIndexChanged += cbx_TrangThaiFind_SelectedIndexChanged;
             // 
             // label8
             // 
@@ -291,14 +297,15 @@
             txt_TimKiemVocher.Name = "txt_TimKiemVocher";
             txt_TimKiemVocher.Size = new Size(206, 26);
             txt_TimKiemVocher.TabIndex = 5;
+            txt_TimKiemVocher.TextChanged += txt_TimKiemVocher_TextChanged;
             // 
             // groupBox2
             // 
             groupBox2.BackColor = SystemColors.Control;
             groupBox2.Controls.Add(label10);
             groupBox2.Controls.Add(txt_TimKiemVocher);
-            groupBox2.Controls.Add(dataGridView1);
-            groupBox2.Controls.Add(cbx_TrangThai);
+            groupBox2.Controls.Add(dgv_Voucher);
+            groupBox2.Controls.Add(cbx_TrangThaiFind);
             groupBox2.Controls.Add(label8);
             groupBox2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox2.Location = new Point(741, 12);
@@ -318,9 +325,10 @@
             Name = "f_Voucher";
             Text = "Voucher";
             WindowState = FormWindowState.Maximized;
+            Load += f_Voucher_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_Voucher).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ResumeLayout(false);
@@ -341,16 +349,16 @@
         private Label label7;
         private Label label4;
         private Label label10;
-        private DataGridView dataGridView1;
-        private ComboBox cbx_TrangThai;
+        private DataGridView dgv_Voucher;
+        private ComboBox cbx_TrangThaiFind;
         private Label label8;
         private TextBox txt_TimKiemVocher;
         private GroupBox groupBox2;
-        private Button button1;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private Button btn_Add;
+        private TextBox txt_GiamTien;
+        private TextBox txt_DKApDung;
         private Label label9;
-        private ComboBox comboBox1;
-        private Button button2;
+        private ComboBox cmb_TrangThai;
+        private Button btn_Update;
     }
 }

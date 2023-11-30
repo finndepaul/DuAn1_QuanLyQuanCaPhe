@@ -283,7 +283,7 @@ namespace PRL.f_ChucNang
                 }
                 else
                 {
-                    MessageBox.Show("B thêm that bai");
+                    MessageBox.Show("B thêm thất bại");
                 }
             }
             else if (alert == DialogResult.Cancel)

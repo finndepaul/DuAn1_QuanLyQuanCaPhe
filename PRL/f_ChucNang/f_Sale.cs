@@ -1,5 +1,6 @@
 ﻿using BUS.Services;
 using DAL.Models;
+using DAL.Repositories;
 using DAL.ViewModels;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using System;
@@ -21,7 +22,7 @@ namespace PRL.f_ChucNang
         string _idGGClick;
         string _idSPclick;
         GiamGiaService _ser = new GiamGiaService();
-
+        GiamGiaRepos _res = new GiamGiaRepos();
         public f_Sale()
         {
             InitializeComponent();
@@ -102,6 +103,41 @@ namespace PRL.f_ChucNang
             }
             Load_DGV_SanPham(_idGGClick);
         }
+        //private void Load_DGV_SanPham(string id)
+        //{
+        //    dgv_SanPham.Rows.Clear();
+        //    dgv_SanPham.ColumnCount = 5;
+        //    dgv_SanPham.Columns[0].Name = "STT";
+        //    dgv_SanPham.Columns[1].Name = "ID Sản Phẩm";
+        //    dgv_SanPham.Columns[2].Name = "Tên Sản Phẩm";
+        //    dgv_SanPham.Columns[3].Name = "Giá";
+        //    dgv_SanPham.Columns[4].Name = "Giá Sale";
+
+        //    DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
+        //    checkBoxColumn.HeaderText = "Áp Dụng";
+        //    checkBoxColumn.Name = "chb_ApDungSP";
+        //    dgv_SanPham.Columns.Add(checkBoxColumn);
+
+        //    // Đảm bảo rằng cột checkbox hiển thị ở cuối cùng
+        //    checkBoxColumn.DisplayIndex = dgv_SanPham.Columns.Count - 1;
+        //    _lstSanPham = _ser.GetSanPham(id);
+
+        //    foreach (var item in _lstSanPham)
+        //    {
+        //        int stt = _lstSanPham.IndexOf(item) + 1;
+
+        //        // Nếu id là "All" và item.isCheck là true nhưng id không tồn tại trong GiamGiaChiTiets
+        //        if (id == "All" && item.isCheck && !_ser.CheckIdGiamGiaChiTiet(item.SanPham.IdsanPham, _idGGClick))
+        //        {
+        //            item.isCheck = false; // Đặt giá trị của checkbox thành false
+        //        }
+
+        //        dgv_SanPham.Rows.Add(stt++, item.SanPham.IdsanPham, item.SanPham.TenSanPham, item.SanPham.Gia, item.SanPham.GiaSale, item.isCheck);
+        //    }
+
+
+        //}
+
         private void Load_DGV_SanPham(string id)
         {
             dgv_SanPham.Rows.Clear();
@@ -131,11 +167,26 @@ namespace PRL.f_ChucNang
                     item.isCheck = false; // Đặt giá trị của checkbox thành false
                 }
 
-                dgv_SanPham.Rows.Add(stt++, item.SanPham.IdsanPham, item.SanPham.TenSanPham, item.SanPham.Gia, item.SanPham.GiaSale, item.isCheck);
+                // Update the sale price based on GiamGiaChiTiet records
+                float giaMoi = (float)item.SanPham.Gia;
+                if (item.SanPham.IdsanPham == _idSPclick) // Only update the clicked product
+                {
+                    var giamGia = _res.GetGiamGia(_idGGClick);
+                    if (giamGia != null)
+                    {
+                        float giamGiaPhanTram = (float)giamGia.PhanTram / 100;
+                        giaMoi = giaMoi * (1 - giamGiaPhanTram);
+                    }
+                }
+
+                dgv_SanPham.Rows.Add(stt++, item.SanPham.IdsanPham, item.SanPham.TenSanPham, item.SanPham.Gia, giaMoi, item.isCheck);
             }
-
-
         }
+
+
+
+
+
         private void dgv_SanPham_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = e.RowIndex;
@@ -159,15 +210,18 @@ namespace PRL.f_ChucNang
                     // Ô checkbox được chọn
                     // Thực hiện các hành động tương ứng
                     MessageBox.Show("Đang được chọn");
+                    _res.AddGGCT(_idGGClick, _idSPclick);
+                    dgv_SanPham.Rows.Clear();
                     cell.Value = true; // Bỏ chọn ô checkbox
-                    //isChecked = false;
                 }
                 else
                 {
                     MessageBox.Show("Bỏ chọn");
                     // Ô checkbox không được chọn
                     // Thực hiện các hành động tương ứng
-                    cell.Value = false; // Chọn ô checkbox
+                    _res.DeleteGGCT(_idGGClick, _idSPclick);
+                    dgv_SanPham.Rows.Clear();
+                    cell.Value = false; // Chọn ô checkbox;
                 }
             }
 
