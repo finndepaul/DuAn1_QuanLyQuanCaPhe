@@ -1,3 +1,5 @@
+using PRL.f_ChucNang;
+
 namespace PRL
 {
     internal static class Program

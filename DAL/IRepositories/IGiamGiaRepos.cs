@@ -14,7 +14,9 @@ namespace DAL.IRepositories
 
         public List<SanPhamVM> GetSanPham(string idGiamGia);
         public bool CheckIdGiamGiaChiTiet(string idSanPham, string idGiamGia);
-        public bool UpdateGiaSale(string idGiamGia, string idSanPham);
+        public bool AddGGCT( string idGiamGia, string idSanPham);
+        public bool DeleteGGCT(string idGiamGia, string idSanPham);
+        public GiamGia GetGiamGia(string id);
 
     }
 }

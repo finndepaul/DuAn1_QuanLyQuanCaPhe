@@ -18,8 +18,8 @@ namespace PRL
         LoaiSanPhamService _LSPSer = new LoaiSanPhamService();
         private int _btnHeight = 180;
         private int _btnWidth = 180;
-        private int _labelHeight = 40;
-        private int _labelWidth = 40;
+        private int _labelHeight = 50;
+        private int _labelWidth = 200;
 
         string _idSPWhenClick;
         public f_TrangChu()
@@ -97,15 +97,15 @@ namespace PRL
                         lbl.Width = _labelWidth;
 
                         // Check if Gia is not null or empty before assigning to the label
-                        if (!string.IsNullOrEmpty(item.SanPham.Gia.ToString()))
+                        if (item.SanPham.GiaSale != null && item.SanPham.GiaSale > 0)
                         {
-                            //lbl.Text = ($"{item.SanPham.TenSanPham}\n{item.SanPham.Gia}" + donvi);
-                            lbl.Text = ($"{item.SanPham.TenSanPham}\n{decimal.Parse(item.SanPham.Gia.ToString()):C0}");
+                            lbl.Text = $"{item.SanPham.TenSanPham}\n{decimal.Parse(item.SanPham.Gia.ToString()):C0} - {decimal.Parse(item.SanPham.GiaSale.ToString()):C0}";
                         }
                         else
                         {
-                            lbl.Text = $"{item.SanPham.TenSanPham}\nN/A"; // Set a default value if Gia is null or empty
+                            lbl.Text = $"{item.SanPham.TenSanPham}\n{decimal.Parse(item.SanPham.Gia.ToString()):C0}";
                         }
+
 
                         // Add Button and Label to the Panel
                         panel.Controls.Add(bt);
