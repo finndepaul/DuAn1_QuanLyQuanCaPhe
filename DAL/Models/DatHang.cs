@@ -13,5 +13,5 @@ public partial class DatHang
 
     public int TrangThai { get; set; }
 
-    public virtual DatHangChiTiet? DatHangChiTiet { get; set; }
+    public virtual ICollection<DatHangChiTiet> DatHangChiTiets { get; set; } = new List<DatHangChiTiet>();
 }
