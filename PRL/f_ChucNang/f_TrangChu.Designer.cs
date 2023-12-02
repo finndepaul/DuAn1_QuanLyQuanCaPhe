@@ -59,6 +59,7 @@
             label6 = new Label();
             textBox6 = new TextBox();
             dataGridView2 = new DataGridView();
+            btn_Cho = new Button();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgv_Order).BeginInit();
@@ -163,6 +164,7 @@
             groupBox3.Controls.Add(button51);
             groupBox3.Controls.Add(button65);
             groupBox3.Controls.Add(button50);
+            groupBox3.Controls.Add(btn_Cho);
             groupBox3.Controls.Add(button64);
             groupBox3.Controls.Add(btn_Them);
             groupBox3.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
@@ -299,7 +301,7 @@
             // button65
             // 
             button65.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            button65.Location = new Point(785, 747);
+            button65.Location = new Point(785, 748);
             button65.Name = "button65";
             button65.Size = new Size(123, 53);
             button65.TabIndex = 0;
@@ -319,7 +321,7 @@
             // button64
             // 
             button64.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            button64.Location = new Point(601, 747);
+            button64.Location = new Point(601, 748);
             button64.Name = "button64";
             button64.Size = new Size(123, 53);
             button64.TabIndex = 0;
@@ -388,6 +390,16 @@
             dataGridView2.Size = new Size(781, 373);
             dataGridView2.TabIndex = 1;
             // 
+            // btn_Cho
+            // 
+            btn_Cho.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_Cho.Location = new Point(698, 834);
+            btn_Cho.Name = "btn_Cho";
+            btn_Cho.Size = new Size(123, 53);
+            btn_Cho.TabIndex = 0;
+            btn_Cho.Text = "Chờ";
+            btn_Cho.UseVisualStyleBackColor = true;
+            // 
             // f_TrangChu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -443,5 +455,6 @@
         private Label lb_SP;
         private Label label5;
         private Label lb_TenSP;
+        private Button btn_Cho;
     }
 }
