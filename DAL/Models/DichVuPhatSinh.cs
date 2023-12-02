@@ -11,7 +11,7 @@ public partial class DichVuPhatSinh
 
     public double? SoTien { get; set; }
 
-    public string? IdhoaDon { get; set; }
+    public string IdhoaDon { get; set; } = null!;
 
-    public virtual HoaDon? IdhoaDonNavigation { get; set; }
+    public virtual HoaDon IdhoaDonNavigation { get; set; } = null!;
 }

@@ -7,15 +7,15 @@ public partial class HoaDon
 {
     public string IdhoaDon { get; set; } = null!;
 
-    public DateTime NgayBan { get; set; }
-
     public double? TongTien { get; set; }
+
+    public DateTime NgayXuatDon { get; set; }
 
     public int TrangThai { get; set; }
 
     public string IdnhanVien { get; set; } = null!;
 
-    public string IdkhachHang { get; set; } = null!;
+    public string? Sdt { get; set; }
 
     public string? Idvoucher { get; set; }
 
@@ -23,9 +23,9 @@ public partial class HoaDon
 
     public virtual ICollection<HoaDonChiTiet> HoaDonChiTiets { get; set; } = new List<HoaDonChiTiet>();
 
-    public virtual KhachHang IdkhachHangNavigation { get; set; } = null!;
-
     public virtual NhanVien IdnhanVienNavigation { get; set; } = null!;
 
     public virtual Voucher? IdvoucherNavigation { get; set; }
+
+    public virtual KhachHang? SdtNavigation { get; set; }
 }
