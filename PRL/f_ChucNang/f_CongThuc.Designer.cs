@@ -29,42 +29,44 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
-            comboBox1 = new ComboBox();
-            cbx_LocNguyenLieu = new ComboBox();
-            dgv_NguyenLieu = new DataGridView();
-            btn_XoaNL = new Button();
-            btn_SuaNL = new Button();
-            btn_ThemNL = new Button();
-            groupBox2 = new GroupBox();
-            txt_TimKiemPC = new TextBox();
-            lbl_TimKiemPC = new Label();
-            btn_SuaPC = new Button();
+            btn_HienThiAll = new Button();
+            cbx_NguyenLieu = new ComboBox();
+            cbx_SanPham = new ComboBox();
             dgv_PhaChe = new DataGridView();
-            txt_PC_IdNguyenLieu = new TextBox();
+            btn_XoaPC = new Button();
+            btn_XoaNL = new Button();
             btn_ThemPC = new Button();
+            label3 = new Label();
+            label2 = new Label();
+            groupBox2 = new GroupBox();
+            txt_TimKiemNL = new TextBox();
+            lbl_TimKiemPC = new Label();
+            btn_SuaNL = new Button();
+            dgv_NguyenLieu = new DataGridView();
+            txt_SoLuong = new TextBox();
+            btn_ThemNL = new Button();
             lbl_IdNguyenLieus = new Label();
-            txt_PC_IdSanPham = new TextBox();
+            txt_Gia = new TextBox();
             lbl_IdSanPham = new Label();
-            textBox1 = new TextBox();
-            txt_IdPhaChe = new TextBox();
+            txt_TenNguyenLieu = new TextBox();
+            txt_IdNguyenLieu = new TextBox();
             label1 = new Label();
             lbl_IdPhaChe = new Label();
-            label2 = new Label();
-            label3 = new Label();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgv_NguyenLieu).BeginInit();
-            groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_PhaChe).BeginInit();
+            groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv_NguyenLieu).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(comboBox1);
-            groupBox1.Controls.Add(cbx_LocNguyenLieu);
-            groupBox1.Controls.Add(dgv_NguyenLieu);
+            groupBox1.Controls.Add(btn_HienThiAll);
+            groupBox1.Controls.Add(cbx_NguyenLieu);
+            groupBox1.Controls.Add(cbx_SanPham);
+            groupBox1.Controls.Add(dgv_PhaChe);
+            groupBox1.Controls.Add(btn_XoaPC);
             groupBox1.Controls.Add(btn_XoaNL);
-            groupBox1.Controls.Add(btn_SuaNL);
-            groupBox1.Controls.Add(btn_ThemNL);
+            groupBox1.Controls.Add(btn_ThemPC);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label2);
             groupBox1.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
@@ -75,76 +77,111 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Quản Lý Pha Chế";
             // 
-            // comboBox1
+            // btn_HienThiAll
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(217, 177);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(410, 29);
-            comboBox1.TabIndex = 41;
+            btn_HienThiAll.Location = new Point(744, 119);
+            btn_HienThiAll.Name = "btn_HienThiAll";
+            btn_HienThiAll.Size = new Size(94, 29);
+            btn_HienThiAll.TabIndex = 42;
+            btn_HienThiAll.Text = "Show All";
+            btn_HienThiAll.UseVisualStyleBackColor = true;
+            btn_HienThiAll.Click += btn_HienThiAll_Click;
             // 
-            // cbx_LocNguyenLieu
+            // cbx_NguyenLieu
             // 
-            cbx_LocNguyenLieu.FormattingEnabled = true;
-            cbx_LocNguyenLieu.Location = new Point(217, 59);
-            cbx_LocNguyenLieu.Name = "cbx_LocNguyenLieu";
-            cbx_LocNguyenLieu.Size = new Size(410, 29);
-            cbx_LocNguyenLieu.TabIndex = 41;
+            cbx_NguyenLieu.FormattingEnabled = true;
+            cbx_NguyenLieu.Location = new Point(217, 177);
+            cbx_NguyenLieu.Name = "cbx_NguyenLieu";
+            cbx_NguyenLieu.Size = new Size(410, 29);
+            cbx_NguyenLieu.TabIndex = 41;
             // 
-            // dgv_NguyenLieu
+            // cbx_SanPham
             // 
-            dgv_NguyenLieu.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_NguyenLieu.Location = new Point(0, 252);
-            dgv_NguyenLieu.Name = "dgv_NguyenLieu";
-            dgv_NguyenLieu.RowHeadersWidth = 51;
-            dgv_NguyenLieu.RowTemplate.Height = 29;
-            dgv_NguyenLieu.Size = new Size(844, 439);
-            dgv_NguyenLieu.TabIndex = 38;
+            cbx_SanPham.FormattingEnabled = true;
+            cbx_SanPham.Location = new Point(217, 59);
+            cbx_SanPham.Name = "cbx_SanPham";
+            cbx_SanPham.Size = new Size(410, 29);
+            cbx_SanPham.TabIndex = 41;
+            // 
+            // dgv_PhaChe
+            // 
+            dgv_PhaChe.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_PhaChe.Location = new Point(0, 252);
+            dgv_PhaChe.Name = "dgv_PhaChe";
+            dgv_PhaChe.RowHeadersWidth = 51;
+            dgv_PhaChe.RowTemplate.Height = 29;
+            dgv_PhaChe.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_PhaChe.Size = new Size(844, 439);
+            dgv_PhaChe.TabIndex = 38;
+            dgv_PhaChe.CellClick += dgv_PhaChe_CellClick;
+            // 
+            // btn_XoaPC
+            // 
+            btn_XoaPC.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_XoaPC.Location = new Point(615, 765);
+            btn_XoaPC.Name = "btn_XoaPC";
+            btn_XoaPC.Size = new Size(173, 66);
+            btn_XoaPC.TabIndex = 37;
+            btn_XoaPC.Text = "Xóa Pha Chế";
+            btn_XoaPC.UseVisualStyleBackColor = true;
+            btn_XoaPC.Click += btn_XoaPC_Click;
             // 
             // btn_XoaNL
             // 
             btn_XoaNL.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_XoaNL.Location = new Point(615, 765);
+            btn_XoaNL.Location = new Point(336, 765);
             btn_XoaNL.Name = "btn_XoaNL";
             btn_XoaNL.Size = new Size(173, 66);
-            btn_XoaNL.TabIndex = 37;
-            btn_XoaNL.Text = "Xóa Pha Chế";
+            btn_XoaNL.TabIndex = 36;
+            btn_XoaNL.Text = "Xóa Nguyên Liệu";
             btn_XoaNL.UseVisualStyleBackColor = true;
+            btn_XoaNL.Click += btn_XoaNL_Click;
             // 
-            // btn_SuaNL
+            // btn_ThemPC
             // 
-            btn_SuaNL.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_SuaNL.Location = new Point(336, 765);
-            btn_SuaNL.Name = "btn_SuaNL";
-            btn_SuaNL.Size = new Size(173, 66);
-            btn_SuaNL.TabIndex = 36;
-            btn_SuaNL.Text = "Xóa Nguyên Liệu";
-            btn_SuaNL.UseVisualStyleBackColor = true;
+            btn_ThemPC.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_ThemPC.Location = new Point(57, 765);
+            btn_ThemPC.Name = "btn_ThemPC";
+            btn_ThemPC.Size = new Size(173, 66);
+            btn_ThemPC.TabIndex = 35;
+            btn_ThemPC.Text = "Thêm Pha Chế";
+            btn_ThemPC.UseVisualStyleBackColor = true;
+            btn_ThemPC.Click += btn_ThemPC_Click;
             // 
-            // btn_ThemNL
+            // label3
             // 
-            btn_ThemNL.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_ThemNL.Location = new Point(57, 765);
-            btn_ThemNL.Name = "btn_ThemNL";
-            btn_ThemNL.Size = new Size(173, 66);
-            btn_ThemNL.TabIndex = 35;
-            btn_ThemNL.Text = "Thêm Pha Chế";
-            btn_ThemNL.UseVisualStyleBackColor = true;
+            label3.AutoSize = true;
+            label3.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(217, 139);
+            label3.Name = "label3";
+            label3.Size = new Size(178, 24);
+            label3.TabIndex = 28;
+            label3.Text = "Chọn Nguyên Liệu:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(217, 24);
+            label2.Name = "label2";
+            label2.Size = new Size(157, 24);
+            label2.TabIndex = 28;
+            label2.Text = "Chọn Sản Phẩm:";
             // 
             // groupBox2
             // 
             groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            groupBox2.Controls.Add(txt_TimKiemPC);
+            groupBox2.Controls.Add(txt_TimKiemNL);
             groupBox2.Controls.Add(lbl_TimKiemPC);
-            groupBox2.Controls.Add(btn_SuaPC);
-            groupBox2.Controls.Add(dgv_PhaChe);
-            groupBox2.Controls.Add(txt_PC_IdNguyenLieu);
-            groupBox2.Controls.Add(btn_ThemPC);
+            groupBox2.Controls.Add(btn_SuaNL);
+            groupBox2.Controls.Add(dgv_NguyenLieu);
+            groupBox2.Controls.Add(txt_SoLuong);
+            groupBox2.Controls.Add(btn_ThemNL);
             groupBox2.Controls.Add(lbl_IdNguyenLieus);
-            groupBox2.Controls.Add(txt_PC_IdSanPham);
+            groupBox2.Controls.Add(txt_Gia);
             groupBox2.Controls.Add(lbl_IdSanPham);
-            groupBox2.Controls.Add(textBox1);
-            groupBox2.Controls.Add(txt_IdPhaChe);
+            groupBox2.Controls.Add(txt_TenNguyenLieu);
+            groupBox2.Controls.Add(txt_IdNguyenLieu);
             groupBox2.Controls.Add(label1);
             groupBox2.Controls.Add(lbl_IdPhaChe);
             groupBox2.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
@@ -155,13 +192,14 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Quản Lý Nguyên Liệu";
             // 
-            // txt_TimKiemPC
+            // txt_TimKiemNL
             // 
-            txt_TimKiemPC.Location = new Point(515, 397);
-            txt_TimKiemPC.Name = "txt_TimKiemPC";
-            txt_TimKiemPC.PlaceholderText = "Nhập Tên nguyên Liệu";
-            txt_TimKiemPC.Size = new Size(330, 28);
-            txt_TimKiemPC.TabIndex = 38;
+            txt_TimKiemNL.Location = new Point(515, 397);
+            txt_TimKiemNL.Name = "txt_TimKiemNL";
+            txt_TimKiemNL.PlaceholderText = "Nhập Tên nguyên Liệu";
+            txt_TimKiemNL.Size = new Size(330, 28);
+            txt_TimKiemNL.TabIndex = 38;
+            txt_TimKiemNL.TextChanged += txt_TimKiemNL_TextChanged;
             // 
             // lbl_TimKiemPC
             // 
@@ -172,42 +210,46 @@
             lbl_TimKiemPC.TabIndex = 37;
             lbl_TimKiemPC.Text = "Tìm Kiếm";
             // 
-            // btn_SuaPC
+            // btn_SuaNL
             // 
-            btn_SuaPC.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_SuaPC.Location = new Point(492, 848);
-            btn_SuaPC.Name = "btn_SuaPC";
-            btn_SuaPC.Size = new Size(140, 66);
-            btn_SuaPC.TabIndex = 40;
-            btn_SuaPC.Text = "Sửa";
-            btn_SuaPC.UseVisualStyleBackColor = true;
+            btn_SuaNL.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_SuaNL.Location = new Point(492, 848);
+            btn_SuaNL.Name = "btn_SuaNL";
+            btn_SuaNL.Size = new Size(140, 66);
+            btn_SuaNL.TabIndex = 40;
+            btn_SuaNL.Text = "Sửa";
+            btn_SuaNL.UseVisualStyleBackColor = true;
+            btn_SuaNL.Click += btn_SuaNL_Click;
             // 
-            // dgv_PhaChe
+            // dgv_NguyenLieu
             // 
-            dgv_PhaChe.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_PhaChe.Location = new Point(0, 436);
-            dgv_PhaChe.Name = "dgv_PhaChe";
-            dgv_PhaChe.RowHeadersWidth = 51;
-            dgv_PhaChe.RowTemplate.Height = 29;
-            dgv_PhaChe.Size = new Size(845, 386);
-            dgv_PhaChe.TabIndex = 36;
+            dgv_NguyenLieu.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_NguyenLieu.Location = new Point(0, 436);
+            dgv_NguyenLieu.Name = "dgv_NguyenLieu";
+            dgv_NguyenLieu.RowHeadersWidth = 51;
+            dgv_NguyenLieu.RowTemplate.Height = 29;
+            dgv_NguyenLieu.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_NguyenLieu.Size = new Size(845, 386);
+            dgv_NguyenLieu.TabIndex = 36;
+            dgv_NguyenLieu.CellClick += dgv_NguyenLieu_CellClick;
             // 
-            // txt_PC_IdNguyenLieu
+            // txt_SoLuong
             // 
-            txt_PC_IdNguyenLieu.Location = new Point(264, 299);
-            txt_PC_IdNguyenLieu.Name = "txt_PC_IdNguyenLieu";
-            txt_PC_IdNguyenLieu.Size = new Size(496, 28);
-            txt_PC_IdNguyenLieu.TabIndex = 35;
+            txt_SoLuong.Location = new Point(264, 299);
+            txt_SoLuong.Name = "txt_SoLuong";
+            txt_SoLuong.Size = new Size(496, 28);
+            txt_SoLuong.TabIndex = 35;
             // 
-            // btn_ThemPC
+            // btn_ThemNL
             // 
-            btn_ThemPC.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_ThemPC.Location = new Point(213, 848);
-            btn_ThemPC.Name = "btn_ThemPC";
-            btn_ThemPC.Size = new Size(140, 66);
-            btn_ThemPC.TabIndex = 39;
-            btn_ThemPC.Text = "Thêm";
-            btn_ThemPC.UseVisualStyleBackColor = true;
+            btn_ThemNL.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_ThemNL.Location = new Point(213, 848);
+            btn_ThemNL.Name = "btn_ThemNL";
+            btn_ThemNL.Size = new Size(140, 66);
+            btn_ThemNL.TabIndex = 39;
+            btn_ThemNL.Text = "Thêm";
+            btn_ThemNL.UseVisualStyleBackColor = true;
+            btn_ThemNL.Click += btn_ThemNL_Click;
             // 
             // lbl_IdNguyenLieus
             // 
@@ -219,12 +261,12 @@
             lbl_IdNguyenLieus.TabIndex = 34;
             lbl_IdNguyenLieus.Text = "Số Lượng";
             // 
-            // txt_PC_IdSanPham
+            // txt_Gia
             // 
-            txt_PC_IdSanPham.Location = new Point(264, 219);
-            txt_PC_IdSanPham.Name = "txt_PC_IdSanPham";
-            txt_PC_IdSanPham.Size = new Size(496, 28);
-            txt_PC_IdSanPham.TabIndex = 33;
+            txt_Gia.Location = new Point(264, 219);
+            txt_Gia.Name = "txt_Gia";
+            txt_Gia.Size = new Size(496, 28);
+            txt_Gia.TabIndex = 33;
             // 
             // lbl_IdSanPham
             // 
@@ -236,19 +278,20 @@
             lbl_IdSanPham.TabIndex = 32;
             lbl_IdSanPham.Text = "Giá";
             // 
-            // textBox1
+            // txt_TenNguyenLieu
             // 
-            textBox1.Location = new Point(264, 139);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(496, 28);
-            textBox1.TabIndex = 29;
+            txt_TenNguyenLieu.Location = new Point(264, 139);
+            txt_TenNguyenLieu.Name = "txt_TenNguyenLieu";
+            txt_TenNguyenLieu.Size = new Size(496, 28);
+            txt_TenNguyenLieu.TabIndex = 29;
             // 
-            // txt_IdPhaChe
+            // txt_IdNguyenLieu
             // 
-            txt_IdPhaChe.Location = new Point(264, 59);
-            txt_IdPhaChe.Name = "txt_IdPhaChe";
-            txt_IdPhaChe.Size = new Size(496, 28);
-            txt_IdPhaChe.TabIndex = 29;
+            txt_IdNguyenLieu.Location = new Point(264, 59);
+            txt_IdNguyenLieu.Name = "txt_IdNguyenLieu";
+            txt_IdNguyenLieu.ReadOnly = true;
+            txt_IdNguyenLieu.Size = new Size(496, 28);
+            txt_IdNguyenLieu.TabIndex = 29;
             // 
             // label1
             // 
@@ -270,26 +313,6 @@
             lbl_IdPhaChe.TabIndex = 28;
             lbl_IdPhaChe.Text = "ID Nguyên Liệu";
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(217, 24);
-            label2.Name = "label2";
-            label2.Size = new Size(157, 24);
-            label2.TabIndex = 28;
-            label2.Text = "Chọn Sản Phẩm:";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(217, 139);
-            label3.Name = "label3";
-            label3.Size = new Size(178, 24);
-            label3.TabIndex = 28;
-            label3.Text = "Chọn Nguyên Liệu:";
-            // 
             // f_CongThuc
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -300,12 +323,13 @@
             Name = "f_CongThuc";
             Text = "Công Thức";
             WindowState = FormWindowState.Maximized;
+            Load += f_CongThuc_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgv_NguyenLieu).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_PhaChe).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgv_PhaChe).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_NguyenLieu).EndInit();
             ResumeLayout(false);
         }
 
@@ -313,26 +337,27 @@
 
         private GroupBox groupBox1;
         private GroupBox groupBox2;
-        private ComboBox cbx_LocNguyenLieu;
-        private DataGridView dgv_NguyenLieu;
+        private ComboBox cbx_SanPham;
+        private DataGridView dgv_PhaChe;
+        private Button btn_XoaPC;
         private Button btn_XoaNL;
+        private Button btn_ThemPC;
         private Button btn_SuaNL;
         private Button btn_ThemNL;
-        private Button btn_SuaPC;
-        private Button btn_ThemPC;
-        private TextBox txt_TimKiemPC;
+        private TextBox txt_TimKiemNL;
         private Label lbl_TimKiemPC;
-        private DataGridView dgv_PhaChe;
-        private TextBox txt_PC_IdNguyenLieu;
+        private DataGridView dgv_NguyenLieu;
+        private TextBox txt_SoLuong;
         private Label lbl_IdNguyenLieus;
-        private TextBox txt_PC_IdSanPham;
+        private TextBox txt_Gia;
         private Label lbl_IdSanPham;
-        private TextBox txt_IdPhaChe;
+        private TextBox txt_IdNguyenLieu;
         private Label lbl_IdPhaChe;
-        private ComboBox comboBox1;
-        private TextBox textBox1;
+        private ComboBox cbx_NguyenLieu;
+        private TextBox txt_TenNguyenLieu;
         private Label label1;
         private Label label3;
         private Label label2;
+        private Button btn_HienThiAll;
     }
 }

@@ -49,7 +49,7 @@ public partial class Da1CoffeeContext : DbContext
     {
         modelBuilder.Entity<DichVuPhatSinh>(entity =>
         {
-            entity.HasKey(e => e.IddichVuPhatSinh).HasName("PK__DichVuPh__87E4E2CEB4F3079E");
+            entity.HasKey(e => e.IddichVuPhatSinh).HasName("PK__DichVuPh__87E4E2CE27D173D0");
 
             entity.ToTable("DichVuPhatSinh");
 
@@ -71,7 +71,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<GiamGiaChiTiet>(entity =>
         {
-            entity.HasKey(e => e.IdgiamGiaChiTiet).HasName("PK__GiamGiaC__F7895F4A4CFFAB10");
+            entity.HasKey(e => e.IdgiamGiaChiTiet).HasName("PK__GiamGiaC__F7895F4A8CF5A41D");
 
             entity.ToTable("GiamGiaChiTiet");
 
@@ -101,7 +101,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<GiamGia>(entity =>
         {
-            entity.HasKey(e => e.IdgiamGia).HasName("PK__GiamGia__F091CBDCE7DD2511");
+            entity.HasKey(e => e.IdgiamGia).HasName("PK__GiamGia__F091CBDC53E8ACF9");
 
             entity.Property(e => e.IdgiamGia)
                 .HasMaxLength(20)
@@ -114,7 +114,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<HoaDon>(entity =>
         {
-            entity.HasKey(e => e.IdhoaDon).HasName("PK__HoaDon__5B896F495C06B1AC");
+            entity.HasKey(e => e.IdhoaDon).HasName("PK__HoaDon__5B896F496949D399");
 
             entity.ToTable("HoaDon");
 
@@ -122,10 +122,6 @@ public partial class Da1CoffeeContext : DbContext
                 .HasMaxLength(20)
                 .IsUnicode(false)
                 .HasColumnName("IDHoaDon");
-            entity.Property(e => e.IdkhachHang)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("IDKhachHang");
             entity.Property(e => e.IdnhanVien)
                 .HasMaxLength(20)
                 .IsUnicode(false)
@@ -135,10 +131,10 @@ public partial class Da1CoffeeContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("IDVoucher");
             entity.Property(e => e.NgayXuatDon).HasColumnType("date");
-
-            entity.HasOne(d => d.IdkhachHangNavigation).WithMany(p => p.HoaDons)
-                .HasForeignKey(d => d.IdkhachHang)
-                .HasConstraintName("fk_KH_HD");
+            entity.Property(e => e.Sdt)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("SDT");
 
             entity.HasOne(d => d.IdnhanVienNavigation).WithMany(p => p.HoaDons)
                 .HasForeignKey(d => d.IdnhanVien)
@@ -148,11 +144,15 @@ public partial class Da1CoffeeContext : DbContext
             entity.HasOne(d => d.IdvoucherNavigation).WithMany(p => p.HoaDons)
                 .HasForeignKey(d => d.Idvoucher)
                 .HasConstraintName("fk_V_HD");
+
+            entity.HasOne(d => d.SdtNavigation).WithMany(p => p.HoaDons)
+                .HasForeignKey(d => d.Sdt)
+                .HasConstraintName("fk_KH_HD");
         });
 
         modelBuilder.Entity<HoaDonChiTiet>(entity =>
         {
-            entity.HasKey(e => e.IdhoaDonChiTiet).HasName("PK__HoaDonCh__21C2367707B37768");
+            entity.HasKey(e => e.IdhoaDonChiTiet).HasName("PK__HoaDonCh__21C236777507BC0E");
 
             entity.ToTable("HoaDonChiTiet");
 
@@ -183,25 +183,30 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<KhachHang>(entity =>
         {
-            entity.HasKey(e => e.IdkhachHang).HasName("PK__KhachHan__5A7167B5243D9A6B");
+            entity.HasKey(e => e.Sdt).HasName("PK__KhachHan__CA1930A4FDC52E46");
 
             entity.ToTable("KhachHang");
 
-            entity.Property(e => e.IdkhachHang)
+            entity.Property(e => e.Sdt)
                 .HasMaxLength(20)
                 .IsUnicode(false)
-                .HasColumnName("IDKhachHang");
+                .HasColumnName("SDT");
             entity.Property(e => e.DiaChi).HasMaxLength(50);
             entity.Property(e => e.Email).HasMaxLength(50);
+            entity.Property(e => e.IdnhanVien)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("IDNhanVien");
             entity.Property(e => e.Idrank)
                 .HasMaxLength(20)
                 .IsUnicode(false)
                 .HasColumnName("IDRank");
             entity.Property(e => e.Name).HasMaxLength(50);
-            entity.Property(e => e.Sdt)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .HasColumnName("SDT");
+
+            entity.HasOne(d => d.IdnhanVienNavigation).WithMany(p => p.KhachHangs)
+                .HasForeignKey(d => d.IdnhanVien)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_NV_KH");
 
             entity.HasOne(d => d.IdrankNavigation).WithMany(p => p.KhachHangs)
                 .HasForeignKey(d => d.Idrank)
@@ -210,7 +215,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<LoaiSanPham>(entity =>
         {
-            entity.HasKey(e => e.IdloaiSanPham).HasName("PK__LoaiSanP__6CB987C5C5E45ACB");
+            entity.HasKey(e => e.IdloaiSanPham).HasName("PK__LoaiSanP__6CB987C533016436");
 
             entity.ToTable("LoaiSanPham");
 
@@ -232,7 +237,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<MemberShipRank>(entity =>
         {
-            entity.HasKey(e => e.Idrank).HasName("PK__MemberSh__AFFF681DDD823A62");
+            entity.HasKey(e => e.Idrank).HasName("PK__MemberSh__AFFF681D6247B105");
 
             entity.ToTable("MemberShipRank");
 
@@ -245,7 +250,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<NguyenLieu>(entity =>
         {
-            entity.HasKey(e => e.IdnguyenLieu).HasName("PK__NguyenLi__209F08FF14FB9447");
+            entity.HasKey(e => e.IdnguyenLieu).HasName("PK__NguyenLi__209F08FF217D0B4B");
 
             entity.ToTable("NguyenLieu");
 
@@ -258,7 +263,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<NhanVien>(entity =>
         {
-            entity.HasKey(e => e.IdnhanVien).HasName("PK__NhanVien__7AC2D9F7F13F78C4");
+            entity.HasKey(e => e.IdnhanVien).HasName("PK__NhanVien__7AC2D9F7E28E5083");
 
             entity.ToTable("NhanVien");
 
@@ -276,7 +281,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<PhaChe>(entity =>
         {
-            entity.HasKey(e => e.IdphaChe).HasName("PK__PhaChe__1035F7DE825525C6");
+            entity.HasKey(e => e.IdphaChe).HasName("PK__PhaChe__1035F7DE9F2816A9");
 
             entity.ToTable("PhaChe");
 
@@ -306,7 +311,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<SanPham>(entity =>
         {
-            entity.HasKey(e => e.IdsanPham).HasName("PK__SanPham__9D45E58AEED3EFDC");
+            entity.HasKey(e => e.IdsanPham).HasName("PK__SanPham__9D45E58A766023D7");
 
             entity.ToTable("SanPham");
 
@@ -338,7 +343,7 @@ public partial class Da1CoffeeContext : DbContext
 
         modelBuilder.Entity<Voucher>(entity =>
         {
-            entity.HasKey(e => e.Idvoucher).HasName("PK__Voucher__50249A2764BA4CBE");
+            entity.HasKey(e => e.Idvoucher).HasName("PK__Voucher__50249A272F481C41");
 
             entity.ToTable("Voucher");
 

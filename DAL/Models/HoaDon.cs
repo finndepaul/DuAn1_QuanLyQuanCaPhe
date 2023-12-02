@@ -15,7 +15,7 @@ public partial class HoaDon
 
     public string IdnhanVien { get; set; } = null!;
 
-    public string? IdkhachHang { get; set; }
+    public string? Sdt { get; set; }
 
     public string? Idvoucher { get; set; }
 
@@ -23,9 +23,9 @@ public partial class HoaDon
 
     public virtual ICollection<HoaDonChiTiet> HoaDonChiTiets { get; set; } = new List<HoaDonChiTiet>();
 
-    public virtual KhachHang? IdkhachHangNavigation { get; set; }
-
     public virtual NhanVien IdnhanVienNavigation { get; set; } = null!;
 
     public virtual Voucher? IdvoucherNavigation { get; set; }
+
+    public virtual KhachHang? SdtNavigation { get; set; }
 }

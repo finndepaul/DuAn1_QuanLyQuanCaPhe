@@ -107,6 +107,9 @@ namespace PRL
                         }
 
 
+
+
+
                         // Add Button and Label to the Panel
                         panel.Controls.Add(bt);
                         panel.Controls.Add(lbl);
@@ -128,6 +131,8 @@ namespace PRL
                 }
             }
         }
+
+
 
         private void btn_Them_Click(object sender, EventArgs e)
         {
@@ -151,7 +156,6 @@ namespace PRL
             dgv_Order.Columns[1].Name = "Giá";
             dgv_Order.Columns[2].Name = "Số lượng";
             dgv_Order.Columns[3].Name = "Ghi chú";
-
 
         }
     }

@@ -29,44 +29,46 @@
         private void InitializeComponent()
         {
             groupBox2 = new GroupBox();
-            textBox1 = new TextBox();
+            lbl_Total = new Label();
+            dgv_Rank = new DataGridView();
             label5 = new Label();
             btn_Loc = new Button();
             label1 = new Label();
-            dateTimePicker2 = new DateTimePicker();
-            cbx_LoaiSanPham = new ComboBox();
+            dtp_End = new DateTimePicker();
+            cbx_LocLoaiSP = new ComboBox();
             label2 = new Label();
-            dateTimePicker1 = new DateTimePicker();
-            dataGridView1 = new DataGridView();
+            dtp_Start = new DateTimePicker();
+            dgv_DoanhThu = new DataGridView();
             label4 = new Label();
+            label6 = new Label();
             label3 = new Label();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             btn_BayNgay = new Button();
             btn_TrongNgay = new Button();
             btn_MuoiBonNgay = new Button();
             groupBox1 = new GroupBox();
-            dataGridView2 = new DataGridView();
             groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_Rank).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_DoanhThu).BeginInit();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             SuspendLayout();
             // 
             // groupBox2
             // 
             groupBox2.Anchor = AnchorStyles.Bottom;
             groupBox2.BackColor = SystemColors.Control;
-            groupBox2.Controls.Add(dataGridView2);
-            groupBox2.Controls.Add(textBox1);
+            groupBox2.Controls.Add(lbl_Total);
+            groupBox2.Controls.Add(dgv_Rank);
             groupBox2.Controls.Add(label5);
             groupBox2.Controls.Add(btn_Loc);
             groupBox2.Controls.Add(label1);
-            groupBox2.Controls.Add(dateTimePicker2);
-            groupBox2.Controls.Add(cbx_LoaiSanPham);
+            groupBox2.Controls.Add(dtp_End);
+            groupBox2.Controls.Add(cbx_LocLoaiSP);
             groupBox2.Controls.Add(label2);
-            groupBox2.Controls.Add(dateTimePicker1);
-            groupBox2.Controls.Add(dataGridView1);
+            groupBox2.Controls.Add(dtp_Start);
+            groupBox2.Controls.Add(dgv_DoanhThu);
             groupBox2.Controls.Add(label4);
+            groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(label3);
             groupBox2.Location = new Point(12, 223);
             groupBox2.Name = "groupBox2";
@@ -74,12 +76,26 @@
             groupBox2.TabIndex = 15;
             groupBox2.TabStop = false;
             // 
-            // textBox1
+            // lbl_Total
             // 
-            textBox1.Location = new Point(1299, 269);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(390, 27);
-            textBox1.TabIndex = 13;
+            lbl_Total.AutoSize = true;
+            lbl_Total.Font = new Font("Tahoma", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
+            lbl_Total.Location = new Point(1196, 288);
+            lbl_Total.Name = "lbl_Total";
+            lbl_Total.Size = new Size(87, 34);
+            lbl_Total.TabIndex = 15;
+            lbl_Total.Text = "label7";
+            lbl_Total.Visible = false;
+            // 
+            // dgv_Rank
+            // 
+            dgv_Rank.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_Rank.Location = new Point(1054, 397);
+            dgv_Rank.Name = "dgv_Rank";
+            dgv_Rank.RowHeadersWidth = 51;
+            dgv_Rank.RowTemplate.Height = 29;
+            dgv_Rank.Size = new Size(635, 317);
+            dgv_Rank.TabIndex = 14;
             // 
             // label5
             // 
@@ -87,9 +103,9 @@
             label5.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label5.Location = new Point(29, 23);
             label5.Name = "label5";
-            label5.Size = new Size(199, 24);
+            label5.Size = new Size(212, 24);
             label5.TabIndex = 10;
-            label5.Text = "Thống kê sản phẩm: ";
+            label5.Text = "Thống Kê Doanh Thu: ";
             // 
             // btn_Loc
             // 
@@ -100,6 +116,7 @@
             btn_Loc.TabIndex = 12;
             btn_Loc.Text = "Lọc";
             btn_Loc.UseVisualStyleBackColor = true;
+            btn_Loc.Click += btn_Loc_Click;
             // 
             // label1
             // 
@@ -111,22 +128,23 @@
             label1.TabIndex = 6;
             label1.Text = "Từ ngày:";
             // 
-            // dateTimePicker2
+            // dtp_End
             // 
-            dateTimePicker2.CustomFormat = "dd/MM/yyyy";
-            dateTimePicker2.Location = new Point(1439, 117);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(250, 27);
-            dateTimePicker2.TabIndex = 5;
+            dtp_End.CustomFormat = "dd/MM/yyyy";
+            dtp_End.Location = new Point(1439, 117);
+            dtp_End.Name = "dtp_End";
+            dtp_End.Size = new Size(250, 27);
+            dtp_End.TabIndex = 5;
             // 
-            // cbx_LoaiSanPham
+            // cbx_LocLoaiSP
             // 
-            cbx_LoaiSanPham.FormattingEnabled = true;
-            cbx_LoaiSanPham.Items.AddRange(new object[] { "Đồ uống", "Đồ ăn" });
-            cbx_LoaiSanPham.Location = new Point(1439, 385);
-            cbx_LoaiSanPham.Name = "cbx_LoaiSanPham";
-            cbx_LoaiSanPham.Size = new Size(250, 28);
-            cbx_LoaiSanPham.TabIndex = 11;
+            cbx_LocLoaiSP.FormattingEnabled = true;
+            cbx_LocLoaiSP.Items.AddRange(new object[] { "Đồ uống", "Đồ ăn" });
+            cbx_LocLoaiSP.Location = new Point(1449, 363);
+            cbx_LocLoaiSP.Name = "cbx_LocLoaiSP";
+            cbx_LocLoaiSP.Size = new Size(240, 28);
+            cbx_LocLoaiSP.TabIndex = 11;
+            cbx_LocLoaiSP.SelectedIndexChanged += cbx_LocLoaiSP_SelectedIndexChanged;
             // 
             // label2
             // 
@@ -138,40 +156,51 @@
             label2.TabIndex = 7;
             label2.Text = "Đến ngày:";
             // 
-            // dateTimePicker1
+            // dtp_Start
             // 
-            dateTimePicker1.CalendarFont = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dateTimePicker1.CustomFormat = "dd/MM/yyyy";
-            dateTimePicker1.Location = new Point(1044, 117);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(262, 27);
-            dateTimePicker1.TabIndex = 4;
+            dtp_Start.CalendarFont = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dtp_Start.CustomFormat = "dd/MM/yyyy";
+            dtp_Start.Location = new Point(1044, 117);
+            dtp_Start.Name = "dtp_Start";
+            dtp_Start.Size = new Size(262, 27);
+            dtp_Start.TabIndex = 4;
             // 
-            // dataGridView1
+            // dgv_DoanhThu
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(29, 70);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.RowTemplate.Height = 29;
-            dataGridView1.Size = new Size(966, 644);
-            dataGridView1.TabIndex = 3;
+            dgv_DoanhThu.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_DoanhThu.Location = new Point(29, 70);
+            dgv_DoanhThu.Name = "dgv_DoanhThu";
+            dgv_DoanhThu.RowHeadersWidth = 51;
+            dgv_DoanhThu.RowTemplate.Height = 29;
+            dgv_DoanhThu.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_DoanhThu.Size = new Size(966, 644);
+            dgv_DoanhThu.TabIndex = 3;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(1187, 272);
+            label4.Font = new Font("Tahoma", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(1044, 288);
             label4.Name = "label4";
-            label4.Size = new Size(107, 24);
+            label4.Size = new Size(149, 34);
             label4.TabIndex = 8;
             label4.Text = "Tổng Tiền:";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Location = new Point(1054, 367);
+            label6.Name = "label6";
+            label6.Size = new Size(139, 24);
+            label6.TabIndex = 8;
+            label6.Text = "Top Sản Phẩm";
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(1286, 385);
+            label3.Location = new Point(1296, 363);
             label3.Name = "label3";
             label3.Size = new Size(147, 24);
             label3.TabIndex = 8;
@@ -188,6 +217,7 @@
             btn_BayNgay.TabIndex = 1;
             btn_BayNgay.Text = "7 Ngày";
             btn_BayNgay.UseVisualStyleBackColor = false;
+            btn_BayNgay.Click += btn_BayNgay_Click;
             // 
             // btn_TrongNgay
             // 
@@ -200,6 +230,7 @@
             btn_TrongNgay.TabIndex = 0;
             btn_TrongNgay.Text = "Trong ngày";
             btn_TrongNgay.UseVisualStyleBackColor = false;
+            btn_TrongNgay.Click += btn_TrongNgay_Click;
             // 
             // btn_MuoiBonNgay
             // 
@@ -212,6 +243,7 @@
             btn_MuoiBonNgay.TabIndex = 2;
             btn_MuoiBonNgay.Text = "14 Ngày";
             btn_MuoiBonNgay.UseVisualStyleBackColor = false;
+            btn_MuoiBonNgay.Click += btn_MuoiBonNgay_Click;
             // 
             // groupBox1
             // 
@@ -226,16 +258,6 @@
             groupBox1.TabIndex = 14;
             groupBox1.TabStop = false;
             // 
-            // dataGridView2
-            // 
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(1044, 419);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.RowHeadersWidth = 51;
-            dataGridView2.RowTemplate.Height = 29;
-            dataGridView2.Size = new Size(645, 285);
-            dataGridView2.TabIndex = 14;
-            // 
             // f_DanhThu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -246,11 +268,12 @@
             Name = "f_DanhThu";
             Text = "Doanh Thu";
             WindowState = FormWindowState.Maximized;
+            Load += f_DanhThu_Load;
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_Rank).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_DoanhThu).EndInit();
             groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);
         }
 
@@ -260,19 +283,20 @@
         private Label label5;
         private Button btn_Loc;
         private Label label1;
-        private DateTimePicker dateTimePicker2;
-        private ComboBox cbx_LoaiSanPham;
+        private DateTimePicker dtp_End;
+        private ComboBox cbx_LocLoaiSP;
         private Label label2;
-        private DateTimePicker dateTimePicker1;
-        private DataGridView dataGridView1;
+        private DateTimePicker dtp_Start;
+        private DataGridView dgv_DoanhThu;
         private Label label3;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Button btn_BayNgay;
         private Button btn_TrongNgay;
         private Button btn_MuoiBonNgay;
         private GroupBox groupBox1;
-        private TextBox textBox1;
         private Label label4;
-        private DataGridView dataGridView2;
+        private DataGridView dgv_Rank;
+        private Label label6;
+        private Label lbl_Total;
     }
 }
