@@ -90,6 +90,7 @@
             // cbx_Loc
             // 
             cbx_Loc.FormattingEnabled = true;
+            cbx_Loc.Items.AddRange(new object[] { "All", "Kích hoạt", "Chưa kick hoạt" });
             cbx_Loc.Location = new Point(1507, 82);
             cbx_Loc.Name = "cbx_Loc";
             cbx_Loc.Size = new Size(182, 30);
@@ -226,6 +227,7 @@
             // 
             txb_IdNhanVien.Location = new Point(245, 90);
             txb_IdNhanVien.Name = "txb_IdNhanVien";
+            txb_IdNhanVien.ReadOnly = true;
             txb_IdNhanVien.Size = new Size(539, 29);
             txb_IdNhanVien.TabIndex = 18;
             // 

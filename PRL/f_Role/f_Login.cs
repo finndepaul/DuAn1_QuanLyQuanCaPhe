@@ -1,4 +1,5 @@
 ﻿using BUS.Services;
+using PRL.f_ChucNang;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,13 +15,12 @@ namespace PRL
     public partial class f_Login : Form
     {
         ThucDonService _ser = new();
-        f_Admin f_Admin = new f_Admin();
         f_Staff f_Staff = new f_Staff();
         public f_Login()
         {
-            InitializeComponent();
+            InitializeComponent(); 
         }
-
+        
         private void btn_Login_Click(object sender, EventArgs e)
         {
             string loginName = txt_loginName.Text;
@@ -41,11 +41,14 @@ namespace PRL
                 if (user.Role)
                 {
                     this.Hide();
+                    f_KhachHang khachHang = new f_KhachHang(user.IdnhanVien.ToString());
+                    f_Admin f_Admin = new f_Admin(user.IdnhanVien);
                     f_Admin.ShowDialog();
                 }
                 else if (!user.Role)
                 {
                     this.Hide();
+                    f_KhachHang khachHang = new f_KhachHang(user.IdnhanVien.ToString());
                     f_Staff.ShowDialog();
                 }
 
@@ -78,5 +81,6 @@ namespace PRL
                 SelectNextControl((Control)sender, true, true, true, true);
             }
         }
+
     }
 }

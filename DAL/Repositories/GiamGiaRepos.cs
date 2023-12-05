@@ -17,10 +17,10 @@ namespace DAL.Repositories
             _db = new Da1CoffeeContext();
         }
 
-        public List<GiamGia> GetGiamGias()
-        {
-            return _db.GiamGia.ToList();
-        }
+        //public List<GiamGia> GetGiamGias()
+        //{
+        //    return _db.GiamGia.ToList();
+        //}
 
         public List<SanPhamVM> GetSanPham(string idGiamGia)
         {

@@ -43,24 +43,24 @@ namespace PRL.f_ChucNang
         }
         private void Load_DGV_GiamGia()
         {
-            dgv_GiamGia.Rows.Clear();
-            dgv_GiamGia.ColumnCount = 7;
-            dgv_GiamGia.Columns[0].Name = "STT";
-            dgv_GiamGia.Columns[1].Name = "ID Giam Gia";
-            dgv_GiamGia.Columns[2].Name = "Ten Chuong Trinh";
-            dgv_GiamGia.Columns[3].Name = "Phan Tram";
-            dgv_GiamGia.Columns[4].Name = "Ngay Bat Dau";
-            dgv_GiamGia.Columns[5].Name = "Ngay Ket Thuc";
-            dgv_GiamGia.Columns[6].Name = "Trang Thai";
+        //    dgv_GiamGia.Rows.Clear();
+        //    dgv_GiamGia.ColumnCount = 7;
+        //    dgv_GiamGia.Columns[0].Name = "STT";
+        //    dgv_GiamGia.Columns[1].Name = "ID Giam Gia";
+        //    dgv_GiamGia.Columns[2].Name = "Ten Chuong Trinh";
+        //    dgv_GiamGia.Columns[3].Name = "Phan Tram";
+        //    dgv_GiamGia.Columns[4].Name = "Ngay Bat Dau";
+        //    dgv_GiamGia.Columns[5].Name = "Ngay Ket Thuc";
+        //    dgv_GiamGia.Columns[6].Name = "Trang Thai";
 
-            _lstGiamGia = _ser.GetGiamGias();
-            foreach (var item in _lstGiamGia)
-            {
-                int stt = _lstGiamGia.IndexOf(item) + 1;
-                dgv_GiamGia.Rows.Add(stt++, item.IdgiamGia, item.TenChuongTrinh, item.PhanTram, item.NgayKetThuc, item.NgayKetThuc,
-        GetTrangThaiText(item.TrangThai.Value)
-                     );
-            }
+        //    _lstGiamGia = _ser.GetGiamGias();
+        //    foreach (var item in _lstGiamGia)
+        //    {
+        //        int stt = _lstGiamGia.IndexOf(item) + 1;
+        //        dgv_GiamGia.Rows.Add(stt++, item.IdgiamGia, item.TenChuongTrinh, item.PhanTram, item.NgayKetThuc, item.NgayKetThuc,
+        //GetTrangThaiText(item.TrangThai.Value)
+        //             );
+        //    }
         }
         private string GetTrangThaiText(int trangThai)
         {

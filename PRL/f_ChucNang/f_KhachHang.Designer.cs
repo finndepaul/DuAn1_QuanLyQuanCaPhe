@@ -39,7 +39,6 @@
             dataGridView1 = new DataGridView();
             txt_SoDienThoai = new TextBox();
             txt_Email = new TextBox();
-            txt_ID = new TextBox();
             label7 = new Label();
             label10 = new Label();
             txt_TimKiemIdKhachHang = new TextBox();
@@ -52,7 +51,10 @@
             label2 = new Label();
             label9 = new Label();
             groupBox1 = new GroupBox();
+            txt_idNVClick = new TextBox();
             label1 = new Label();
+            txt_IDNhanVien = new TextBox();
+            label11 = new Label();
             groupBox2 = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -67,6 +69,7 @@
             cbx_TimKiemTheoRank.Name = "cbx_TimKiemTheoRank";
             cbx_TimKiemTheoRank.Size = new Size(256, 28);
             cbx_TimKiemTheoRank.TabIndex = 8;
+            cbx_TimKiemTheoRank.SelectedIndexChanged += cbx_TimKiemTheoRank_SelectedIndexChanged;
             // 
             // txt_TimKiemRank
             // 
@@ -74,42 +77,47 @@
             txt_TimKiemRank.Name = "txt_TimKiemRank";
             txt_TimKiemRank.Size = new Size(292, 27);
             txt_TimKiemRank.TabIndex = 6;
+            txt_TimKiemRank.TextChanged += txt_TimKiemRank_TextChanged;
             // 
             // btn_Sua
             // 
-            btn_Sua.Location = new Point(360, 531);
+            btn_Sua.Location = new Point(364, 531);
             btn_Sua.Name = "btn_Sua";
             btn_Sua.Size = new Size(140, 51);
             btn_Sua.TabIndex = 15;
-            btn_Sua.Text = "Sửa";
+            btn_Sua.Text = "Update";
             btn_Sua.UseVisualStyleBackColor = true;
+            btn_Sua.Click += btn_Sua_Click;
             // 
             // btn_Them
             // 
-            btn_Them.Location = new Point(141, 531);
+            btn_Them.Location = new Point(114, 531);
             btn_Them.Name = "btn_Them";
             btn_Them.Size = new Size(140, 51);
             btn_Them.TabIndex = 14;
             btn_Them.Text = "Thêm";
             btn_Them.UseVisualStyleBackColor = true;
+            btn_Them.Click += btn_Them_Click;
             // 
             // txt_IDRank
             // 
-            txt_IDRank.Location = new Point(235, 406);
+            txt_IDRank.Location = new Point(235, 346);
             txt_IDRank.Name = "txt_IDRank";
+            txt_IDRank.ReadOnly = true;
             txt_IDRank.Size = new Size(349, 27);
             txt_IDRank.TabIndex = 13;
             // 
             // txt_Point
             // 
-            txt_Point.Location = new Point(235, 347);
+            txt_Point.Location = new Point(235, 287);
             txt_Point.Name = "txt_Point";
+            txt_Point.ReadOnly = true;
             txt_Point.Size = new Size(349, 27);
             txt_Point.TabIndex = 12;
             // 
             // txt_TenKhachHang
             // 
-            txt_TenKhachHang.Location = new Point(235, 111);
+            txt_TenKhachHang.Location = new Point(235, 51);
             txt_TenKhachHang.Name = "txt_TenKhachHang";
             txt_TenKhachHang.Size = new Size(349, 27);
             txt_TenKhachHang.TabIndex = 11;
@@ -123,6 +131,7 @@
             dataGridView2.RowTemplate.Height = 29;
             dataGridView2.Size = new Size(1037, 353);
             dataGridView2.TabIndex = 5;
+            dataGridView2.CellClick += dataGridView2_CellClick;
             // 
             // dataGridView1
             // 
@@ -133,33 +142,27 @@
             dataGridView1.RowTemplate.Height = 29;
             dataGridView1.Size = new Size(1037, 347);
             dataGridView1.TabIndex = 4;
+            dataGridView1.CellClick += dataGridView1_CellClick;
             // 
             // txt_SoDienThoai
             // 
-            txt_SoDienThoai.Location = new Point(235, 170);
+            txt_SoDienThoai.Location = new Point(235, 110);
             txt_SoDienThoai.Name = "txt_SoDienThoai";
             txt_SoDienThoai.Size = new Size(349, 27);
             txt_SoDienThoai.TabIndex = 10;
             // 
             // txt_Email
             // 
-            txt_Email.Location = new Point(235, 229);
+            txt_Email.Location = new Point(235, 169);
             txt_Email.Name = "txt_Email";
             txt_Email.Size = new Size(349, 27);
             txt_Email.TabIndex = 9;
-            // 
-            // txt_ID
-            // 
-            txt_ID.Location = new Point(235, 52);
-            txt_ID.Name = "txt_ID";
-            txt_ID.Size = new Size(349, 27);
-            txt_ID.TabIndex = 7;
             // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.Location = new Point(40, 351);
+            label7.Location = new Point(40, 290);
             label7.Name = "label7";
             label7.Size = new Size(62, 24);
             label7.TabIndex = 6;
@@ -181,10 +184,11 @@
             txt_TimKiemIdKhachHang.Name = "txt_TimKiemIdKhachHang";
             txt_TimKiemIdKhachHang.Size = new Size(292, 27);
             txt_TimKiemIdKhachHang.TabIndex = 3;
+            txt_TimKiemIdKhachHang.TextChanged += txt_TimKiemIdKhachHang_TextChanged;
             // 
             // txt_DiaChi
             // 
-            txt_DiaChi.Location = new Point(235, 288);
+            txt_DiaChi.Location = new Point(235, 228);
             txt_DiaChi.Name = "txt_DiaChi";
             txt_DiaChi.Size = new Size(349, 27);
             txt_DiaChi.TabIndex = 8;
@@ -203,17 +207,17 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(40, 405);
+            label6.Location = new Point(40, 349);
             label6.Name = "label6";
-            label6.Size = new Size(88, 24);
+            label6.Size = new Size(82, 24);
             label6.TabIndex = 5;
-            label6.Text = "IDRank :";
+            label6.Text = "IDRank:";
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(40, 291);
+            label5.Location = new Point(40, 231);
             label5.Name = "label5";
             label5.Size = new Size(71, 24);
             label5.TabIndex = 4;
@@ -223,7 +227,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(40, 231);
+            label4.Location = new Point(40, 171);
             label4.Name = "label4";
             label4.Size = new Size(66, 24);
             label4.TabIndex = 3;
@@ -233,7 +237,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(40, 171);
+            label3.Location = new Point(40, 111);
             label3.Name = "label3";
             label3.Size = new Size(140, 24);
             label3.TabIndex = 2;
@@ -243,7 +247,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(40, 111);
+            label2.Location = new Point(40, 51);
             label2.Name = "label2";
             label2.Size = new Size(165, 24);
             label2.TabIndex = 1;
@@ -262,6 +266,10 @@
             // groupBox1
             // 
             groupBox1.BackColor = SystemColors.Control;
+            groupBox1.Controls.Add(txt_idNVClick);
+            groupBox1.Controls.Add(label1);
+            groupBox1.Controls.Add(txt_IDNhanVien);
+            groupBox1.Controls.Add(label11);
             groupBox1.Controls.Add(btn_Sua);
             groupBox1.Controls.Add(btn_Them);
             groupBox1.Controls.Add(txt_IDRank);
@@ -270,29 +278,53 @@
             groupBox1.Controls.Add(txt_SoDienThoai);
             groupBox1.Controls.Add(txt_Email);
             groupBox1.Controls.Add(txt_DiaChi);
-            groupBox1.Controls.Add(txt_ID);
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(640, 931);
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             // 
+            // txt_idNVClick
+            // 
+            txt_idNVClick.Location = new Point(235, 459);
+            txt_idNVClick.Name = "txt_idNVClick";
+            txt_idNVClick.ReadOnly = true;
+            txt_idNVClick.Size = new Size(349, 27);
+            txt_idNVClick.TabIndex = 19;
+            // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(40, 51);
+            label1.Location = new Point(40, 458);
             label1.Name = "label1";
-            label1.Size = new Size(151, 24);
-            label1.TabIndex = 0;
-            label1.Text = "ID Khách Hàng:";
+            label1.Size = new Size(177, 24);
+            label1.TabIndex = 18;
+            label1.Text = "ID Nhân viên click:";
+            // 
+            // txt_IDNhanVien
+            // 
+            txt_IDNhanVien.Location = new Point(235, 402);
+            txt_IDNhanVien.Name = "txt_IDNhanVien";
+            txt_IDNhanVien.ReadOnly = true;
+            txt_IDNhanVien.Size = new Size(349, 27);
+            txt_IDNhanVien.TabIndex = 17;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label11.Location = new Point(40, 401);
+            label11.Name = "label11";
+            label11.Size = new Size(133, 24);
+            label11.TabIndex = 16;
+            label11.Text = "ID Nhân viên:";
             // 
             // groupBox2
             // 
@@ -321,6 +353,7 @@
             Name = "f_KhachHang";
             Text = "Khách Hàng";
             WindowState = FormWindowState.Maximized;
+            Load += f_KhachHang_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             groupBox1.ResumeLayout(false);
@@ -343,7 +376,6 @@
         private DataGridView dataGridView1;
         private TextBox txt_SoDienThoai;
         private TextBox txt_Email;
-        private TextBox txt_ID;
         private Label label7;
         private Label label10;
         private TextBox txt_TimKiemIdKhachHang;
@@ -356,7 +388,10 @@
         private Label label2;
         private Label label9;
         private GroupBox groupBox1;
-        private Label label1;
         private GroupBox groupBox2;
+        private TextBox txt_IDNhanVien;
+        private Label label11;
+        private TextBox txt_idNVClick;
+        private Label label1;
     }
 }

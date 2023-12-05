@@ -17,10 +17,10 @@ namespace BUS.Services
         {
             _res = new GiamGiaRepos();
         }
-        public List<GiamGia> GetGiamGias()
-        {
-            return _res.GetGiamGias();
-        }
+        //public List<GiamGia> GetGiamGias()
+        //{
+        //    return _res.GetGiamGias();
+        //}
 
         public List<SanPhamVM> GetSanPham(string idGiamGia)
         {
