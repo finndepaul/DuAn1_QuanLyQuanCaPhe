@@ -90,6 +90,7 @@
             // cbx_Loc
             // 
             cbx_Loc.FormattingEnabled = true;
+            cbx_Loc.Items.AddRange(new object[] { "All", "Kích Hoạt", "Chưa Kích Hoạt" });
             cbx_Loc.Location = new Point(1507, 82);
             cbx_Loc.Name = "cbx_Loc";
             cbx_Loc.Size = new Size(182, 30);
@@ -98,6 +99,7 @@
             // 
             // dgv_TaiKhoan
             // 
+            dgv_TaiKhoan.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_TaiKhoan.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_TaiKhoan.Location = new Point(849, 144);
             dgv_TaiKhoan.Name = "dgv_TaiKhoan";
@@ -133,7 +135,7 @@
             cbx_TrangThai.Items.AddRange(new object[] { "Kích Hoạt", "Chưa Kích Hoạt" });
             cbx_TrangThai.Location = new Point(245, 462);
             cbx_TrangThai.Name = "cbx_TrangThai";
-            cbx_TrangThai.Size = new Size(539, 30);
+            cbx_TrangThai.Size = new Size(213, 30);
             cbx_TrangThai.TabIndex = 29;
             // 
             // lbl_ChucVu

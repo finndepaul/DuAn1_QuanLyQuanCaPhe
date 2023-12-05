@@ -31,6 +31,7 @@
             btn_Home = new Button();
             btn_Logout = new Button();
             pn_Staff = new Panel();
+            btn_KhachHang = new Button();
             SuspendLayout();
             // 
             // btn_Home
@@ -74,12 +75,28 @@
             pn_Staff.Size = new Size(1737, 1012);
             pn_Staff.TabIndex = 21;
             // 
+            // btn_KhachHang
+            // 
+            btn_KhachHang.BackColor = Color.Tan;
+            btn_KhachHang.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_KhachHang.Image = Properties.Resources.Customer;
+            btn_KhachHang.ImageAlign = ContentAlignment.TopCenter;
+            btn_KhachHang.Location = new Point(12, 121);
+            btn_KhachHang.Name = "btn_KhachHang";
+            btn_KhachHang.Size = new Size(157, 84);
+            btn_KhachHang.TabIndex = 22;
+            btn_KhachHang.Text = "Khách Hàng";
+            btn_KhachHang.TextAlign = ContentAlignment.BottomCenter;
+            btn_KhachHang.UseVisualStyleBackColor = false;
+            btn_KhachHang.Click += btn_KhachHang_Click;
+            // 
             // f_Staff
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.background_app;
             ClientSize = new Size(1924, 1055);
+            Controls.Add(btn_KhachHang);
             Controls.Add(btn_Home);
             Controls.Add(btn_Logout);
             Controls.Add(pn_Staff);
@@ -95,5 +112,6 @@
         private Button btn_Home;
         private Button btn_Logout;
         private Panel pn_Staff;
+        private Button btn_KhachHang;
     }
 }

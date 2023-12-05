@@ -50,17 +50,24 @@ namespace PRL.f_ChucNang
 
         private void Load_CBX_IDLoaiSP()
         {
+            cbx_IDLoaiSP.Items.Clear();
+            _lstIdLoaiSP.Clear();
             foreach (var item in _TDser.GetLoaiSanPhams())
             {
-                if (item.TrangThai == 1)
-                {
-                    cbx_IDLoaiSP.Items.Add(item.IdloaiSanPham);
-                    _lstIdLoaiSP.Add(item.IdloaiSanPham);
-                }
-                else
-                {
-                    continue;
-                }
+                //if (item.TrangThai == 1)
+                //{
+                //    cbx_IDLoaiSP.Items.Add(item.IdloaiSanPham);
+                //    _lstIdLoaiSP.Add(item.IdloaiSanPham);
+                //}
+                //else
+                //{
+                //    continue;
+                //}
+
+                //
+
+                cbx_IDLoaiSP.Items.Add(item.IdloaiSanPham);
+                _lstIdLoaiSP.Add(item.IdloaiSanPham);
             }
         }
 
@@ -206,7 +213,7 @@ namespace PRL.f_ChucNang
             txt_Gia.Text = "";
             txt_thue.Text = "";
             cbx_TrangThaiSP.SelectedItem = null;
-            cbx_IDLoaiSP.SelectedItem = null;
+            cbx_IDLoaiSP.SelectedItem = null;                      
         }
         private void Clear_LoaiSP()
         {
@@ -276,10 +283,12 @@ namespace PRL.f_ChucNang
                 var result = _TDser.AddLoaiSP(lsp);
                 if (result)
                 {
-                    MessageBox.Show("B thêm thành công");
+                    MessageBox.Show("B thêm thành công");                    
                     Load_DGV_LoaiSP();
                     Load_CBX_LocLoaiSP();
                     Load_CBX_TrangThaiFind();
+                    Load_CBX_IDLoaiSP();
+                    Clear_LoaiSP();                   
                 }
                 else
                 {
@@ -333,6 +342,11 @@ namespace PRL.f_ChucNang
                 {
                     MessageBox.Show("B cập nhật thành công");
                     Load_DGV_LoaiSP();
+                    Load_CBX_LocLoaiSP();
+                    Load_CBX_TrangThaiFind();
+                    Load_CBX_IDLoaiSP();
+                    Load_DGV_SanPham(null, null, 3);
+                    Clear_LoaiSP();
                 }
                 else
                 {
@@ -399,6 +413,7 @@ namespace PRL.f_ChucNang
                     Clear_SP();
                     return;
                 }
+                
                 SanPham sp = new SanPham();
                 sp.IdsanPham = txt_IDSanPham.Text;
                 sp.TenSanPham = txt_TenSP.Text;
@@ -418,6 +433,8 @@ namespace PRL.f_ChucNang
                 if (result)
                 {
                     MessageBox.Show("B thêm thành công");
+                    Load_CBX_TrangThaiFind();
+                    Load_CBX_LocLoaiSP();
                     Load_DGV_SanPham(null, null, 3);
                 }
                 else

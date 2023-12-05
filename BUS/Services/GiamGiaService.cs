@@ -33,5 +33,39 @@ namespace BUS.Services
             return _res.CheckIdGiamGiaChiTiet(idSanPham, idGiamGia);
         }
 
+        public bool AddGGCT(string idGiamGia, string idSanPham)
+        {
+            return _res.AddGGCT(idGiamGia, idSanPham);
+        }
+
+        public bool DeleteGGCT(string idGiamGia, string idSanPham)
+        {
+            return _res.DeleteGGCT(idGiamGia,idSanPham);
+        }
+
+        public GiamGia GetGiamGia(string id)
+        {
+            return _res.GetGiamGia(id);
+        }
+
+        public bool AddGiamGia(GiamGia giamGia)
+        {
+            return _res.AddGiamGia(giamGia);
+        }
+
+        public bool UpdateGiamGia(string id, GiamGia giamGia)
+        {
+            return _res.UpdateGiamGia(id, giamGia);
+        }
+
+        public bool CheckSanPham(string idSanPham)
+        {
+            return _res.CheckSanPham(idSanPham);
+        }
+
+        public void CheckTrangThai(string idGiamGia)
+        {
+            _res.CheckTrangThai(idGiamGia);
+        }
     }
 }

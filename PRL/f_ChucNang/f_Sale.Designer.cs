@@ -281,6 +281,7 @@
             // 
             // dgv_SanPham
             // 
+            dgv_SanPham.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_SanPham.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_SanPham.Location = new Point(0, 546);
             dgv_SanPham.Name = "dgv_SanPham";
@@ -324,6 +325,7 @@
             btn_Sua.TabIndex = 17;
             btn_Sua.Text = "Sửa";
             btn_Sua.UseVisualStyleBackColor = true;
+            btn_Sua.Click += btn_Sua_Click;
             // 
             // btn_Them
             // 
@@ -333,6 +335,7 @@
             btn_Them.TabIndex = 16;
             btn_Them.Text = "Thêm";
             btn_Them.UseVisualStyleBackColor = true;
+            btn_Them.Click += btn_Them_Click;
             // 
             // cbx_TrangThai
             // 

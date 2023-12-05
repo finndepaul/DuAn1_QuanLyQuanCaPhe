@@ -22,7 +22,7 @@ namespace PRL.f_ChucNang
         string _idGGClick;
         string _idSPclick;
         GiamGiaService _ser = new GiamGiaService();
-        GiamGiaRepos _res = new GiamGiaRepos();
+
         public f_Sale()
         {
             InitializeComponent();
@@ -134,9 +134,9 @@ namespace PRL.f_ChucNang
 
         //        dgv_SanPham.Rows.Add(stt++, item.SanPham.IdsanPham, item.SanPham.TenSanPham, item.SanPham.Gia, item.SanPham.GiaSale, item.isCheck);
         //    }
-
-
         //}
+
+        //
 
         private void Load_DGV_SanPham(string id)
         {
@@ -167,25 +167,31 @@ namespace PRL.f_ChucNang
                     item.isCheck = false; // Đặt giá trị của checkbox thành false
                 }
 
+                //// Update the sale price based on GiamGiaChiTiet records
+                //float giaMoi = (float)item.SanPham.Gia;
+                //var giamGia = _res.GetGiamGia(_idGGClick);
+                //if (giamGia != null)
+                //{
+                //    float giamGiaPhanTram = (float)giamGia.PhanTram / 100;
+                //    giaMoi = giaMoi * (1 - giamGiaPhanTram);
+                //}
+
+                //dgv_SanPham.Rows.Add(stt++, item.SanPham.IdsanPham, item.SanPham.TenSanPham, item.SanPham.Gia, giaMoi, item.isCheck);
+
                 // Update the sale price based on GiamGiaChiTiet records
                 float giaMoi = (float)item.SanPham.Gia;
-                if (item.SanPham.IdsanPham == _idSPclick) // Only update the clicked product
+                var giamGia = _ser.GetGiamGia(_idGGClick);
+                if (giamGia != null)
                 {
-                    var giamGia = _res.GetGiamGia(_idGGClick);
-                    if (giamGia != null)
-                    {
-                        float giamGiaPhanTram = (float)giamGia.PhanTram / 100;
-                        giaMoi = giaMoi * (1 - giamGiaPhanTram);
-                    }
+                    float giamGiaPhanTram = (float)giamGia.PhanTram / 100;
+                    giaMoi = giaMoi * (1 - giamGiaPhanTram);
                 }
 
-                dgv_SanPham.Rows.Add(stt++, item.SanPham.IdsanPham, item.SanPham.TenSanPham, item.SanPham.Gia, giaMoi, item.isCheck);
+                int giaMoiNguyen = (int)Math.Round(giaMoi); // Làm tròn giá trị giáMoi thành số nguyên
+
+                dgv_SanPham.Rows.Add(stt++, item.SanPham.IdsanPham, item.SanPham.TenSanPham, item.SanPham.Gia, giaMoiNguyen, item.isCheck);
             }
         }
-
-
-
-
 
         private void dgv_SanPham_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -201,31 +207,127 @@ namespace PRL.f_ChucNang
         }
         private void dgv_SanPham_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            int index = e.RowIndex;
+            if (index < 0 || index >= _lstSanPham.Count)
+            {
+                Load_DGV_SanPham(_idGGClick);
+                return;
+            }
             if (e.ColumnIndex == dgv_SanPham.Columns["chb_ApDungSP"].Index && e.RowIndex >= 0)
             {
                 DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)dgv_SanPham.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                bool isChecked = (bool)cell.Value;
+                bool isChecked = (bool)cell.Value;                
                 if (!isChecked)
                 {
                     // Ô checkbox được chọn
                     // Thực hiện các hành động tương ứng
-                    MessageBox.Show("Đang được chọn");
-                    _res.AddGGCT(_idGGClick, _idSPclick);
-                    dgv_SanPham.Rows.Clear();
+                    var checkGG = _ser.CheckSanPham(_idSPclick);
+                    if (!checkGG)
+                    {
+                        MessageBox.Show("Sản Phẩm này đã được áp dụng ở chương trình khác");
+                        Load_DGV_SanPham(_idGGClick);
+                        return;
+                    }
+                    MessageBox.Show("Sản Phẩm Được Chọn");
+                    _ser.CheckTrangThai(_idGGClick);
+                    _ser.AddGGCT(_idGGClick, _idSPclick); ;
                     cell.Value = true; // Bỏ chọn ô checkbox
+                }
+                else if (isChecked)
+                {
+                    MessageBox.Show("Bỏ Chọn Sản Phẩm");
+                    // Ô checkbox không được chọn
+                    // Thực hiện các hành động tương ứng
+                    _ser.DeleteGGCT(_idGGClick, _idSPclick);
+                    cell.Value = false; // Chọn ô checkbox;
                 }
                 else
                 {
-                    MessageBox.Show("Bỏ chọn");
-                    // Ô checkbox không được chọn
-                    // Thực hiện các hành động tương ứng
-                    _res.DeleteGGCT(_idGGClick, _idSPclick);
-                    dgv_SanPham.Rows.Clear();
-                    cell.Value = false; // Chọn ô checkbox;
+                    return;
+                }
+                Load_DGV_GiamGia();
+                Load_DGV_SanPham(_idGGClick);
+            }
+        }
+
+            private void btn_Them_Click(object sender, EventArgs e)
+            {
+                var alert = MessageBox.Show("B xác nhận thêm mới giảm giá", "Xác nhận", MessageBoxButtons.OKCancel);
+                if (alert == DialogResult.OK)
+                {
+                    GiamGia gg = new GiamGia();
+                    gg.IdgiamGia = txt_IDGiamGia.Text;
+                    gg.TenChuongTrinh = txt_TenChuongTrinh.Text;
+                    gg.PhanTram = double.Parse(txt_PhanTram.Text);
+                    gg.NgayBatDau = dtp_NgayBatDau.Value;
+                    gg.NgayKetThuc = dtp_NgayKetThuc.Value;
+                    if (cbx_TrangThai.SelectedIndex == 0)
+                    {
+                        gg.TrangThai = 0;
+                    }
+                    else if (cbx_TrangThai.SelectedIndex == 1)
+                    {
+                        gg.TrangThai = 1;
+                    }
+                    else if (cbx_TrangThai.SelectedIndex == 2)
+                    {
+                        gg.TrangThai = 2;
+                    }
+                    var result = _ser.AddGiamGia(gg);
+                    if (result)
+                    {
+                        MessageBox.Show("B thêm thành công");
+                        Load_DGV_GiamGia();
+                    }
+                    else
+                    {
+                        MessageBox.Show("B thêm thất bại");
+                    }
+                }
+                else if (alert == DialogResult.Cancel)
+                {
+                    return;
                 }
             }
 
-
+            private void btn_Sua_Click(object sender, EventArgs e)
+            {
+                var alert = MessageBox.Show("B xác nhận sửa giảm giá", "Xác nhận", MessageBoxButtons.OKCancel);
+                if (alert == DialogResult.OK)
+                {
+                    GiamGia gg = new GiamGia();
+                    gg.IdgiamGia = txt_IDGiamGia.Text;
+                    gg.TenChuongTrinh = txt_TenChuongTrinh.Text;
+                    gg.PhanTram = double.Parse(txt_PhanTram.Text);
+                    gg.NgayBatDau = dtp_NgayBatDau.Value;
+                    gg.NgayKetThuc = dtp_NgayKetThuc.Value;
+                    if (cbx_TrangThai.SelectedIndex == 0)
+                    {
+                        gg.TrangThai = 0;
+                    }
+                    else if (cbx_TrangThai.SelectedIndex == 1)
+                    {
+                        gg.TrangThai = 1;
+                    }
+                    else if (cbx_TrangThai.SelectedIndex == 2)
+                    {
+                        gg.TrangThai = 2;
+                    }
+                    var result = _ser.UpdateGiamGia(_idGGClick, gg);
+                    if (result)
+                    {
+                        MessageBox.Show("B sửa thành công");
+                        Load_DGV_GiamGia();
+                    }
+                    else
+                    {
+                        MessageBox.Show("B sửa thất bại");
+                    }
+                }
+                else if (alert == DialogResult.Cancel)
+                {
+                    return;
+                }
+            }
         }
     }
-}

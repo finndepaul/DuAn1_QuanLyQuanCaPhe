@@ -498,6 +498,7 @@
             // 
             // dgv_LoaiSP
             // 
+            dgv_LoaiSP.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_LoaiSP.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_LoaiSP.Location = new Point(8, 26);
             dgv_LoaiSP.Name = "dgv_LoaiSP";

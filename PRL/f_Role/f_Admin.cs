@@ -16,9 +16,11 @@ namespace PRL
     {
         ThucDonService _ser = new ThucDonService();
         private Button lastClickedButton;
-        public f_Admin()
+        string idNhanVien;
+        public f_Admin(string idNhanVien)
         {
             InitializeComponent();
+            this.idNhanVien = idNhanVien;
         }
 
         private void f_Main_Load(object sender, EventArgs e) // form Load
@@ -158,7 +160,7 @@ namespace PRL
 
         private void btn_KhachHang_Click(object sender, EventArgs e)
         {
-            f_KhachHang objForm = new f_KhachHang();
+            f_KhachHang objForm = new f_KhachHang(idNhanVien);
             objForm.TopLevel = false;
             pn_Admin.Controls.Add(objForm);
             objForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

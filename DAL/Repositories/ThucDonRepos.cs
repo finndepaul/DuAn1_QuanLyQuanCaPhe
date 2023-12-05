@@ -135,14 +135,11 @@ namespace DAL.Repositories
                     int nextId = int.Parse(maxId.Substring(2)) + 1;
 
                     loaiSanPham.IdloaiSanPham = "KP" + nextId.ToString("D3");
-
-                    loaiSanPham.IdnhanVien = "NV001";
                 }
                 else
                 {
                     loaiSanPham.IdloaiSanPham = "KP001";
-                    loaiSanPham.IdnhanVien = "NV001";
-                }
+                }                
                 _db.Add(loaiSanPham);
                 _db.SaveChanges();
 
@@ -169,6 +166,18 @@ namespace DAL.Repositories
                 result.TrangThai = loaiSanPham.TrangThai;
                 result.IdnhanVien = loaiSanPham.IdnhanVien;
 
+                var sanPhamList = _db.SanPhams.Where(x => x.IdloaiSanPham == id).ToList();
+                if (sanPhamList != null)
+                {
+                    foreach (var sp in sanPhamList)
+                    {
+                        sp.TrangThai = 0;
+                        _db.Update(sp);
+                    }
+                    _db.SaveChanges();
+                }
+
+
                 _db.Update(result);
                 _db.SaveChanges();
                 return true;
@@ -178,6 +187,10 @@ namespace DAL.Repositories
                 return false;
             }
         }
+
+        //
+
+
 
         public bool AddSP(SanPham sanPham)
         {
@@ -194,16 +207,14 @@ namespace DAL.Repositories
 
                     // Tạo IdsanPham mới
                     sanPham.IdsanPham = "SP" + nextId.ToString("D3");
-                    sanPham.GiaSale = 0;
-                    sanPham.IdnhanVien = "NV001";
+                    sanPham.GiaSale = 0;                  
                 }
                 else
                 {
                     // Nếu không có sản phẩm, mặc định IdsanPham là "SP001"
                     sanPham.IdsanPham = "SP001";
                     sanPham.GiaSale = 0;
-                    sanPham.IdnhanVien = "NV001";
-                }
+                }              
 
                 // Thêm sản phẩm và lưu thay đổi
                 _db.Add(sanPham);

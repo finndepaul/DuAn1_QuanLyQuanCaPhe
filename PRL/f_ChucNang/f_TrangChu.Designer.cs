@@ -52,6 +52,7 @@
             button51 = new Button();
             button65 = new Button();
             button50 = new Button();
+            btn_Cho = new Button();
             button64 = new Button();
             btn_Them = new Button();
             gb_SanPham = new GroupBox();
@@ -59,7 +60,6 @@
             label6 = new Label();
             textBox6 = new TextBox();
             dataGridView2 = new DataGridView();
-            btn_Cho = new Button();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgv_Order).BeginInit();
@@ -301,7 +301,7 @@
             // button65
             // 
             button65.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            button65.Location = new Point(785, 748);
+            button65.Location = new Point(698, 832);
             button65.Name = "button65";
             button65.Size = new Size(123, 53);
             button65.TabIndex = 0;
@@ -318,10 +318,20 @@
             button50.Text = "Sửa";
             button50.UseVisualStyleBackColor = true;
             // 
+            // btn_Cho
+            // 
+            btn_Cho.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_Cho.Location = new Point(601, 748);
+            btn_Cho.Name = "btn_Cho";
+            btn_Cho.Size = new Size(123, 53);
+            btn_Cho.TabIndex = 0;
+            btn_Cho.Text = "Chờ";
+            btn_Cho.UseVisualStyleBackColor = true;
+            // 
             // button64
             // 
             button64.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            button64.Location = new Point(601, 748);
+            button64.Location = new Point(785, 747);
             button64.Name = "button64";
             button64.Size = new Size(123, 53);
             button64.TabIndex = 0;
@@ -389,16 +399,6 @@
             dataGridView2.RowTemplate.Height = 29;
             dataGridView2.Size = new Size(781, 373);
             dataGridView2.TabIndex = 1;
-            // 
-            // btn_Cho
-            // 
-            btn_Cho.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_Cho.Location = new Point(698, 834);
-            btn_Cho.Name = "btn_Cho";
-            btn_Cho.Size = new Size(123, 53);
-            btn_Cho.TabIndex = 0;
-            btn_Cho.Text = "Chờ";
-            btn_Cho.UseVisualStyleBackColor = true;
             // 
             // f_TrangChu
             // 

@@ -151,8 +151,93 @@ namespace DAL.Repositories
             return _db.GiamGia.FirstOrDefault(gg => gg.IdgiamGia == id);
         }
 
+        public bool AddGiamGia(GiamGia giamGia)
+        {
+            try
+            {
+                if (_db.GiamGia.Any())
+                {
+                    var maxId = _db.GiamGia.Max(gg => gg.IdgiamGia);
 
+                    int nextId = int.Parse(maxId.Substring(2)) + 1;
 
+                    giamGia.IdgiamGia = "SA" + nextId.ToString("D3");
+                    giamGia.TrangThai = 1;
+                }
+                else
+                {
+                    giamGia.IdgiamGia = "SA001";
+                    giamGia.TrangThai = 1;
+                }
+                _db.Add(giamGia);
+                _db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
+        public bool UpdateGiamGia(string id, GiamGia giamGia)
+        {
+            try
+            {
+                var result = _db.GiamGia.FirstOrDefault(x => x.IdgiamGia == id);
+                if (result == null) return false;
+
+                result.IdgiamGia = result.IdgiamGia;
+                result.TenChuongTrinh = giamGia.TenChuongTrinh;
+                result.PhanTram = giamGia.PhanTram;
+                result.NgayBatDau = giamGia.NgayBatDau;
+                result.NgayKetThuc = giamGia.NgayKetThuc;
+                result.TrangThai = giamGia.TrangThai;
+
+                _db.Update(result);
+                _db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool CheckSanPham(string idsanpham)
+        {
+            int count = 1;
+            foreach (var item in _db.GiamGiaChiTiets.ToList())
+            {
+                if (item.IdsanPham == idsanpham)
+                {
+                    count++;
+                }
+            }
+            if (count >= 2)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public void CheckTrangThai(string idGiamGia)
+        {
+            var result = _db.GiamGiaChiTiets.FirstOrDefault(x => x.IdgiamGia == idGiamGia);
+            if (result == null) return;
+            foreach (var item in _db.GiamGia.ToList())
+            {
+                if (item.IdgiamGia == idGiamGia)
+                {
+                    item.TrangThai = 0;                    
+                }
+                else if (item.IdgiamGia!= idGiamGia && item.TrangThai == 0)
+                {
+                    item.TrangThai = 2;                    
+                }
+                _db.Update(item);
+                _db.SaveChanges();
+            }
+                       
+        }
     }
 }
