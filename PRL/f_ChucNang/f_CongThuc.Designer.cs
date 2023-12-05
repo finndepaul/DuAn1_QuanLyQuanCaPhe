@@ -223,6 +223,7 @@
             // 
             // dgv_NguyenLieu
             // 
+            dgv_NguyenLieu.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_NguyenLieu.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_NguyenLieu.Location = new Point(0, 436);
             dgv_NguyenLieu.Name = "dgv_NguyenLieu";

@@ -25,6 +25,8 @@ namespace PRL.f_ChucNang
             LoadDgv_PC();
             LoadCbbSanPham();
             LoadCbbNguyenLieu();
+            dgv_PhaChe.ClearSelection();
+            dgv_NguyenLieu.ClearSelection();
         }
 
         private void LoadCbbNguyenLieu()
@@ -96,32 +98,45 @@ namespace PRL.f_ChucNang
 
         private void btn_ThemNL_Click(object sender, EventArgs e)
         {
-            try
+
+            if (MessageBox.Show("Bạn muốn thêm nguyên liệu này?", "Thông báo", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                if (MessageBox.Show("Bạn muốn thêm nguyên liệu này?", "Thông báo", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                if (string.IsNullOrEmpty(txt_TenNguyenLieu.Text))
                 {
-                    if (_ct.GetByNameNL(txt_TenNguyenLieu.Text) == null)
-                    {
-                        var a = _ct.CreateNL(new DAL.Models.NguyenLieu
-                        {
-                            TenNguyenLieu = txt_TenNguyenLieu.Text,
-                            Gia = Convert.ToDouble(txt_Gia.Text),
-                            SoLuong = Convert.ToInt32(txt_SoLuong.Text)
-                        });
-                        MessageBox.Show("Thành công!!!");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Nguyên liệu này đã có");
-                    }
-                    LoadDgv_NL();
-                    LoadCbbNguyenLieu();
+                    MessageBox.Show("Tên Nguyên liệu không được để trống");
+                    EmtyFormNguyenLieu();
+                    return;
                 }
+                if (string.IsNullOrEmpty(txt_Gia.Text))
+                {
+                    MessageBox.Show("Giá Nguyên liệu không được để trống");
+                    EmtyFormNguyenLieu();
+                    return;
+                }
+                if (string.IsNullOrEmpty(txt_SoLuong.Text))
+                {
+                    MessageBox.Show("Số Lượng không được để trống");
+                    EmtyFormNguyenLieu();
+                    return;
+                }
+                if (_ct.GetByNameNL(txt_TenNguyenLieu.Text) == null)
+                {
+                    var a = _ct.CreateNL(new DAL.Models.NguyenLieu
+                    {
+                        TenNguyenLieu = txt_TenNguyenLieu.Text,
+                        Gia = Convert.ToDouble(txt_Gia.Text),
+                        SoLuong = Convert.ToInt32(txt_SoLuong.Text)
+                    });
+                    MessageBox.Show("Thành công!!!");
+                }
+                else
+                {
+                    MessageBox.Show("Nguyên liệu này đã có");
+                }
+                LoadDgv_NL();
+                LoadCbbNguyenLieu();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Lỗi rồi");
-            }
+
         }
 
         private void btn_SuaNL_Click(object sender, EventArgs e)
@@ -130,6 +145,11 @@ namespace PRL.f_ChucNang
             {
                 if (MessageBox.Show("Bạn muốn sửa nguyên liệu này?", "Thông báo", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
+                    if (string.IsNullOrEmpty(txt_TenNguyenLieu.Text))
+                    {
+                        MessageBox.Show("Tên Nguyên liệu không được để trống");
+                        return;
+                    }
                     var a = _ct.GetByIdNL(txt_IdNguyenLieu.Text);
 
                     var check = Update_RegexTenNl(txt_TenNguyenLieu.Text, txt_IdNguyenLieu.Text);
@@ -151,9 +171,10 @@ namespace PRL.f_ChucNang
 
             }
 
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Lỗi rồi");
+                MessageBox.Show("Trường dữ liệu của b không được null or empty");
+                EmtyFormNguyenLieu();
             }
         }
         public bool Update_RegexTenNl(string tennl, string Id)
@@ -199,9 +220,13 @@ namespace PRL.f_ChucNang
 
         private void btn_ThemPC_Click(object sender, EventArgs e)
         {
-            if (cbx_SanPham.SelectedItem == null || cbx_NguyenLieu.SelectedItem == null)
+            if (cbx_SanPham.SelectedItem == null)
             {
-                MessageBox.Show("Bạn chưa chọn!!!");
+                MessageBox.Show("Bạn chưa chọn sản phẩm!!!");
+            }
+            else if (cbx_NguyenLieu.SelectedItem == null)
+            {
+                MessageBox.Show("Bạn chưa chọn nguyên liệu!!");
             }
             else
             {
@@ -280,6 +305,8 @@ namespace PRL.f_ChucNang
         {
             LoadCbbSanPham();
             LoadCbbNguyenLieu();
+            dgv_PhaChe.ClearSelection();
+            dgv_NguyenLieu.ClearSelection();
         }
 
         private void btn_XoaNL_Click(object sender, EventArgs e)

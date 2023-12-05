@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PRL.f_ChucNang;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,12 @@ namespace PRL
 {
     public partial class f_Staff : Form
     {
-        public f_Staff()
+        private Button lastClickedButton;
+        string idNhanVien;
+        public f_Staff(string idNhanVien)
         {
             InitializeComponent();
+            this.idNhanVien = idNhanVien;
         }
         private void btn_Home_Click(object sender, EventArgs e) //
         {
@@ -23,7 +27,21 @@ namespace PRL
             pn_Staff.Controls.Add(objForm);
             objForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             objForm.Dock = DockStyle.Fill;
-            objForm.Show();   
+            objForm.Show();
+
+
+            Button clickedButton = (Button)sender;
+            // Thiết lập màu nền cho nút được nhấp
+            clickedButton.BackColor = Color.Linen;
+
+            // Thiết lập màu nền trở về mặc định cho nút trước đó (nếu có)
+            if (lastClickedButton != null && lastClickedButton != clickedButton)
+            {
+                lastClickedButton.BackColor = Color.Tan;
+            }
+
+            // Lưu trữ nút được nhấp cuối cùng
+            lastClickedButton = clickedButton;
         }
 
         private void f_Staff_Load(object sender, EventArgs e)
@@ -58,6 +76,30 @@ namespace PRL
                 return;
             }
 
+        }
+
+        private void btn_KhachHang_Click(object sender, EventArgs e)
+        {
+            f_KhachHang objForm = new f_KhachHang(idNhanVien);
+            objForm.TopLevel = false;
+            pn_Staff.Controls.Add(objForm);
+            objForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            objForm.Dock = DockStyle.Fill;
+            objForm.Show();
+
+
+            Button clickedButton = (Button)sender;
+            // Thiết lập màu nền cho nút được nhấp
+            clickedButton.BackColor = Color.Linen;
+
+            // Thiết lập màu nền trở về mặc định cho nút trước đó (nếu có)
+            if (lastClickedButton != null && lastClickedButton != clickedButton)
+            {
+                lastClickedButton.BackColor = Color.Tan;
+            }
+
+            // Lưu trữ nút được nhấp cuối cùng
+            lastClickedButton = clickedButton;
         }
     }
 }

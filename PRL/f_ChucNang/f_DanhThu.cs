@@ -1,4 +1,5 @@
-﻿using DAL.Repositories;
+﻿using BUS.Services;
+using DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ namespace PRL.f_ChucNang
 {
     public partial class f_DanhThu : Form
     {
-        public DoanhThuRepos _res = new DoanhThuRepos();
+        public DoanhThuService _ser = new DoanhThuService();
         public f_DanhThu()
         {
             InitializeComponent();
@@ -36,7 +37,7 @@ namespace PRL.f_ChucNang
             dgv_Rank.Columns[1].Name = "Sản phẩm";
             dgv_Rank.Columns[2].Name = "Đã bán";
             dgv_Rank.Columns[3].Name = "Loại Sản phẩm";
-            foreach (var item in _res.GetSanPhamRank(cbx_LocLoaiSP.SelectedIndex, cbx_LocLoaiSP.Text, start, end))
+            foreach (var item in _ser.GetSanPhamRank(cbx_LocLoaiSP.SelectedIndex, cbx_LocLoaiSP.Text, start, end))
             {
                 dgv_Rank.Rows.Add(stt++, item.Idsanpham, item.Soluong, item.LoaiSanPham);
             }
@@ -46,7 +47,7 @@ namespace PRL.f_ChucNang
         {
             cbx_LocLoaiSP.Items.Clear();
             cbx_LocLoaiSP.Items.Add("All");
-            foreach (var item in _res.GetLoai())
+            foreach (var item in _ser.GetLoai())
             {
                 cbx_LocLoaiSP.Items.Add(item);
             }
@@ -66,7 +67,7 @@ namespace PRL.f_ChucNang
             dgv_DoanhThu.Columns[5].Name = "Khách Hàng";
             dgv_DoanhThu.Columns[6].Name = "Sản Phẩm";
             double? tong = 0;
-            foreach (var item in _res.GetAllHoaDon(start, end))
+            foreach (var item in _ser.GetAllHoaDon(start, end))
             {
                 dgv_DoanhThu.Rows.Add(stt++, item.IdhoaDon, item.TongTien, item.NgayBan
                     , item.IdnhanVien == null ? "N/A" : item.IdnhanVien,
@@ -83,13 +84,29 @@ namespace PRL.f_ChucNang
 
         private void btn_Loc_Click(object sender, EventArgs e)
         {
-            LoadDtgDoanhThu(dtp_Start.Value, dtp_End.Value);
-            LoadRank(dtp_Start.Value, dtp_End.Value);
+            if (dtp_Start.Value > dtp_End.Value)
+            {
+                MessageBox.Show("Thời gian không hợp lệ");
+            }
+            else
+            {
+                LoadDtgDoanhThu(dtp_Start.Value, dtp_End.Value);
+                LoadRank(dtp_Start.Value, dtp_End.Value);
+            }
+
         }
 
         private void cbx_LocLoaiSP_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadRank(dtp_Start.Value, dtp_End.Value);
+            if (dtp_Start.Value > dtp_End.Value)
+            {
+                MessageBox.Show("Thời gian không hợp lệ");
+            }
+            else
+            {
+                LoadRank(dtp_Start.Value, dtp_End.Value);
+
+            }
         }
 
         private void btn_TrongNgay_Click(object sender, EventArgs e)
@@ -104,6 +121,7 @@ namespace PRL.f_ChucNang
 
             LoadDtgDoanhThu(startOfDay, endOfDay);
             LoadRank(startOfDay, endOfDay);
+
         }
 
         private void btn_BayNgay_Click(object sender, EventArgs e)
@@ -116,6 +134,7 @@ namespace PRL.f_ChucNang
 
             LoadDtgDoanhThu(startOfPreviousWeek, now);
             LoadRank(startOfPreviousWeek, now);
+
         }
 
         private void btn_MuoiBonNgay_Click(object sender, EventArgs e)

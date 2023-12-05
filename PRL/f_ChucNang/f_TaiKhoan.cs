@@ -57,6 +57,7 @@ namespace PRL.f_ChucNang
             if (txt_LoginName.Text == "" || txt_Password.Text == "" || cbx_ChucVu.Items == null || cbx_TrangThai.Items == null)
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin !!!!");
+                ClearData();
                 return;
             }
 
@@ -187,17 +188,7 @@ namespace PRL.f_ChucNang
             txt_TimKiem.Text = "";
         }
 
-        private void txt_TimKiem_TextChanged(object sender, EventArgs e)
-        {
-            if (txt_TimKiem.Text.Length == 0 || txt_TimKiem.Text == null)
-            {
-                LoadDataNhanVien(null, "");
-            }
-            else
-            {
-                LoadDataNhanVien(txt_TimKiem.Text, null);
-            }
-        }
+
 
         private void cbx_Loc_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -215,6 +206,16 @@ namespace PRL.f_ChucNang
             }
         }
 
-
+        private void txt_TimKiem_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_TimKiem.Text.Length == 0 || txt_TimKiem.Text == null)
+            {
+                LoadDataNhanVien(null, "");
+            }
+            else
+            {
+                LoadDataNhanVien(txt_TimKiem.Text, null);
+            }
+        }
     }
 }
