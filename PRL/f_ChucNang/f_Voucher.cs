@@ -58,7 +58,7 @@ namespace PRL.f_ChucNang
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = e.RowIndex;
-            if (index < 0 || index >= _ser.GetVouchers(null,10).Count)
+            if (index < 0 || index >= _ser.GetVouchers(null, 10).Count)
             {
                 return;
             }
@@ -118,27 +118,33 @@ namespace PRL.f_ChucNang
 
                     if (_ser.GetByCode(txt_MaVocher.Text) == null)
                     {
-
-                        var result = _ser.AddVoucher(new Voucher
+                        if (dtpNgayBatDau.Value < dtpNgayKetThuc.Value)
                         {
-                            Code = txt_MaVocher.Text,
-                            GiamTien = Convert.ToDouble(txt_GiamTien.Text),
-                            SoLuong = Convert.ToInt32(txt_SoLuong.Text),
-                            DateStart = dtpNgayBatDau.Value.Date,
-                            DateEnd = dtpNgayKetThuc.Value.Date,
-                            DieuKienApDung = txt_DKApDung.Text,
-                            TrangThai = cmb_TrangThai.SelectedIndex
-                        });
+                            var result = _ser.AddVoucher(new Voucher
+                            {
+                                Code = txt_MaVocher.Text,
+                                GiamTien = Convert.ToDouble(txt_GiamTien.Text),
+                                SoLuong = Convert.ToInt32(txt_SoLuong.Text),
+                                DateStart = dtpNgayBatDau.Value.Date,
+                                DateEnd = dtpNgayKetThuc.Value.Date,
+                                DieuKienApDung = txt_DKApDung.Text,
+                                TrangThai = cmb_TrangThai.SelectedIndex
+                            });
 
-                        if (result)
-                        {
-                            MessageBox.Show("Thêm thành công");
-                            LoadDgv();
-
+                            if (result)
+                            {
+                                MessageBox.Show("Thêm thành công");
+                                LoadDgv();
+                                ClearForm();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Thêm thất bại");
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Thêm thất bại");
+                            MessageBox.Show("Thời gian không hợp lệ");
                         }
                     }
                     else
@@ -157,44 +163,58 @@ namespace PRL.f_ChucNang
             var confirmResult = MessageBox.Show("Xác nhận sửa voucher", "Xác nhận", MessageBoxButtons.OKCancel);
             if (confirmResult == DialogResult.OK)
             {
-
-                var search = _ser.GetByIdVC(txt_IdVocher.Text);
-                if (search == null)
+                if (txt_MaVocher.Text == "" || txt_GiamTien.Text == "" || txt_SoLuong.Text == "" || txt_DKApDung.Text == "")
                 {
-                    MessageBox.Show("Bạn chưa chọn");
+                    MessageBox.Show("Bạn chưa điền đầy đủ thông tin thông tin");
+
                 }
                 else
                 {
-                    if (txt_MaVocher.Text == search.Code)
+                    var search = _ser.GetByIdVC(txt_IdVocher.Text);
+                    if (search == null)
                     {
-                        search.Code = txt_MaVocher.Text;
-                        search.GiamTien = Convert.ToDouble(txt_GiamTien.Text);
-                        search.SoLuong = Convert.ToInt32(txt_SoLuong.Text);
-                        search.DateStart = dtpNgayBatDau.Value.Date;
-                        search.DateEnd = dtpNgayKetThuc.Value.Date;
-                        search.DieuKienApDung = txt_DKApDung.Text;
-                        search.TrangThai = cmb_TrangThai.SelectedIndex;
-                        var upp = _ser.UpdateVocuher(search);
-                        if (upp)
-                        {
-                            MessageBox.Show("Sửa thành công");
-                            LoadDgv();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Sửa thất bại");
-                        }
+                        MessageBox.Show("Bạn chưa chọn");
                     }
                     else
                     {
-                        MessageBox.Show("Voucher đã có");
+                        if (dtpNgayBatDau.Value < dtpNgayKetThuc.Value)
+                        {
+                            if (txt_MaVocher.Text == search.Code)
+                            {
+                                search.Code = txt_MaVocher.Text;
+                                search.GiamTien = Convert.ToDouble(txt_GiamTien.Text);
+                                search.SoLuong = Convert.ToInt32(txt_SoLuong.Text);
+                                search.DateStart = dtpNgayBatDau.Value.Date;
+                                search.DateEnd = dtpNgayKetThuc.Value.Date;
+                                search.DieuKienApDung = txt_DKApDung.Text;
+                                search.TrangThai = cmb_TrangThai.SelectedIndex;
+                                var upp = _ser.UpdateVocuher(search);
+                                if (upp)
+                                {
+                                    MessageBox.Show("Sửa thành công");
+                                    LoadDgv();
+                                    ClearForm();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Sửa thất bại");
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Voucher đã có");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Thời gian không hợp lệ");
+                        }
+
                     }
-
-
                 }
             }
         }
-        
+
         private void ClearForm()
         {
             txt_IdVocher.Text = "";
