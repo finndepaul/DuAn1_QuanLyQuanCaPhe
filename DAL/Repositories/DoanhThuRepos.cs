@@ -80,8 +80,7 @@ namespace DAL.Repositories
                 }
 
             }
-            return result.ToList(); //loadform 
-
+            return result.ToList(); 
         }
     }
 }

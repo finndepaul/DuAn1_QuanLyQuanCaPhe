@@ -25,6 +25,8 @@ namespace PRL.f_ChucNang
             LoadDgv_PC();
             LoadCbbSanPham();
             LoadCbbNguyenLieu();
+            dgv_PhaChe.ClearSelection();
+            dgv_NguyenLieu.ClearSelection();
         }
 
         private void LoadCbbNguyenLieu()
@@ -96,10 +98,14 @@ namespace PRL.f_ChucNang
 
         private void btn_ThemNL_Click(object sender, EventArgs e)
         {
-            try
-            {
                 if (MessageBox.Show("Bạn muốn thêm nguyên liệu này?", "Thông báo", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
+
+                    if (txt_TenNguyenLieu.Text == null)
+                    {
+                        MessageBox.Show("Tên Nguyên liệu không được để trống");
+                        return;
+                    }
                     if (_ct.GetByNameNL(txt_TenNguyenLieu.Text) == null)
                     {
                         var a = _ct.CreateNL(new DAL.Models.NguyenLieu
@@ -117,11 +123,7 @@ namespace PRL.f_ChucNang
                     LoadDgv_NL();
                     LoadCbbNguyenLieu();
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Lỗi rồi");
-            }
+            
         }
 
         private void btn_SuaNL_Click(object sender, EventArgs e)
@@ -280,7 +282,9 @@ namespace PRL.f_ChucNang
         {
             LoadCbbSanPham();
             LoadCbbNguyenLieu();
-        }
+			dgv_PhaChe.ClearSelection();
+			dgv_NguyenLieu.ClearSelection();
+		}
 
         private void btn_XoaNL_Click(object sender, EventArgs e)
         {
@@ -327,6 +331,7 @@ namespace PRL.f_ChucNang
 
                     }
                     LoadDgv_PC();
+                    
                 }
             }
         }
