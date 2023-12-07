@@ -6,10 +6,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PRL.f_ChucNang
@@ -19,10 +22,11 @@ namespace PRL.f_ChucNang
         private readonly VoucherService _ser = new();
         List<Voucher> _lstvoucher;
         Da1CoffeeContext _db = new Da1CoffeeContext();
-
+        DateTime _datenow;
         public f_Voucher()
         {
             InitializeComponent();
+            _datenow = DateTime.Now;
         }
 
         private void LoadCmbSearch()
@@ -47,7 +51,6 @@ namespace PRL.f_ChucNang
             dataGridView1.Columns[6].Name = "Date End";
             dataGridView1.Columns[7].Name = "Điều kiện áp dụng";
             dataGridView1.Columns[8].Name = "Trạng thái";
-
 
             foreach (var item in _ser.GetVouchers(txt_TimKiemVocher.Text, cbx_TrangThai.SelectedIndex))
             {
@@ -80,6 +83,7 @@ namespace PRL.f_ChucNang
             LoadDgv();
             LoadCmbSearch();
             LoadCmbAdd();
+
 
         }
 
@@ -118,33 +122,56 @@ namespace PRL.f_ChucNang
 
                     if (_ser.GetByCode(txt_MaVocher.Text) == null)
                     {
-                        if (dtpNgayBatDau.Value < dtpNgayKetThuc.Value)
+                        if (dtpNgayBatDau.Value.Date <= dtpNgayKetThuc.Value.Date)
                         {
-                            var result = _ser.AddVoucher(new Voucher
+                            if (dtpNgayBatDau.Value.Date < DateTime.Now.Date && dtpNgayKetThuc.Value.Date < DateTime.Now.Date)
                             {
-                                Code = txt_MaVocher.Text,
-                                GiamTien = Convert.ToDouble(txt_GiamTien.Text),
-                                SoLuong = Convert.ToInt32(txt_SoLuong.Text),
-                                DateStart = dtpNgayBatDau.Value.Date,
-                                DateEnd = dtpNgayKetThuc.Value.Date,
-                                DieuKienApDung = txt_DKApDung.Text,
-                                TrangThai = cmb_TrangThai.SelectedIndex
-                            });
-
-                            if (result)
-                            {
-                                MessageBox.Show("Thêm thành công");
+                                MessageBox.Show("Ngày bắt đầu và ngày kết không hợp lệ. Vui lòng chọn lại ngày để áp dụng sale!");
                                 LoadDgv();
-                                ClearForm();
+                                return;
+                            }
+                            else if (dtpNgayBatDau.Value.Date < DateTime.Now.Date)
+                            {
+                                MessageBox.Show("Ngày bắt đầu không hợp lệ. Vui lòng chọn lại ngày để áp dụng sale!");
+                                LoadDgv();
+                                return;
+                            }
+                            int sl = Convert.ToInt32(txt_SoLuong.Text);
+                            double giamGia = Convert.ToDouble(txt_GiamTien.Text);
+                            if (sl <= 0 || giamGia <= 0)
+                            {
+
+                                MessageBox.Show("Số lượng phải lớn hơn 0");
+                                txt_SoLuong.Focus();
+                                txt_GiamTien.Focus();
                             }
                             else
                             {
-                                MessageBox.Show("Thêm thất bại");
+                                var result = _ser.AddVoucher(new Voucher
+                                {
+                                    Code = txt_MaVocher.Text,
+                                    GiamTien = Convert.ToDouble(txt_GiamTien.Text),
+                                    SoLuong = Convert.ToInt32(txt_SoLuong.Text),
+                                    DateStart = dtpNgayBatDau.Value.Date,
+                                    DateEnd = dtpNgayKetThuc.Value.Date,
+                                    DieuKienApDung = txt_DKApDung.Text,
+                                    TrangThai = cmb_TrangThai.SelectedIndex
+                                });
+                                if (result)
+                                {
+                                    MessageBox.Show("Thêm thành công");
+                                    LoadDgv();
+                                    ClearForm();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Thêm thất bại");
+                                }
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Thời gian không hợp lệ");
+                            MessageBox.Show("Thời gian không hợp lệ!");
                         }
                     }
                     else
@@ -177,27 +204,52 @@ namespace PRL.f_ChucNang
                     }
                     else
                     {
-                        if (dtpNgayBatDau.Value < dtpNgayKetThuc.Value)
+
+                        if (dtpNgayBatDau.Value.Date <= dtpNgayKetThuc.Value.Date)
                         {
+                            if (dtpNgayBatDau.Value.Date < DateTime.Now.Date && dtpNgayKetThuc.Value.Date < DateTime.Now.Date)
+                            {
+                                MessageBox.Show("Ngày bắt đầu và ngày kết không hợp lệ. Vui lòng chọn lại ngày để áp dụng sale!");
+                                LoadDgv();
+                                return;
+                            }
+                            else if (dtpNgayBatDau.Value.Date < DateTime.Now.Date)
+                            {
+                                MessageBox.Show("Ngày bắt đầu không hợp lệ. Vui lòng chọn lại ngày để áp dụng sale!");
+                                LoadDgv();
+                                return;
+                            }
                             if (txt_MaVocher.Text == search.Code)
                             {
-                                search.Code = txt_MaVocher.Text;
-                                search.GiamTien = Convert.ToDouble(txt_GiamTien.Text);
-                                search.SoLuong = Convert.ToInt32(txt_SoLuong.Text);
-                                search.DateStart = dtpNgayBatDau.Value.Date;
-                                search.DateEnd = dtpNgayKetThuc.Value.Date;
-                                search.DieuKienApDung = txt_DKApDung.Text;
-                                search.TrangThai = cmb_TrangThai.SelectedIndex;
-                                var upp = _ser.UpdateVocuher(search);
-                                if (upp)
+                                int sl = Convert.ToInt32(txt_SoLuong.Text);
+                                double giamGia = Convert.ToDouble(txt_GiamTien.Text);
+                                if (sl <= 0 || giamGia <= 0)
                                 {
-                                    MessageBox.Show("Sửa thành công");
-                                    LoadDgv();
-                                    ClearForm();
+                                    MessageBox.Show("Giá trị phải lớn hơn 0");
+                                    txt_SoLuong.Focus();
+                                    txt_GiamTien.Focus();
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Sửa thất bại");
+                                    search.Code = txt_MaVocher.Text;
+                                    search.GiamTien = Convert.ToDouble(txt_GiamTien.Text);
+                                    search.SoLuong = Convert.ToInt32(txt_SoLuong.Text);
+                                    search.DateStart = dtpNgayBatDau.Value.Date;
+                                    search.DateEnd = dtpNgayKetThuc.Value.Date;
+                                    search.DieuKienApDung = txt_DKApDung.Text;
+                                    search.TrangThai = cmb_TrangThai.SelectedIndex;
+                                    var upp = _ser.UpdateVocuher(search);
+                                    if (upp)
+                                    {
+                                        MessageBox.Show("Sửa thành công");
+                                        _ser.CheckTrangThai(txt_IdVocher.Text);
+                                        LoadDgv();
+                                        ClearForm();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Sửa thất bại");
+                                    }
                                 }
                             }
                             else
@@ -207,7 +259,7 @@ namespace PRL.f_ChucNang
                         }
                         else
                         {
-                            MessageBox.Show("Thời gian không hợp lệ");
+                            MessageBox.Show("Thời gian không hợp lệ!");
                         }
 
                     }
@@ -227,6 +279,7 @@ namespace PRL.f_ChucNang
             dtpNgayKetThuc.Value = DateTime.Now;
         }
 
+       
     }
 }
 

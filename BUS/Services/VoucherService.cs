@@ -23,6 +23,13 @@ namespace BUS.Services
            return _res.AddVoucher(voucher);
         }
 
+        public void CheckTrangThai(string idVoucher)
+        {
+             _res.CheckTrangThai(idVoucher);
+        }
+
+        
+
         public bool DeleteVocuher(string id)
         {
             return _res.DeleteVocuher(id);

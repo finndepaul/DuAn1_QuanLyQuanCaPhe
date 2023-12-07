@@ -38,7 +38,7 @@
             groupBox1 = new GroupBox();
             label9 = new Label();
             cmb_TrangThai = new ComboBox();
-            button3 = new Button();
+            btn_Clear = new Button();
             btn_Update = new Button();
             btn_Add = new Button();
             label1 = new Label();
@@ -71,7 +71,7 @@
             // 
             // txt_SoLuong
             // 
-            txt_SoLuong.Location = new Point(251, 196);
+            txt_SoLuong.Location = new Point(254, 197);
             txt_SoLuong.Margin = new Padding(3, 2, 3, 2);
             txt_SoLuong.Name = "txt_SoLuong";
             txt_SoLuong.Size = new Size(336, 22);
@@ -129,7 +129,7 @@
             groupBox1.BackColor = SystemColors.Control;
             groupBox1.Controls.Add(label9);
             groupBox1.Controls.Add(cmb_TrangThai);
-            groupBox1.Controls.Add(button3);
+            groupBox1.Controls.Add(btn_Clear);
             groupBox1.Controls.Add(btn_Update);
             groupBox1.Controls.Add(btn_Add);
             groupBox1.Controls.Add(label3);
@@ -176,16 +176,16 @@
             cmb_TrangThai.Size = new Size(231, 22);
             cmb_TrangThai.TabIndex = 21;
             // 
-            // button3
+            // btn_Clear
             // 
-            button3.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            button3.Location = new Point(452, 476);
-            button3.Margin = new Padding(3, 2, 3, 2);
-            button3.Name = "button3";
-            button3.Size = new Size(125, 39);
-            button3.TabIndex = 19;
-            button3.Text = "Xóa";
-            button3.UseVisualStyleBackColor = true;
+            btn_Clear.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_Clear.Location = new Point(452, 476);
+            btn_Clear.Margin = new Padding(3, 2, 3, 2);
+            btn_Clear.Name = "btn_Clear";
+            btn_Clear.Size = new Size(125, 39);
+            btn_Clear.TabIndex = 19;
+            btn_Clear.Text = "Clear";
+            btn_Clear.UseVisualStyleBackColor = true;
             // 
             // btn_Update
             // 
@@ -292,6 +292,7 @@
             dataGridView1.Location = new Point(5, 98);
             dataGridView1.Margin = new Padding(3, 2, 3, 2);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.RowTemplate.Height = 29;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -391,7 +392,7 @@
         private TextBox txt_DKApDung;
         private Label label9;
         private ComboBox cmb_TrangThai;
-        private Button button3;
+        private Button btn_Clear;
         private Button btn_Update;
     }
 }
