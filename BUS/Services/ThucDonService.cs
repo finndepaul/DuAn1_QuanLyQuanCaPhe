@@ -1,19 +1,14 @@
 ﻿using BUS.IServices;
-using DAL.IRepositories;
 using DAL.Models;
 using DAL.Repositories;
 using DAL.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BUS.Services
 {
     public class ThucDonService : IThucDonService
     {
-        ThucDonRepos _res;
+        private ThucDonRepos _res;
+
         public ThucDonService()
         {
             _res = new ThucDonRepos();
@@ -23,6 +18,7 @@ namespace BUS.Services
         {
             return _res.AddLoaiSP(loaiSanPham);
         }
+
         public bool UpdateLoaiSP(string id, LoaiSanPham loaiSanPham)
         {
             return _res.UpdateLoaiSP(id, loaiSanPham);
@@ -45,7 +41,7 @@ namespace BUS.Services
 
         public List<SanPhamVM> GetSanPhams(string searchText, string cbxLoaiSP, int cbxLocTrangTha)
         {
-            return _res.GetSanPhams(searchText,cbxLoaiSP, cbxLocTrangTha);
+            return _res.GetSanPhams(searchText, cbxLoaiSP, cbxLocTrangTha);
         }
 
         public bool AddSP(SanPham sanPham)

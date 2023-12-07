@@ -1,17 +1,13 @@
 ﻿using DAL.IRepositories;
 using DAL.Models;
 using DAL.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
     public class GiamGiaRepos : IGiamGiaRepos
     {
-        Da1CoffeeContext _db;
+        private Da1CoffeeContext _db;
+
         public GiamGiaRepos()
         {
             _db = new Da1CoffeeContext();
@@ -54,6 +50,7 @@ namespace DAL.Repositories
                 return query.ToList();
             }
         }
+
         public bool CheckIdGiamGiaChiTiet(string idSanPham, string idGiamGia)
         {
             // Thực hiện truy vấn để kiểm tra xem idSanPham đã tồn tại trong bảng GiamGiaChiTiets hay không

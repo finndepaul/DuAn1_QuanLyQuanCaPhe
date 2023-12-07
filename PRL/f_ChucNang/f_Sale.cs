@@ -1,26 +1,16 @@
 ﻿using BUS.Services;
 using DAL.Models;
 using DAL.ViewModels;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace PRL.f_ChucNang
 {
     public partial class f_Sale : Form
     {
-        List<SanPhamVM> _lstSanPham;
-        List<GiamGia> _lstGiamGia;
-        string _idGGClick;
-        string _idSPclick;
-        GiamGiaService _ser = new GiamGiaService();
+        private List<SanPhamVM> _lstSanPham;
+        private List<GiamGia> _lstGiamGia;
+        private string _idGGClick;
+        private string _idSPclick;
+        private GiamGiaService _ser = new GiamGiaService();
 
         public f_Sale()
         {
@@ -41,6 +31,7 @@ namespace PRL.f_ChucNang
             cbx_TrangThai.Items.Add("Chưa áp dụng");
             cbx_TrangThai.Items.Add("Đã hết hạn");
         }
+
         private void Load_DGV_GiamGia()
         {
             dgv_GiamGia.Rows.Clear();
@@ -62,16 +53,20 @@ namespace PRL.f_ChucNang
                      );
             }
         }
+
         private string GetTrangThaiText(int trangThai)
         {
             switch (trangThai)
             {
                 case 0:
                     return "Đang áp dụng";
+
                 case 1:
                     return "Chưa áp dụng";
+
                 case 2:
                     return "Đã hết hạn";
+
                 default:
                     return "Không xác định";
             }
@@ -102,6 +97,7 @@ namespace PRL.f_ChucNang
             }
             Load_DGV_SanPham(_idGGClick);
         }
+
         private void Load_DGV_SanPham(string id)
         {
             dgv_SanPham.Rows.Clear();
@@ -133,9 +129,8 @@ namespace PRL.f_ChucNang
 
                 dgv_SanPham.Rows.Add(stt++, item.SanPham.IdsanPham, item.SanPham.TenSanPham, item.SanPham.Gia, item.SanPham.GiaSale, item.isCheck);
             }
-
-
         }
+
         private void dgv_SanPham_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = e.RowIndex;
@@ -148,6 +143,7 @@ namespace PRL.f_ChucNang
         {
             Load_DGV_SanPham("All");
         }
+
         private void dgv_SanPham_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == dgv_SanPham.Columns["chb_ApDungSP"].Index && e.RowIndex >= 0)
@@ -170,8 +166,6 @@ namespace PRL.f_ChucNang
                     cell.Value = false; // Chọn ô checkbox
                 }
             }
-
-
         }
     }
 }

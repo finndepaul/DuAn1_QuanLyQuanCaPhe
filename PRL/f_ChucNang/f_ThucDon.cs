@@ -1,16 +1,6 @@
 ﻿using BUS.Services;
 using DAL.Models;
 using DAL.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PRL.f_ChucNang
 {
@@ -196,7 +186,6 @@ namespace PRL.f_ChucNang
                 _imageWhenClick = result.SanPham.HinhAnh;
             }
             txt_IDNVinSP.Text = result.SanPham.IdnhanVien;
-
         }
         private void Clear_SP()
         {
@@ -492,6 +481,5 @@ namespace PRL.f_ChucNang
                 return;
             }
         }
-
     }
 }

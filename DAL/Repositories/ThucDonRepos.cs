@@ -1,23 +1,18 @@
 ﻿using DAL.IRepositories;
 using DAL.Models;
 using DAL.ViewModels;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
     public class ThucDonRepos : IThucDonRepos
     {
-        Da1CoffeeContext _db;
+        private Da1CoffeeContext _db;
+
         public ThucDonRepos()
         {
             _db = new();
         }
+
         public List<LoaiSanPham> GetLoaiSanPhams()
         {
             return _db.LoaiSanPhams.ToList();
@@ -48,7 +43,7 @@ namespace DAL.Repositories
                     TenLoaiSP = s.IdloaiSanPham == null ? "N/A" : _db.LoaiSanPhams.FirstOrDefault(lsp => lsp.IdloaiSanPham == s.IdloaiSanPham)!.TenLoaiSanPham,
                 }).ToList();
             }
-            else if (cbxTrangThai == 1 && string.Equals(cbxLoaiSP, "All")) // TH: cbx trạng thái là đang bán , cbx loại SP là All 
+            else if (cbxTrangThai == 1 && string.Equals(cbxLoaiSP, "All")) // TH: cbx trạng thái là đang bán , cbx loại SP là All
             {
                 return _db.SanPhams.Where(x => x.TrangThai == 1)
                     .Select(c => new SanPhamVM()
@@ -57,7 +52,7 @@ namespace DAL.Repositories
                         TenLoaiSP = c.IdloaiSanPham == null ? "N/A" : _db.LoaiSanPhams.FirstOrDefault(lsp => lsp.IdloaiSanPham == c.IdloaiSanPham)!.TenLoaiSanPham,
                     }).ToList();
             }
-            else if (cbxTrangThai == 2 && string.Equals(cbxLoaiSP, "All")) // TH: cbx trạng thái là ngừng bán, cbx loại SP là All 
+            else if (cbxTrangThai == 2 && string.Equals(cbxLoaiSP, "All")) // TH: cbx trạng thái là ngừng bán, cbx loại SP là All
             {
                 return _db.SanPhams
                     .Where(x => x.TrangThai == 0)
@@ -67,7 +62,6 @@ namespace DAL.Repositories
                         TenLoaiSP = c.IdloaiSanPham == null ? "N/A" : _db.LoaiSanPhams.FirstOrDefault(lsp => lsp.IdloaiSanPham == c.IdloaiSanPham)!.TenLoaiSanPham,
                     }).ToList();
             }
-
             else if (!string.IsNullOrEmpty(cbxLoaiSP) && cbxTrangThai == 1) // TH: cbx loại SP là Tên Loại Sản Phẩm, cbx trạng thái là đang bán
             {
                 return _db.SanPhams
@@ -121,7 +115,6 @@ namespace DAL.Repositories
             {
                 return false;
             }
-
         }
 
         public bool AddLoaiSP(LoaiSanPham loaiSanPham)
@@ -152,7 +145,6 @@ namespace DAL.Repositories
             {
                 return false;
             }
-
         }
 
         public bool UpdateLoaiSP(string id, LoaiSanPham loaiSanPham)
@@ -215,7 +207,6 @@ namespace DAL.Repositories
             {
                 return false;
             }
-
         }
 
         public bool UpdateSP(string id, SanPham sanPham)

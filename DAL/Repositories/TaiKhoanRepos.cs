@@ -1,20 +1,17 @@
 ﻿using DAL.IRepositories;
 using DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
     public class TaiKhoanRepos : ITaiKhoanRepos
     {
-        Da1CoffeeContext _db;
+        private Da1CoffeeContext _db;
+
         public TaiKhoanRepos()
         {
             _db = new Da1CoffeeContext();
         }
+
         public List<NhanVien> GetNhanViens(string id, string loc)
         {
             if (!string.IsNullOrEmpty(id) && !string.IsNullOrEmpty(loc))
@@ -47,6 +44,7 @@ namespace DAL.Repositories
             }
             return new List<NhanVien>();
         }
+
         public bool AddNhanVien(NhanVien nhanVien)
         {
             if (nhanVien != null)
@@ -60,7 +58,7 @@ namespace DAL.Repositories
                 return false;
             }
         }
-       
+
         public bool UpdateNhanVien(string? id, NhanVien nhanVien)
         {
             var result = _db.NhanViens.FirstOrDefault(x => x.IdnhanVien == id);

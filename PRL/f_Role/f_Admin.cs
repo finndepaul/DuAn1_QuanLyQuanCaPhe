@@ -1,21 +1,13 @@
 ﻿using BUS.Services;
 using PRL.f_ChucNang;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace PRL
 {
     public partial class f_Admin : Form
     {
-        ThucDonService _ser = new ThucDonService();
+        private ThucDonService _ser = new ThucDonService();
         private Button lastClickedButton;
+
         public f_Admin()
         {
             InitializeComponent();
@@ -29,14 +21,10 @@ namespace PRL
             objForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             objForm.Dock = DockStyle.Fill;
             objForm.Show();
-
-
-
         }
 
         private void btn_Logout_Click(object sender, EventArgs e) // Đăng Xuất
         {
-
             var mess = MessageBox.Show("Bạn xác nhận đăng xuất?", "Xác nhận", MessageBoxButtons.OKCancel);
 
             if (mess == DialogResult.OK)
@@ -56,21 +44,16 @@ namespace PRL
                 // Do nothing or handle as needed
                 return;
             }
-
-
         }
 
         private void btn_TrangChu_Click(object sender, EventArgs e) // form Trang Chủ
         {
-
-
             f_TrangChu objForm = new f_TrangChu();
             objForm.TopLevel = false;
             pn_Admin.Controls.Add(objForm);
             objForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             objForm.Dock = DockStyle.Fill;
             objForm.Show();
-
 
             Button clickedButton = (Button)sender;
             // Thiết lập màu nền cho nút được nhấp
@@ -95,7 +78,6 @@ namespace PRL
             f_ThucDon.Dock = DockStyle.Fill;
             f_ThucDon.Show();
 
-
             Button clickedButton = (Button)sender;
             // Thiết lập màu nền cho nút được nhấp
             clickedButton.BackColor = Color.Linen;
@@ -109,6 +91,7 @@ namespace PRL
             // Lưu trữ nút được nhấp cuối cùng
             lastClickedButton = clickedButton;
         }
+
         private void btn_Voucher_Click(object sender, EventArgs e) // form Voucher
         {
             f_Voucher objForm = new f_Voucher();
@@ -117,7 +100,6 @@ namespace PRL
             objForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             objForm.Dock = DockStyle.Fill;
             objForm.Show();
-
 
             Button clickedButton = (Button)sender;
             // Thiết lập màu nền cho nút được nhấp
@@ -247,7 +229,5 @@ namespace PRL
             // Lưu trữ nút được nhấp cuối cùng
             lastClickedButton = clickedButton;
         }
-
-
     }
 }
