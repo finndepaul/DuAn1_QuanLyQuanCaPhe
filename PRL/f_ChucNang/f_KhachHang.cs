@@ -1,5 +1,6 @@
 ﻿using BUS.Services;
 using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,13 +17,27 @@ namespace PRL.f_ChucNang
     public partial class f_KhachHang : Form
     {
         KhachHangService _ser = new KhachHangService();
+        TaiKhoanService _serTK = new TaiKhoanService();
         string? _sdtWhenClick;
         string? _idRankClick;
+        string _idNhanVienDangNhap;
 
         public f_KhachHang(string idNhanVien)
         {
             InitializeComponent();
             txt_IDNhanVien.Text = idNhanVien;
+            _idNhanVienDangNhap = idNhanVien;
+            var result = _serTK.GetNhanViens(null, null).Where(x => x.IdnhanVien == _idNhanVienDangNhap).Select(x => x.Role).FirstOrDefault();
+            if (result == false)
+            {
+                btn_ThemMemberShip.Visible = false;
+                btn_UpdateMemberShip.Visible = false;
+            }
+            else
+            {
+                btn_ThemMemberShip.Visible = true;
+                btn_UpdateMemberShip.Visible = true;
+            }
             LoadDataKhachHang(null);
             LoadDataMemberShip(null, null);
             LoadNameRank();
@@ -30,13 +45,10 @@ namespace PRL.f_ChucNang
 
         private void LoadNameRank()
         {
-            cbx_TimKiemTheoRank.Items.Clear();
-            cbx_TimKiemTheoRank.Items.Add("All");
-            cbx_TimKiemTheoRank.Items.Add("Chưa sếp hạng rank");
-            cbx_TimKiemTheoRank.Items.Add("Rank đồng");
-            cbx_TimKiemTheoRank.Items.Add("Rank bạc");
-            cbx_TimKiemTheoRank.Items.Add("Ranks vàng");
-            cbx_TimKiemTheoRank.Items.Add("Ranks kim cương");
+            var columnData = _ser.GetMemberShipRanks(null, null).Select(e => e.RankName).ToList();
+            columnData.Insert(0, "All");
+            cbx_TimKiemTheoRank.DataSource = columnData;
+            cbx_TimKiemTheoRank.SelectedIndex = 0;
         }
 
         private void LoadDataMemberShip(string idRank, string nameRank)
@@ -65,19 +77,21 @@ namespace PRL.f_ChucNang
             dgv_KhachHang.Columns[3].Name = "Email";
             dgv_KhachHang.Columns[4].Name = "Địa chỉ";
             dgv_KhachHang.Columns[5].Name = "Point";
-            dgv_KhachHang.Columns[6].Name = "IDRank";
+            dgv_KhachHang.Columns[6].Name = "Tên rank";
             dgv_KhachHang.Columns[7].Name = "ID Nhân viên";
+
             foreach (var item in _ser.GetKhachHangs(sdt))
             {
                 int stt = _ser.GetKhachHangs(sdt).IndexOf(item) + 1;
-                dgv_KhachHang.Rows.Add(stt++, item.Sdt, item.Name, item.Email, item.DiaChi, item.Point, item.Idrank, item.IdnhanVien);
+                var rankName = _ser.GetMemberShipRanks(null, null)
+                           .FirstOrDefault(rank => rank.Idrank == item.Idrank)?.RankName;
+                dgv_KhachHang.Rows.Add(stt++, item.Sdt, item.Name, item.Email, item.DiaChi, item.Point, rankName, item.IdnhanVien);
             }
         }
 
         private void btn_Them_Click(object sender, EventArgs e)
         {
             KhachHang khachHang = new KhachHang();
-            MemberShipRank memberShipRank = new MemberShipRank();
             //Thêm thông tin cho khách hàng
             if (string.IsNullOrWhiteSpace(txt_TenKhachHang.Text))
             {
@@ -120,19 +134,7 @@ namespace PRL.f_ChucNang
             khachHang.Email = txt_Email.Text;
             khachHang.DiaChi = txt_DiaChi.Text;
             //Thêm id cho membership
-            if (_ser.GetMemberShipRanks(null, null).Count != 0)
-            {
-                var maxid = _ser.GetMemberShipRanks(null, null).Max(x => x.Idrank);
-                int index = Convert.ToInt32(maxid.Substring(2)) + 1;
-                memberShipRank.Idrank = "KH" + index.ToString("D3");
-            }
-            else
-            {
-                memberShipRank.Idrank = "KH001";
-            }
-            _ser.AddMemberShipRank(txt_SoDienThoai.Text, memberShipRank);
-            khachHang.Idrank = _ser.GetMemberShipRanks(null, null).Max(x => x.Idrank);
-            khachHang.IdnhanVien = txt_IDNhanVien.Text;
+            khachHang.IdnhanVien = _idNhanVienDangNhap;
             _ser.AddKhachHang(khachHang);
             MessageBox.Show("Lưu thành công (-_-)");
             LoadDataKhachHang(null);
@@ -151,8 +153,14 @@ namespace PRL.f_ChucNang
             txt_TenKhachHang.Text = "";
             txt_TimKiemIdKhachHang.Text = "";
             txt_TimKiemRank.Text = "";
+            txt_RankName.Text = "";
+            txt_PointsNeed.Text = "";
+            txt_Discount.Text = "";
             cbx_TimKiemTheoRank.SelectedIndex = 0;
+
         }
+
+
 
         private void dgv_KhachHang_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -162,8 +170,16 @@ namespace PRL.f_ChucNang
                 return;
             }
             _sdtWhenClick = dgv_KhachHang.Rows[index].Cells[1].Value.ToString();
-            _idRankClick = dgv_KhachHang.Rows[index].Cells[6].Value.ToString();
             var result = _ser.GetKhachHangs(null).FirstOrDefault(x => x.Sdt == _sdtWhenClick);
+            if (result.Point >= 500000)
+            {
+
+                _idRankClick = dgv_KhachHang.Rows[index].Cells[6].Value.ToString();
+            }
+            else
+            {
+                _idRankClick = null;
+            }
             txt_TenKhachHang.Text = result.Name;
             txt_SoDienThoai.Text = result.Sdt;
             txt_Email.Text = result.Email;
@@ -181,20 +197,15 @@ namespace PRL.f_ChucNang
                 return;
             }
             _idRankClick = dgv_Membership.Rows[index].Cells[1].Value.ToString();
-            var result = _ser.GetKhachHangs(null).FirstOrDefault(x => x.Idrank == _idRankClick);
-            txt_TenKhachHang.Text = result.Name;
-            txt_SoDienThoai.Text = result.Sdt;
-            txt_Email.Text = result.Email;
-            txt_DiaChi.Text = result.DiaChi;
-            txt_Point.Text = result.Point.ToString();
-            txt_IDRank.Text = result.Idrank;
-            txt_IDNhanVien.Text = result.IdnhanVien;
+            var result = _ser.GetMemberShipRanks(null, null).FirstOrDefault(x => x.Idrank == _idRankClick);
+            txt_RankName.Text = result.RankName;
+            txt_Discount.Text = result.Discount.ToString();
+            txt_PointsNeed.Text = result.PointsNeed.ToString();
         }
 
         private void btn_Sua_Click(object sender, EventArgs e)
         {
             KhachHang khachHang = new KhachHang();
-            MemberShipRank memberShipRank = new MemberShipRank();
             if (txt_TenKhachHang.Text == null)
             {
                 MessageBox.Show("Tên khách hàng không được để chống");
@@ -236,10 +247,11 @@ namespace PRL.f_ChucNang
                 khachHang.Email = txt_Email.Text;
                 khachHang.DiaChi = txt_DiaChi.Text;
                 khachHang.IdnhanVien = txt_IDNhanVien.Text;
-                if (_ser.UpdateKhachHang(_sdtWhenClick, khachHang) && _ser.UpdateMemberShip(_idRankClick, _sdtWhenClick))
+                khachHang.Idrank = txt_IDRank.Text;
+                if (_ser.UpdateKhachHang(_sdtWhenClick, khachHang))
                 {
-                    MessageBox.Show("Sửa thành công");
-                    _idRankClick = null;
+
+                    MessageBox.Show("Đã update thành công");
                     _sdtWhenClick = null;
                     LoadDataKhachHang(null);
                     LoadDataMemberShip(null, null);
@@ -247,7 +259,9 @@ namespace PRL.f_ChucNang
                 }
                 else
                 {
-                    MessageBox.Show("Sửa thất bại");
+                    MessageBox.Show("Khách hàng chưa được update");
+                    LoadDataKhachHang(null);
+                    LoadDataMemberShip(null, null);
                     Clear();
                 }
             }
@@ -287,29 +301,200 @@ namespace PRL.f_ChucNang
             {
                 if (cbx_TimKiemTheoRank.SelectedIndex == 1)
                 {
-                    LoadDataMemberShip(null, "Chưa sếp hạng rank");
+                    LoadDataMemberShip(null, cbx_TimKiemTheoRank.SelectedItem.ToString());
                 }
                 else if (cbx_TimKiemTheoRank.SelectedIndex == 2)
                 {
-                    LoadDataMemberShip(null, "Rank đồng");
+                    LoadDataMemberShip(null, cbx_TimKiemTheoRank.SelectedItem.ToString());
                 }
                 else if (cbx_TimKiemTheoRank.SelectedIndex == 3)
                 {
-                    LoadDataMemberShip(null, "Rank bạc");
-                }
-                else if (cbx_TimKiemTheoRank.SelectedIndex == 4)
-                {
-                    LoadDataMemberShip(null, "Ranks vàng");
+                    LoadDataMemberShip(null, cbx_TimKiemTheoRank.SelectedItem.ToString());
                 }
                 else
                 {
-                    LoadDataMemberShip(null, "Ranks kim cương");
+                    LoadDataMemberShip(null, cbx_TimKiemTheoRank.SelectedItem.ToString());
                 }
             }
             if (cbx_TimKiemTheoRank.SelectedIndex == 0)
             {
                 LoadDataMemberShip(null, null);
             }
+        }
+
+        private void btn_ThemMemberShip_Click(object sender, EventArgs e)
+        {
+            MemberShipRank member = new MemberShipRank();
+            if (string.IsNullOrEmpty(txt_RankName.Text))
+            {
+                MessageBox.Show("Tên rank không đc để chống");
+                return;
+            }
+            else if (!Regex.IsMatch(txt_RankName.Text.ToString(), @"^([\p{L}]+\s?)+$"))
+            {
+                MessageBox.Show("Tên rank không hợp lệ");
+                return;
+            }
+            else if (_ser.GetMemberShipRanks(null, null).Any(x => x.RankName == txt_RankName.Text))
+            {
+                MessageBox.Show("Tên đã tồn tại");
+                return;
+            }
+            else if (txt_RankName.Text != null && Regex.IsMatch(txt_RankName.Text.ToString(), @"^([\p{L}]+\s?)+$"))
+            {
+                member.RankName = txt_RankName.Text;
+            }
+
+            if (string.IsNullOrEmpty(txt_PointsNeed.Text))
+            {
+                MessageBox.Show("PointsNeed không được để chống");
+                return;
+            }
+            else if (Convert.ToInt32(txt_PointsNeed.Text) < 0 || !Regex.IsMatch(txt_PointsNeed.Text, @"^[0-9]+$"))
+            {
+                MessageBox.Show("PointsNeed không hợp lệ");
+                return;
+            }
+            else if (_ser.GetMemberShipRanks(null, null).Any(x => x.PointsNeed == Convert.ToInt32(txt_PointsNeed.Text)))
+            {
+                MessageBox.Show("PointsNeed đã tồn tại");
+                return;
+            }
+
+            else if (txt_PointsNeed.Text != null && Regex.IsMatch(txt_PointsNeed.Text, @"^[0-9]+$"))
+            {
+                member.PointsNeed = Convert.ToInt32(txt_PointsNeed.Text);
+            }
+
+            if (string.IsNullOrEmpty(txt_Discount.Text))
+            {
+                MessageBox.Show("Discount không được để chống");
+                return;
+            }
+            else if (!Regex.IsMatch(txt_Discount.Text, @"^\d*\.\d+$"))
+            {
+                MessageBox.Show("Discount không hợp lệ");
+                return;
+            }
+            else if (_ser.GetMemberShipRanks(null, null).Any(x => x.Discount == Convert.ToDouble(txt_Discount.Text)))
+            {
+                MessageBox.Show("Discount đã tồn tại");
+                return;
+            }
+            else if (txt_Discount.Text != null && Regex.IsMatch(txt_Discount.Text, @"^\d*\.\d+$"))
+            {
+                member.Discount = Convert.ToDouble(txt_Discount.Text);
+            }
+
+
+            if (_ser.AddMemberShipRank(member))
+            {
+                MessageBox.Show("Lưu thành công");
+                LoadDataKhachHang(null);
+                LoadDataMemberShip(null, null);
+                LoadNameRank();
+                Clear();
+            }
+
+        }
+
+        private void btn_UpdateMemberShip_Click(object sender, EventArgs e)
+        {
+            MemberShipRank member = new MemberShipRank();
+            var thongBao = MessageBox.Show("Bạn có muốn thay đổi dữ liệu không", "Xác nhận", MessageBoxButtons.OKCancel);
+            if (thongBao == DialogResult.OK)
+            {
+                var result = _ser.GetMemberShipRanks(null, null).FirstOrDefault(x => x.Idrank == _idRankClick);
+                //Rank name
+                if (string.IsNullOrEmpty(txt_RankName.Text))
+                {
+                    MessageBox.Show("Tên rank không đc để chống");
+                    return;
+                }
+                else if (!Regex.IsMatch(txt_RankName.Text.ToString(), @"^([\p{L}]+\s?)+$"))
+                {
+                    MessageBox.Show("Tên rank không hợp lệ");
+                    return;
+                }
+                else if (_ser.GetMemberShipRanks(null, null).Any(x => x.RankName != result.RankName && x.RankName == txt_RankName.Text))
+                {
+                    MessageBox.Show("Tên đã tồn tại");
+                    return;
+                }
+                else if (txt_RankName.Text != null && _ser.GetMemberShipRanks(null, null).Any(x => x.RankName == result.RankName || x.RankName != txt_RankName.Text))
+                {
+                    member.RankName = txt_RankName.Text;
+                }
+                // PointsNeed
+                if (string.IsNullOrEmpty(txt_PointsNeed.Text))
+                {
+                    MessageBox.Show("PointsNeed không được để chống");
+                    return;
+                }
+                else if (int.Parse(txt_PointsNeed.Text) < 0 || !Regex.IsMatch(txt_PointsNeed.Text, @"^[0-9]+$"))
+                {
+                    MessageBox.Show("PointsNeed không hợp lệ");
+                    return;
+                }
+                else if (_ser.GetMemberShipRanks(null, null).Any(x => x.PointsNeed != result.PointsNeed && x.PointsNeed == int.Parse(txt_PointsNeed.Text)))
+                {
+                    MessageBox.Show("PointsNeed đã tồn tại");
+                    return;
+                }
+                else if (!string.IsNullOrEmpty(txt_PointsNeed.Text) && _ser.GetMemberShipRanks(null, null).Any(x => x.PointsNeed == result.PointsNeed || x.PointsNeed != int.Parse(txt_PointsNeed.Text)))
+                {
+                    member.PointsNeed = Convert.ToInt32(txt_PointsNeed.Text);
+                }
+                //Discount
+                if (!Regex.IsMatch(txt_Discount.Text, @"^\d*\.\d+$"))
+                {
+                    MessageBox.Show("Discount không hợp lệ");
+                    return;
+                }
+                else if (string.IsNullOrEmpty(txt_Discount.Text))
+                {
+                    MessageBox.Show("Discount không được để chống");
+                    return;
+                }
+                else if (_ser.GetMemberShipRanks(null, null).Any(x => x.Discount != result.Discount && x.Discount == Convert.ToDouble(txt_Discount.Text)))
+                {
+                    MessageBox.Show("Discount đã tồn tại");
+                    return;
+                }
+                else if (txt_Discount.Text != null && _ser.GetMemberShipRanks(null, null).Any(x => x.Discount == result.Discount || x.Discount != Convert.ToDouble(txt_Discount.Text)) && Regex.IsMatch(txt_Discount.Text, @"^\d*\.\d+$"))
+                {
+                    member.Discount = Convert.ToDouble(txt_Discount.Text);
+                }
+
+
+
+
+                if (_ser.UpdateMemberShip(_idRankClick, member))
+                {
+                    MessageBox.Show("Update thành công");
+                    _idRankClick = null;
+                    LoadDataKhachHang(null);
+                    LoadDataMemberShip(null, null);
+                    LoadNameRank();
+                    Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Update thất bại");
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Chưa update dữ liệu");
+                Clear();
+                return;
+            }
+        }
+
+        private void f_KhachHang_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }

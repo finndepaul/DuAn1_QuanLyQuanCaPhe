@@ -10,21 +10,21 @@ namespace BUS.IServices
 {
     public interface IGiamGIaService
     {
-        public List<GiamGia> GetGiamGias();
+        //public List<GiamGia> GetGiamGias();
 
-        public List<SanPhamVM> GetSanPham(string idGiamGia);
-        public bool AddGGCT(string idGiamGia, string idSanPham);
-        public bool DeleteGGCT(string idGiamGia, string idSanPham);
-        public GiamGia GetGiamGia(string id);
+        //public List<SanPhamVM> GetSanPham(string idGiamGia);
+        //public bool AddGGCT(string idGiamGia, string idSanPham);
+        //public bool DeleteGGCT(string idGiamGia, string idSanPham);
+        //public GiamGia GetGiamGia(string id);
 
-        // giảm giá
-        public bool AddGiamGia(GiamGia giamGia);
-        public bool UpdateGiamGia(string id, GiamGia giamGia);
+        //// giảm giá
+        //public bool AddGiamGia(GiamGia giamGia);
+        //public bool UpdateGiamGia(string id, GiamGia giamGia);
 
-        // Regex:
-        public bool CheckIdGiamGiaChiTiet(string idSanPham, string idGiamGia);
-        public bool CheckSanPham(string idSanPham);
-        public void CheckTrangThai(string idGiamGia);
+        //// Regex:
+        //public bool CheckIdGiamGiaChiTiet(string idSanPham, string idGiamGia);
+        //public bool CheckSanPham(string idSanPham);
+        //public void CheckTrangThai(string idGiamGia);
 
     }
 }

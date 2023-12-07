@@ -198,7 +198,7 @@
             btn_ShowAll.TabIndex = 6;
             btn_ShowAll.Text = "Show All";
             btn_ShowAll.UseVisualStyleBackColor = true;
-            btn_ShowAll.Click += btn_ShowAll_Click;
+            //btn_ShowAll.Click += btn_ShowAll_Click;
             // 
             // chb_All
             // 
@@ -277,7 +277,7 @@
             dgv_GiamGia.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_GiamGia.Size = new Size(857, 322);
             dgv_GiamGia.TabIndex = 0;
-            dgv_GiamGia.CellClick += dgv_GiamGia_CellClick;
+            //dgv_GiamGia.CellClick += dgv_GiamGia_CellClick;
             // 
             // dgv_SanPham
             // 
@@ -290,8 +290,8 @@
             dgv_SanPham.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_SanPham.Size = new Size(857, 379);
             dgv_SanPham.TabIndex = 0;
-            dgv_SanPham.CellClick += dgv_SanPham_CellClick;
-            dgv_SanPham.CellContentClick += dgv_SanPham_CellContentClick;
+            //dgv_SanPham.CellClick += dgv_SanPham_CellClick;
+            //dgv_SanPham.CellContentClick += dgv_SanPham_CellContentClick;
             // 
             // groupBox3
             // 
@@ -325,7 +325,7 @@
             btn_Sua.TabIndex = 17;
             btn_Sua.Text = "Sửa";
             btn_Sua.UseVisualStyleBackColor = true;
-            btn_Sua.Click += btn_Sua_Click;
+            //btn_Sua.Click += btn_Sua_Click;
             // 
             // btn_Them
             // 
@@ -335,7 +335,7 @@
             btn_Them.TabIndex = 16;
             btn_Them.Text = "Thêm";
             btn_Them.UseVisualStyleBackColor = true;
-            btn_Them.Click += btn_Them_Click;
+            //btn_Them.Click += btn_Them_Click;
             // 
             // cbx_TrangThai
             // 
@@ -458,7 +458,7 @@
             Name = "f_Sale";
             Text = "Giảm Giá";
             WindowState = FormWindowState.Maximized;
-            Load += f_Sale_Load;
+            //Load += f_Sale_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);

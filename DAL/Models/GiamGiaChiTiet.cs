@@ -11,7 +11,7 @@ public partial class GiamGiaChiTiet
 
     public string IdgiamGia { get; set; } = null!;
 
-    public virtual GiamGia IdgiamGiaNavigation { get; set; } = null!;
+    public virtual GiamGium IdgiamGiaNavigation { get; set; } = null!;
 
     public virtual SanPham IdsanPhamNavigation { get; set; } = null!;
 }
