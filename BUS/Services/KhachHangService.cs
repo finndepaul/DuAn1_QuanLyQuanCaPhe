@@ -23,9 +23,9 @@ namespace BUS.Services
             return _res.AddKhachHang(khachHang);
         }
 
-        public bool AddMemberShipRank(string SDT, MemberShipRank memberShip)
+        public bool AddMemberShipRank(MemberShipRank memberShip)
         {
-            return _res.AddMenberShipRank(SDT, memberShip);
+            return _res.AddMenberShipRank(memberShip);
         }
 
         public List<KhachHang> GetKhachHangs(string Sdt)
@@ -43,9 +43,9 @@ namespace BUS.Services
             return _res.UpdateKhachHang(Sdt, khachHang);
         }
 
-        public bool UpdateMemberShip(string idRank, string SDT)
+        public bool UpdateMemberShip(string idRank, MemberShipRank memberShip)
         {
-            return _res.UpdateMembership(idRank, SDT);
+            return _res.UpdateMembership(idRank, memberShip);
         }
     }
 }   

@@ -18,13 +18,47 @@ namespace DAL.Repositories
             _db = new Da1CoffeeContext();
         }
 
-        public List<GiamGia> GetGiamGias()
+        public List<GiamGia> GetGiamGias(string searchText, int cbxTrangThai)
         {
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                return _db.GiamGia.Where(x => x.TenChuongTrinh.Contains(searchText)).ToList();
+            }
+            if (cbxTrangThai == 0)
+            {
+                return _db.GiamGia.ToList();
+            }
+            else if (cbxTrangThai == 1)
+            {
+                return _db.GiamGia.Where(x => x.TrangThai == 0).ToList();
+            }
+            else if (cbxTrangThai == 2)
+            {
+                return _db.GiamGia.Where(x => x.TrangThai == 1).ToList();
+            }
+            else if (cbxTrangThai == 3)
+            {
+                return _db.GiamGia.Where(x => x.TrangThai == 2).ToList();
+            }
             return _db.GiamGia.ToList();
         }
 
-        public List<SanPhamVM> GetSanPham(string idGiamGia)
+        public List<SanPhamVM> GetSanPham(string idGiamGia, string searchText)
         {
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                var query = from sp in _db.SanPhams
+                            join gct in _db.GiamGiaChiTiets on sp.IdsanPham equals gct.IdsanPham into gj
+                            from subGct in gj.DefaultIfEmpty()
+                            select new SanPhamVM
+                            {
+                                SanPham = sp,
+                                isCheck = subGct != null,
+                                TenLoaiSP = null,
+                            };
+
+                return query.Where(x => x.SanPham.TenSanPham.Contains(searchText)).ToList();
+            }
             if (string.Equals(idGiamGia, "all", StringComparison.OrdinalIgnoreCase))
             {
                 var query = from sp in _db.SanPhams
@@ -60,7 +94,7 @@ namespace DAL.Repositories
             // Thực hiện truy vấn để kiểm tra xem idSanPham đã tồn tại trong bảng GiamGiaChiTiets hay không
             // Trả về true nếu tồn tại, ngược lại trả về false
             return _db.GiamGiaChiTiets.Any(gct => gct.IdsanPham == idSanPham && gct.IdgiamGia == idGiamGia);
-        }       
+        }
 
         public bool AddGGCT(string idGiamGia, string idSanPham)
         {
@@ -107,7 +141,7 @@ namespace DAL.Repositories
                 };
                 _db.GiamGiaChiTiets.Add(giamGiaChiTiet);
                 _db.SaveChanges();
-                _db.SanPhams.Update(sanPham);              
+                _db.SanPhams.Update(sanPham);
                 _db.SaveChanges();
                 return true;
             }
@@ -136,7 +170,7 @@ namespace DAL.Repositories
                 sanPham.GiaSale = 0;
                 _db.SanPhams.Update(sanPham);
                 _db.SaveChanges();
-                _db.GiamGiaChiTiets.Remove(ggct);               
+                _db.GiamGiaChiTiets.Remove(ggct);
                 _db.SaveChanges();
                 return true;
             }
@@ -223,21 +257,37 @@ namespace DAL.Repositories
         public void CheckTrangThai(string idGiamGia)
         {
             var result = _db.GiamGiaChiTiets.FirstOrDefault(x => x.IdgiamGia == idGiamGia);
-            if (result == null) return;
-            foreach (var item in _db.GiamGia.ToList())
+            if (result == null)
             {
-                if (item.IdgiamGia == idGiamGia)
-                {
-                    item.TrangThai = 0;                    
-                }
-                else if (item.IdgiamGia!= idGiamGia && item.TrangThai == 0)
-                {
-                    item.TrangThai = 2;                    
-                }
-                _db.Update(item);
+                var gg = _db.GiamGia.FirstOrDefault(x => x.IdgiamGia == idGiamGia);
+                gg.TrangThai = 2;
+                _db.Update(gg);
                 _db.SaveChanges();
             }
-                       
+            else
+            {
+                var gg = _db.GiamGia.FirstOrDefault(x => x.IdgiamGia == idGiamGia);
+                gg.TrangThai = 0;
+                _db.Update(gg);
+                _db.SaveChanges();
+            }
+        }
+
+        public void CheckDate()
+        {
+            foreach (var item in _db.GiamGia.ToList())
+            {
+                if (item.TrangThai == 0 && item.NgayKetThuc.Value.Date < DateTime.Now.Date)
+                {
+
+                    item.TrangThai = 2;
+                    _db.Update(item);
+                    _db.SaveChanges();
+                    var result = _db.GiamGiaChiTiets.FirstOrDefault(x => x.IdgiamGia == item.IdgiamGia);
+                    _db.Remove(result);
+                    _db.SaveChanges();
+                }
+            }
         }
     }
 }

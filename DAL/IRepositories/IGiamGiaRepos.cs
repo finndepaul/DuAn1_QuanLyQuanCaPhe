@@ -10,14 +10,13 @@ namespace DAL.IRepositories
 {
     public interface IGiamGiaRepos
     {
-        public List<GiamGia> GetGiamGias();
-
-        public List<SanPhamVM> GetSanPham(string idGiamGia);
+        public List<SanPhamVM> GetSanPham(string idGiamGia, string searchText);
         public bool AddGGCT( string idGiamGia, string idSanPham);
         public bool DeleteGGCT(string idGiamGia, string idSanPham);
         public GiamGia GetGiamGia(string id);
 
         // giảm giá
+        public List<GiamGia> GetGiamGias(string searchText, int cbxTrangThai);
         public bool AddGiamGia(GiamGia giamGia);
         public bool UpdateGiamGia(string id, GiamGia giamGia);
 
@@ -25,6 +24,7 @@ namespace DAL.IRepositories
         public bool CheckIdGiamGiaChiTiet(string idSanPham, string idGiamGia);
         public bool CheckSanPham(string idSanPham);
         public void CheckTrangThai(string idGiamGia);
+        public void CheckDate();
 
     }
 }

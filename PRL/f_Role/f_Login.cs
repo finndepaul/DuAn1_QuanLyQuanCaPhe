@@ -37,6 +37,16 @@ namespace PRL
                 return;
             }
             var user = _ser.GetNhanViens().FirstOrDefault(x => x.LoginName == loginName && x.Password == pass);
+            if (user == null)
+            {
+                MessageBox.Show("Thông tin đăng nhập của b chưa chính xác. Vui lòng nhập lại!");
+                return;
+            }
+            if (user.Active == false)
+            {
+                MessageBox.Show("Tài khoản chưa kích hoạt");
+                return;
+            }         
             if (user != null)
             {
                 if (user.Role)

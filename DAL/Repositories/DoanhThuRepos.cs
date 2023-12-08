@@ -25,6 +25,7 @@ namespace DAL.Repositories
         {
             var query = from hd in _db.HoaDons
                         join hct in _db.HoaDonChiTiets on hd.IdhoaDon equals hct.IdhoaDon
+                        where hd.TrangThai == 1
                         group hd by new { hd.IdhoaDon, hd.TongTien, hd.NgayXuatDon, hd.IdnhanVien, hd.Sdt } into g
                         select new DoanhThuVM()
                         {

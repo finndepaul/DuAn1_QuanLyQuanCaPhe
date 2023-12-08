@@ -245,7 +245,7 @@ namespace DAL.Repositories
                 result.Thue = sanPham.Thue;
                 result.IdloaiSanPham = sanPham.IdloaiSanPham;
                 result.HinhAnh = sanPham.HinhAnh;
-
+                result.IdnhanVien = sanPham.IdnhanVien;
                 _db.Update(result);
                 _db.SaveChanges();
                 return true;

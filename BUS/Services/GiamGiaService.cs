@@ -17,14 +17,14 @@ namespace BUS.Services
         {
             _res = new GiamGiaRepos();
         }
-        public List<GiamGia> GetGiamGias()
+        public List<GiamGia> GetGiamGias(string searchText, int cbxTrangThai)
         {
-            return _res.GetGiamGias();
+            return _res.GetGiamGias(searchText,cbxTrangThai);
         }
 
-        public List<SanPhamVM> GetSanPham(string idGiamGia)
+        public List<SanPhamVM> GetSanPham(string idGiamGia, string searchText)
         {
-            return _res.GetSanPham(idGiamGia);
+            return _res.GetSanPham(idGiamGia,searchText);
         }
         public bool CheckIdGiamGiaChiTiet(string idSanPham, string idGiamGia)
         {
@@ -66,6 +66,11 @@ namespace BUS.Services
         public void CheckTrangThai(string idGiamGia)
         {
             _res.CheckTrangThai(idGiamGia);
+        }
+
+        public void CheckDate()
+        {
+            _res.CheckDate();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace BUS.IServices
         public bool UpdateKhachHang(string? Sdt, KhachHang khachHang);
 
         public List<MemberShipRank> GetMemberShipRanks(string idRank, string nameRank);
-        public bool AddMemberShipRank(string SDT, MemberShipRank memberShip);
-        public bool UpdateMemberShip(string idRank, string SDT);
+        public bool AddMemberShipRank(MemberShipRank memberShip);
+        public bool UpdateMemberShip(string idRank, MemberShipRank memberShip);
     }
 }
