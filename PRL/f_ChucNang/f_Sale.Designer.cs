@@ -40,7 +40,6 @@
             label1 = new Label();
             groupBox2 = new GroupBox();
             btn_ShowAll = new Button();
-            chb_All = new CheckBox();
             cbx_LocTrangThai = new ComboBox();
             label16 = new Label();
             label15 = new Label();
@@ -173,7 +172,6 @@
             // groupBox2
             // 
             groupBox2.Controls.Add(btn_ShowAll);
-            groupBox2.Controls.Add(chb_All);
             groupBox2.Controls.Add(cbx_LocTrangThai);
             groupBox2.Controls.Add(label16);
             groupBox2.Controls.Add(label15);
@@ -192,23 +190,14 @@
             // 
             // btn_ShowAll
             // 
-            btn_ShowAll.Location = new Point(364, 510);
+            btn_ShowAll.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_ShowAll.Location = new Point(754, 510);
             btn_ShowAll.Name = "btn_ShowAll";
-            btn_ShowAll.Size = new Size(94, 26);
+            btn_ShowAll.Size = new Size(101, 26);
             btn_ShowAll.TabIndex = 6;
             btn_ShowAll.Text = "Show All";
             btn_ShowAll.UseVisualStyleBackColor = true;
             btn_ShowAll.Click += btn_ShowAll_Click;
-            // 
-            // chb_All
-            // 
-            chb_All.AutoSize = true;
-            chb_All.Location = new Point(790, 514);
-            chb_All.Name = "chb_All";
-            chb_All.Size = new Size(75, 22);
-            chb_All.TabIndex = 5;
-            chb_All.Text = "Tất Cả";
-            chb_All.UseVisualStyleBackColor = true;
             // 
             // cbx_LocTrangThai
             // 
@@ -218,6 +207,7 @@
             cbx_LocTrangThai.Name = "cbx_LocTrangThai";
             cbx_LocTrangThai.Size = new Size(151, 26);
             cbx_LocTrangThai.TabIndex = 3;
+            cbx_LocTrangThai.SelectedIndexChanged += cbx_LocTrangThai_SelectedIndexChanged;
             // 
             // label16
             // 
@@ -247,6 +237,7 @@
             txt_TimKhuyenMai.PlaceholderText = "Nhập để tìm kiếm tên chương trình";
             txt_TimKhuyenMai.Size = new Size(272, 26);
             txt_TimKhuyenMai.TabIndex = 2;
+            txt_TimKhuyenMai.TextChanged += txt_TimKhuyenMai_TextChanged;
             // 
             // label2
             // 
@@ -264,8 +255,9 @@
             txt_TimSanPham.Location = new Point(158, 510);
             txt_TimSanPham.Name = "txt_TimSanPham";
             txt_TimSanPham.PlaceholderText = "Nhập để tìm kiếm sản phẩm";
-            txt_TimSanPham.Size = new Size(200, 26);
+            txt_TimSanPham.Size = new Size(282, 26);
             txt_TimSanPham.TabIndex = 2;
+            txt_TimSanPham.TextChanged += txt_TimSanPham_TextChanged;
             // 
             // dgv_GiamGia
             // 
@@ -496,7 +488,6 @@
         private Label label11;
         private Label label12;
         private Label label13;
-        private CheckBox chb_All;
         private Label label2;
         private TextBox txt_TimSanPham;
         private DataGridView dgv_GiamGia;

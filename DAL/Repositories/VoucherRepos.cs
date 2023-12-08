@@ -12,7 +12,7 @@ namespace DAL.Repositories
     public class VoucherRepos : IVoucherRepos
     {
         Da1CoffeeContext _db;
-
+        DateTime? _datenow = DateTime.Now.Date;
         public VoucherRepos()
         {
             _db = new();
@@ -28,7 +28,7 @@ namespace DAL.Repositories
             {
                 if (trangThai == 1) //het han
                 {
-                    return get.Where(c => c.DateEnd < DateTime.Now).ToList();
+                    return get.Where(c => c.DateEnd.Value.Date < DateTime.Now.Date).ToList();
                 }
                 if (trangThai == 0) //all
                 {
@@ -44,6 +44,16 @@ namespace DAL.Repositories
                 }
 
 
+            }
+            var changeTrangThai = (get.Where(x => x.DateEnd.Value.Date <= _datenow).ToList());
+            if (changeTrangThai.Count > 0)
+            {
+                foreach (var item in changeTrangThai)
+                {
+                    item.TrangThai = 0;
+                    UpdateVocuher(item);
+
+                }
             }
             return get.ToList();
         }
@@ -70,6 +80,7 @@ namespace DAL.Repositories
                     voucher.Idvoucher = "VC001";
 
                 }
+                CheckTrangThai(voucher.Idvoucher);
                 // Thêm sản phẩm và lưu thay đổi
                 _db.Add(voucher);
                 _db.SaveChanges();
@@ -84,13 +95,16 @@ namespace DAL.Repositories
 
         public bool UpdateVocuher(Voucher voucher)
         {
-
-
+            if (voucher.DateEnd.Value.Date >= _datenow)
+            {
+                voucher.TrangThai = 1;
+            }
+            //CheckTrangThai(voucher.Idvoucher);
             _db.Update(voucher);
             _db.SaveChanges();
             return true;
-
         }
+        
 
         public bool DeleteVocuher(string id)
         {
@@ -124,6 +138,25 @@ namespace DAL.Repositories
             var search = _db.Vouchers.FirstOrDefault(x => x.Code.Trim().ToLower() == code.Trim().ToLower());
             return search;
 
+        }
+
+        public void CheckTrangThai(string idVoucher)
+        {
+            foreach (var item in _db.Vouchers.ToList())
+            {
+                if (item.Idvoucher == idVoucher)
+                {
+                    item.TrangThai = 1;
+                    _db.Update(item);
+                    _db.SaveChanges();
+                }
+                if (item.Idvoucher != idVoucher && item.TrangThai == 1)
+                {
+                    item.TrangThai = 0;
+                    _db.Update(item);
+                    _db.SaveChanges();
+                }
+            }
         }
     }
 }

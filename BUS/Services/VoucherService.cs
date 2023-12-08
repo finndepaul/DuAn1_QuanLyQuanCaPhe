@@ -22,6 +22,12 @@ namespace BUS.Services
         {
             return _res.AddVoucher(voucher);
         }
+
+        public void CheckTrangThai(string idVoucher)
+        {
+            _res.CheckTrangThai(idVoucher);
+        }
+
         public Voucher GetByCode(string code)
         {
             return _res.GetByCode(code);

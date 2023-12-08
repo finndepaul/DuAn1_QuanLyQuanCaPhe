@@ -52,6 +52,14 @@
             label2 = new Label();
             label9 = new Label();
             groupBox1 = new GroupBox();
+            btn_UpdateMemberShip = new Button();
+            btn_ThemMemberShip = new Button();
+            txt_PointsNeed = new TextBox();
+            txt_RankName = new TextBox();
+            txt_Discount = new TextBox();
+            label12 = new Label();
+            label11 = new Label();
+            label1 = new Label();
             ID_NhanVien = new Label();
             groupBox2 = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)dgv_Membership).BeginInit();
@@ -80,18 +88,17 @@
             // btn_Sua
             // 
             btn_Sua.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_Sua.Location = new Point(360, 531);
+            btn_Sua.Location = new Point(360, 457);
             btn_Sua.Name = "btn_Sua";
             btn_Sua.Size = new Size(140, 51);
             btn_Sua.TabIndex = 15;
             btn_Sua.Text = "Sửa";
             btn_Sua.UseVisualStyleBackColor = true;
-            btn_Sua.Click += btn_Sua_Click;
             // 
             // btn_Them
             // 
             btn_Them.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_Them.Location = new Point(141, 531);
+            btn_Them.Location = new Point(141, 457);
             btn_Them.Name = "btn_Them";
             btn_Them.Size = new Size(140, 51);
             btn_Them.TabIndex = 14;
@@ -101,32 +108,34 @@
             // 
             // txt_IDRank
             // 
-            txt_IDRank.Location = new Point(235, 343);
+            txt_IDRank.Location = new Point(235, 325);
             txt_IDRank.Name = "txt_IDRank";
             txt_IDRank.Size = new Size(349, 27);
             txt_IDRank.TabIndex = 13;
             // 
             // txt_Point
             // 
-            txt_Point.Location = new Point(235, 287);
+            txt_Point.Location = new Point(235, 269);
             txt_Point.Name = "txt_Point";
             txt_Point.Size = new Size(349, 27);
             txt_Point.TabIndex = 12;
             // 
             // txt_IDNhanVien
             // 
-            txt_IDNhanVien.Location = new Point(235, 405);
+            txt_IDNhanVien.Location = new Point(235, 387);
             txt_IDNhanVien.Name = "txt_IDNhanVien";
             txt_IDNhanVien.Size = new Size(349, 27);
             txt_IDNhanVien.TabIndex = 11;
             // 
             // dgv_Membership
             // 
+            dgv_Membership.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_Membership.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_Membership.Location = new Point(6, 577);
             dgv_Membership.Name = "dgv_Membership";
             dgv_Membership.RowHeadersWidth = 51;
             dgv_Membership.RowTemplate.Height = 29;
+            dgv_Membership.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_Membership.Size = new Size(1037, 353);
             dgv_Membership.TabIndex = 5;
             dgv_Membership.CellClick += dgv_Membership_CellClick;
@@ -138,27 +147,28 @@
             dgv_KhachHang.Name = "dgv_KhachHang";
             dgv_KhachHang.RowHeadersWidth = 51;
             dgv_KhachHang.RowTemplate.Height = 29;
+            dgv_KhachHang.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_KhachHang.Size = new Size(1037, 347);
             dgv_KhachHang.TabIndex = 4;
             dgv_KhachHang.CellClick += dgv_KhachHang_CellClick;
             // 
             // txt_SoDienThoai
             // 
-            txt_SoDienThoai.Location = new Point(235, 113);
+            txt_SoDienThoai.Location = new Point(235, 95);
             txt_SoDienThoai.Name = "txt_SoDienThoai";
             txt_SoDienThoai.Size = new Size(349, 27);
             txt_SoDienThoai.TabIndex = 10;
             // 
             // txt_Email
             // 
-            txt_Email.Location = new Point(235, 170);
+            txt_Email.Location = new Point(235, 152);
             txt_Email.Name = "txt_Email";
             txt_Email.Size = new Size(349, 27);
             txt_Email.TabIndex = 9;
             // 
             // txt_TenKhachHang
             // 
-            txt_TenKhachHang.Location = new Point(235, 52);
+            txt_TenKhachHang.Location = new Point(235, 34);
             txt_TenKhachHang.Name = "txt_TenKhachHang";
             txt_TenKhachHang.Size = new Size(349, 27);
             txt_TenKhachHang.TabIndex = 7;
@@ -167,7 +177,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.Location = new Point(39, 287);
+            label7.Location = new Point(39, 269);
             label7.Name = "label7";
             label7.Size = new Size(62, 24);
             label7.TabIndex = 6;
@@ -193,7 +203,7 @@
             // 
             // txt_DiaChi
             // 
-            txt_DiaChi.Location = new Point(235, 229);
+            txt_DiaChi.Location = new Point(235, 211);
             txt_DiaChi.Name = "txt_DiaChi";
             txt_DiaChi.Size = new Size(349, 27);
             txt_DiaChi.TabIndex = 8;
@@ -212,7 +222,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(39, 346);
+            label6.Location = new Point(39, 328);
             label6.Name = "label6";
             label6.Size = new Size(94, 24);
             label6.TabIndex = 5;
@@ -222,7 +232,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(39, 228);
+            label5.Location = new Point(39, 210);
             label5.Name = "label5";
             label5.Size = new Size(71, 24);
             label5.TabIndex = 4;
@@ -232,7 +242,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(39, 169);
+            label4.Location = new Point(39, 151);
             label4.Name = "label4";
             label4.Size = new Size(66, 24);
             label4.TabIndex = 3;
@@ -242,7 +252,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(39, 110);
+            label3.Location = new Point(39, 92);
             label3.Name = "label3";
             label3.Size = new Size(140, 24);
             label3.TabIndex = 2;
@@ -252,7 +262,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(39, 51);
+            label2.Location = new Point(39, 33);
             label2.Name = "label2";
             label2.Size = new Size(165, 24);
             label2.TabIndex = 1;
@@ -271,21 +281,29 @@
             // groupBox1
             // 
             groupBox1.BackColor = SystemColors.Control;
+            groupBox1.Controls.Add(btn_UpdateMemberShip);
             groupBox1.Controls.Add(btn_Sua);
+            groupBox1.Controls.Add(btn_ThemMemberShip);
             groupBox1.Controls.Add(btn_Them);
+            groupBox1.Controls.Add(txt_PointsNeed);
             groupBox1.Controls.Add(txt_IDRank);
+            groupBox1.Controls.Add(txt_RankName);
             groupBox1.Controls.Add(txt_Point);
+            groupBox1.Controls.Add(txt_Discount);
             groupBox1.Controls.Add(txt_IDNhanVien);
             groupBox1.Controls.Add(txt_SoDienThoai);
             groupBox1.Controls.Add(txt_Email);
             groupBox1.Controls.Add(txt_DiaChi);
             groupBox1.Controls.Add(txt_TenKhachHang);
+            groupBox1.Controls.Add(label12);
             groupBox1.Controls.Add(label7);
+            groupBox1.Controls.Add(label11);
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(ID_NhanVien);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
@@ -293,11 +311,84 @@
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             // 
+            // btn_UpdateMemberShip
+            // 
+            btn_UpdateMemberShip.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_UpdateMemberShip.Location = new Point(360, 799);
+            btn_UpdateMemberShip.Name = "btn_UpdateMemberShip";
+            btn_UpdateMemberShip.Size = new Size(140, 51);
+            btn_UpdateMemberShip.TabIndex = 15;
+            btn_UpdateMemberShip.Text = "Sửa";
+            btn_UpdateMemberShip.UseVisualStyleBackColor = true;
+            btn_UpdateMemberShip.Click += btn_UpdateMemberShip_Click;
+            // 
+            // btn_ThemMemberShip
+            // 
+            btn_ThemMemberShip.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_ThemMemberShip.Location = new Point(141, 799);
+            btn_ThemMemberShip.Name = "btn_ThemMemberShip";
+            btn_ThemMemberShip.Size = new Size(140, 51);
+            btn_ThemMemberShip.TabIndex = 14;
+            btn_ThemMemberShip.Text = "Thêm";
+            btn_ThemMemberShip.UseVisualStyleBackColor = true;
+            btn_ThemMemberShip.Click += btn_ThemMemberShip_Click;
+            // 
+            // txt_PointsNeed
+            // 
+            txt_PointsNeed.Location = new Point(235, 644);
+            txt_PointsNeed.Name = "txt_PointsNeed";
+            txt_PointsNeed.Size = new Size(349, 27);
+            txt_PointsNeed.TabIndex = 13;
+            // 
+            // txt_RankName
+            // 
+            txt_RankName.Location = new Point(235, 577);
+            txt_RankName.Name = "txt_RankName";
+            txt_RankName.Size = new Size(349, 27);
+            txt_RankName.TabIndex = 12;
+            // 
+            // txt_Discount
+            // 
+            txt_Discount.Location = new Point(235, 711);
+            txt_Discount.Name = "txt_Discount";
+            txt_Discount.Size = new Size(349, 27);
+            txt_Discount.TabIndex = 11;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label12.Location = new Point(39, 576);
+            label12.Name = "label12";
+            label12.Size = new Size(119, 24);
+            label12.TabIndex = 6;
+            label12.Text = "Rank Name:";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label11.Location = new Point(39, 643);
+            label11.Name = "label11";
+            label11.Size = new Size(114, 24);
+            label11.TabIndex = 5;
+            label11.Text = "Point Need:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(39, 710);
+            label1.Name = "label1";
+            label1.Size = new Size(94, 24);
+            label1.TabIndex = 0;
+            label1.Text = "Discount:";
+            // 
             // ID_NhanVien
             // 
             ID_NhanVien.AutoSize = true;
             ID_NhanVien.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            ID_NhanVien.Location = new Point(39, 405);
+            ID_NhanVien.Location = new Point(39, 387);
             ID_NhanVien.Name = "ID_NhanVien";
             ID_NhanVien.Size = new Size(128, 24);
             ID_NhanVien.TabIndex = 0;
@@ -367,5 +458,13 @@
         private GroupBox groupBox1;
         private Label ID_NhanVien;
         private GroupBox groupBox2;
+        private Button btn_UpdateMemberShip;
+        private Button btn_ThemMemberShip;
+        private TextBox txt_PointsNeed;
+        private TextBox txt_RankName;
+        private TextBox txt_Discount;
+        private Label label12;
+        private Label label11;
+        private Label label1;
     }
 }

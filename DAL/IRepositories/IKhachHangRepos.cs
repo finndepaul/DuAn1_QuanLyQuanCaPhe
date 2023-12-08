@@ -14,7 +14,7 @@ namespace DAL.IRepositories
         public bool UpdateKhachHang(string? Sdt, KhachHang khachHang);
 
         public List<MemberShipRank> GetMemberShipRanks(string idRank, string nameRank);
-        public bool AddMenberShipRank(string SDT, MemberShipRank memberShip);
-        public bool UpdateMembership(string idRank, string SDT);
+        public bool AddMenberShipRank(MemberShipRank memberShip);
+        public bool UpdateMembership(string idRank, MemberShipRank memberShip);
     }
 }

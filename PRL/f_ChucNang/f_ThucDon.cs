@@ -24,9 +24,12 @@ namespace PRL.f_ChucNang
         string _idLSPWhenClick;
         private string selectedImagePath;
         string _imageWhenClick;
-        public f_ThucDon()
+
+        string _idNhanVien;
+        public f_ThucDon(string idNhanVien)
         {
             InitializeComponent();
+            _idNhanVien = idNhanVien;
         }
         private void f_ThucDon_Load(object sender, EventArgs e)
         {
@@ -279,7 +282,7 @@ namespace PRL.f_ChucNang
                 {
                     lsp.TrangThai = 0;
                 }
-                lsp.IdnhanVien = txt_IDNhanVien.Text;
+                lsp.IdnhanVien = _idNhanVien;
                 var result = _TDser.AddLoaiSP(lsp);
                 if (result)
                 {
@@ -336,7 +339,7 @@ namespace PRL.f_ChucNang
                 {
                     lsp.TrangThai = 0;
                 }
-                lsp.IdnhanVien = txt_IDNhanVien.Text;
+                lsp.IdnhanVien = _idNhanVien;
                 var result = _TDser.UpdateLoaiSP(_idLSPWhenClick, lsp);
                 if (result)
                 {
@@ -427,7 +430,7 @@ namespace PRL.f_ChucNang
                     sp.TrangThai = 0;
                 }
                 sp.Thue = double.Parse(txt_thue.Text);
-
+                sp.IdnhanVien = _idNhanVien;
                 sp.IdloaiSanPham = _lstIdLoaiSP[cbx_IDLoaiSP.SelectedIndex];
                 var result = _TDser.AddSP(sp);
                 if (result)
@@ -492,6 +495,7 @@ namespace PRL.f_ChucNang
                 }
                 sp.Thue = double.Parse(txt_thue.Text);
                 sp.IdloaiSanPham = _lstIdLoaiSP[cbx_IDLoaiSP.SelectedIndex];
+                sp.IdnhanVien = _idNhanVien;
                 sp.HinhAnh = _imageWhenClick; // cho string file path biến toàn cục
                 var result = _TDser.UpdateSP(_idSPWhenClick, sp);
                 if (result)

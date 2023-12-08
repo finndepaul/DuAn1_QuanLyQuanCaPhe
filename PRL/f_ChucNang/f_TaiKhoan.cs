@@ -17,6 +17,7 @@ namespace PRL.f_ChucNang
     {
         TaiKhoanService _ser = new TaiKhoanService();
         string? _idWhenClick;
+        string? _loginClick;
         List<NhanVien> _lstnhanVien;
         public f_TaiKhoan()
         {
@@ -101,17 +102,29 @@ namespace PRL.f_ChucNang
         }
         private void btn_Sua_Click(object sender, EventArgs e)
         {
-            if (CheckThongTin(txt_LoginName.Text))
-            {
-                MessageBox.Show("Tài khoản đã tồn tại vui lòng đổi tài khoản khác!!!!");
-                ClearData();
-                return;
-            }
+            
             var thongBao = MessageBox.Show("Bạn muốn sửa thông tin nhân viên", "Xác nhận", MessageBoxButtons.OKCancel);
             if (thongBao == DialogResult.OK)
             {
                 NhanVien nhanVien = new NhanVien();
-                nhanVien.LoginName = txt_LoginName.Text;
+                if (txt_LoginName.Text != null && txt_LoginName.Text != _loginClick && _ser.GetNhanViens("", "").Any(x => x.LoginName != txt_LoginName.Text))
+                {
+                    nhanVien.LoginName = txt_LoginName.Text;
+                }
+                else if (txt_LoginName.Text == _loginClick)
+                {
+                    nhanVien.LoginName = txt_LoginName.Text;
+                }
+                else if (txt_LoginName.Text == null)
+                {
+                    MessageBox.Show("Lgin không được để chống");
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Lgin không hợp lệ");
+                    return;
+                }
                 nhanVien.Password = txt_Password.Text;
                 if (cbx_ChucVu.SelectedIndex == 0)
                 {
@@ -134,6 +147,7 @@ namespace PRL.f_ChucNang
                     MessageBox.Show("Sửa thành công");
                     LoadDataNhanVien("", "");
                     _idWhenClick = null;
+                    _loginClick = null;
                     ClearData();
                 }
                 else
@@ -156,6 +170,7 @@ namespace PRL.f_ChucNang
                 return;
             }
             _idWhenClick = dgv_TaiKhoan.Rows[index].Cells[1].Value.ToString();
+            _loginClick = dgv_TaiKhoan.Rows[index].Cells[2].Value.ToString();
             var result = _ser.GetNhanViens("", "").First(x => x.IdnhanVien == _idWhenClick);
             txb_IdNhanVien.Text = result.IdnhanVien;
             txt_LoginName.Text = result.LoginName;

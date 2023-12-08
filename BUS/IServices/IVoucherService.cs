@@ -14,5 +14,6 @@ namespace BUS.IServices
         bool UpdateVocuher(Voucher voucher);
         Voucher GetByIdVC(string id);
         Voucher GetByCode(string code);
+        public void CheckTrangThai(string idVoucher);
     }
 }

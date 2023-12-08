@@ -89,6 +89,7 @@
             // 
             // dgv_Rank
             // 
+            dgv_Rank.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_Rank.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_Rank.Location = new Point(1054, 397);
             dgv_Rank.Name = "dgv_Rank";

@@ -90,7 +90,7 @@ namespace PRL
 
         private void btn_ThucDon_Click(object sender, EventArgs e) // form Thực Đơn
         {
-            f_ThucDon f_ThucDon = new f_ThucDon();
+            f_ThucDon f_ThucDon = new f_ThucDon(idNhanVien);
             f_ThucDon.TopLevel = false;
             pn_Admin.Controls.Add(f_ThucDon);
             f_ThucDon.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
