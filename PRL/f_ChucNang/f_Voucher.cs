@@ -146,22 +146,31 @@ namespace PRL.f_ChucNang
                 if (string.IsNullOrEmpty(txt_MaVocher.Text))
                 {
                     MessageBox.Show("Mã voucher không được null or empty !");
+                    return;
+
                 }
                 if (string.IsNullOrEmpty(txt_GiamTien.Text))
                 {
                     MessageBox.Show("Phần Trăm không được null or empty !");
+                    return;
+
                 }
                 if (string.IsNullOrEmpty(txt_SoLuong.Text))
                 {
                     MessageBox.Show("Số lượng không được null or empty !");
+                    return;
+
                 }
                 if (string.IsNullOrEmpty(txt_DKApDung.Text))
                 {
                     MessageBox.Show("Điều kiện áp dụng không được null or empty !");
+                    return;
+
                 }
                 if (cbx_TrangThai.SelectedIndex == null)
                 {
                     MessageBox.Show("B chưa chọn trạng thái");
+                    return;
                 }
                 if (dtpNgayBatDau.Value.Date < DateTime.Now.Date && dtpNgayKetThuc.Value.Date < DateTime.Now.Date)
                 {
@@ -212,22 +221,27 @@ namespace PRL.f_ChucNang
                 if (string.IsNullOrEmpty(txt_MaVocher.Text))
                 {
                     MessageBox.Show("Mã voucher không được null or empty !");
+                    return;
                 }
                 if (string.IsNullOrEmpty(txt_GiamTien.Text))
                 {
                     MessageBox.Show("Phần Trăm không được null or empty !");
+                    return;
                 }
                 if (string.IsNullOrEmpty(txt_SoLuong.Text))
                 {
                     MessageBox.Show("Số lượng không được null or empty !");
+                    return;
                 }
                 if (string.IsNullOrEmpty(txt_DKApDung.Text))
                 {
                     MessageBox.Show("Điều kiện áp dụng không được null or empty !");
+                    return;
                 }
                 if (cbx_TrangThai.SelectedIndex == null)
                 {
                     MessageBox.Show("B chưa chọn trạng thái");
+                    return;
                 }
                 if (dtpNgayBatDau.Value.Date < DateTime.Now.Date && dtpNgayKetThuc.Value.Date < DateTime.Now.Date)
                 {

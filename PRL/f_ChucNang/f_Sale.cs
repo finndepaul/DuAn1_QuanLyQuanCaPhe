@@ -217,7 +217,7 @@ namespace PRL.f_ChucNang
                         MessageBox.Show("Ngày bắt đầu không được lớn hơn ngày kết thúc!");
                         Load_DGV_SanPham(_idGGClick, null);
                         return;
-                    }
+                    }                   
                     _ser.AddGGCT(_idGGClick, _idSPclick);
                     _ser.CheckTrangThai(_idGGClick);
                     cell.Value = true;
@@ -235,10 +235,10 @@ namespace PRL.f_ChucNang
                 //ClearData();
                 //Load_DGV_GiamGia(null, 5);
                 //Load_DGV_SanPham(_idGGClick, null);
+                
                 Load_cbx_TrangThai();
                 Load_cbx_LocTrangThai();
                 
-
             }
         }
 
@@ -358,6 +358,11 @@ namespace PRL.f_ChucNang
                 if (string.IsNullOrEmpty(txt_PhanTram.Text))
                 {
                     MessageBox.Show("Giảm giá không được Null or empty");
+                    return;
+                }
+                if (cbx_TrangThai.SelectedIndex < 0)
+                {
+                    MessageBox.Show("Mời b chọn lại giảm giá");
                     return;
                 }
                 GiamGia gg = new GiamGia();

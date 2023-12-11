@@ -225,10 +225,24 @@ namespace DAL.Repositories
                 result.PhanTram = giamGia.PhanTram;
                 result.NgayBatDau = giamGia.NgayBatDau;
                 result.NgayKetThuc = giamGia.NgayKetThuc;
-                result.TrangThai = giamGia.TrangThai;
+                //result.TrangThai = giamGia.TrangThai;
+                result.TrangThai = 2;
 
                 _db.Update(result);
                 _db.SaveChanges();
+
+                var ggct = _db.GiamGiaChiTiets.FirstOrDefault(x => x.IdgiamGia == id);
+                if (ggct == null)
+                {
+                    return true;
+                }
+                _db.Remove(ggct);
+                _db.SaveChanges();
+                var sp = _db.SanPhams.FirstOrDefault(x => x.IdsanPham == ggct.IdsanPham);
+                sp.GiaSale = 0;
+                _db.Update(sp);
+                _db.SaveChanges();
+                
                 return true;
             }
             catch
