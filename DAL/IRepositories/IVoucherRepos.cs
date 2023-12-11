@@ -9,11 +9,11 @@ namespace DAL.IRepositories
 {
     public interface IVoucherRepos
     {
-        List<Voucher> GetVouchers(string id, int? trangThai);
+        List<Voucher> GetVouchers(string searchText, int cbx);
         bool AddVoucher(Voucher voucher);
-        bool UpdateVocuher(Voucher voucher);
-        Voucher GetByIdVC(string id);
-        Voucher GetByCode(string code);
-        public void CheckTrangThai(string idVoucher);
+        int UpdateVocuher(string id,Voucher voucher);
+
+        public bool checkVoucher(int cbx);
+        public void checkTrangThai();
     }
 }

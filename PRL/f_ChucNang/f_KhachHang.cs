@@ -70,7 +70,7 @@ namespace PRL.f_ChucNang
         {
             dgv_KhachHang.Rows.Clear();
             dgv_KhachHang.ColumnCount = 8;
-            dgv_KhachHang.Columns[0].Name = "Stt";
+            dgv_KhachHang.Columns[0].Name = "STT";
             dgv_KhachHang.Columns[1].Name = "SDT";
             dgv_KhachHang.Columns[2].Name = "Tên";
             dgv_KhachHang.Columns[3].Name = "Email";
@@ -228,22 +228,25 @@ namespace PRL.f_ChucNang
             var thongBao = MessageBox.Show("Bạn có muốn thay đổi dữ liệu không", "Xác nhận", MessageBoxButtons.OKCancel);
             if (thongBao == DialogResult.OK)
             {
-                //Check số điện thoại
-                //if (txt_SoDienThoai.Text != _sdtWhenClick && _ser.GetKhachHangs(null).Any(x => x.Sdt != txt_SoDienThoai.Text))
-                //{
-                //    khachHang.Sdt = txt_SoDienThoai.Text;
-                //}
-
-                if (txt_SoDienThoai.Text != _sdtWhenClick)
+                if (txt_SoDienThoai.Text != _sdtWhenClick && _ser.GetKhachHangs(null).Any(x => x.Sdt == txt_SoDienThoai.Text))
                 {
-                    MessageBox.Show("Không thể sửa số điện thoại");
+                    MessageBox.Show("Số điện thoại không được phép sửa khi đã tồn tại trong hóa đơn");
                     return;
                 }
+                else if (txt_SoDienThoai.Text != _sdtWhenClick && _ser.GetKhachHangs(null).Where(x => x.Sdt == _sdtWhenClick).Any(x => x.Point > 0))
+                {
+                    MessageBox.Show("Số điện thoại không được phép sửa khi đã tồn tại trong hóa đơn");
+                    return;
+                }
+                else if (txt_SoDienThoai.Text != _sdtWhenClick && _ser.GetKhachHangs(null).Any(x => x.Sdt != txt_SoDienThoai.Text) || txt_SoDienThoai.Text == _sdtWhenClick)
+                {
+                    khachHang.Sdt = txt_SoDienThoai.Text;
+                }
+
                 khachHang.Name = txt_TenKhachHang.Text;
                 khachHang.Email = txt_Email.Text;
                 khachHang.DiaChi = txt_DiaChi.Text;
                 khachHang.IdnhanVien = txt_IDNhanVien.Text;
-                khachHang.Idrank = txt_IDRank.Text;
                 if (_ser.UpdateKhachHang(_sdtWhenClick, khachHang))
                 {
                     MessageBox.Show("Đã update thành công");
@@ -488,6 +491,74 @@ namespace PRL.f_ChucNang
             }
         }
 
-        
+        private void btn_Sua_Click_1(object sender, EventArgs e)
+        {
+            KhachHang khachHang = new KhachHang();
+            if (txt_TenKhachHang.Text == null)
+            {
+                MessageBox.Show("Tên khách hàng không được để chống");
+                Clear();
+                return;
+            }
+            else if (!Regex.IsMatch(txt_TenKhachHang.Text.ToString(), @"^([\p{L}]+\s?)+$"))
+            {
+                MessageBox.Show("Tên khách hàng không hợp lệ");
+                return;
+            }
+
+            else if (!Regex.IsMatch(txt_Email.Text, @"^[a-zA-Z0-9._%+-]+@gmail\.com$"))
+            {
+                MessageBox.Show("Email không hợp lệ");
+                return;
+            }
+            else if (txt_Email.Text == null)
+            {
+                MessageBox.Show("Email không được để chống");
+                Clear();
+                return;
+            }
+            var thongBao = MessageBox.Show("Bạn có muốn thay đổi dữ liệu không", "Xác nhận", MessageBoxButtons.OKCancel);
+            if (thongBao == DialogResult.OK)
+            {
+                if (txt_SoDienThoai.Text != _sdtWhenClick && _ser.GetKhachHangs(null).Any(x => x.Sdt == txt_SoDienThoai.Text))
+                {
+                    MessageBox.Show("Số điện thoại không được phép sửa khi đã tồn tại trong hóa đơn");
+                    return;
+                }
+                else if (txt_SoDienThoai.Text != _sdtWhenClick && _ser.GetKhachHangs(null).Where(x => x.Sdt == _sdtWhenClick).Any(x => x.Point > 0))
+                {
+                    MessageBox.Show("Số điện thoại không được phép sửa khi đã tồn tại trong hóa đơn");
+                    return;
+                }
+                else if (txt_SoDienThoai.Text != _sdtWhenClick && _ser.GetKhachHangs(null).Any(x => x.Sdt != txt_SoDienThoai.Text) || txt_SoDienThoai.Text == _sdtWhenClick)
+                {
+                    khachHang.Sdt = txt_SoDienThoai.Text;
+                }
+
+                khachHang.Name = txt_TenKhachHang.Text;
+                khachHang.Email = txt_Email.Text;
+                khachHang.DiaChi = txt_DiaChi.Text;
+                khachHang.IdnhanVien = txt_IDNhanVien.Text;
+                if (_ser.UpdateKhachHang(_sdtWhenClick, khachHang))
+                {
+                    MessageBox.Show("Đã update thành công");
+                    _sdtWhenClick = null;
+                    LoadDataKhachHang(null);
+                    LoadDataMemberShip(null, null);
+                    Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Khách hàng chưa được update");
+                    LoadDataKhachHang(null);
+                    LoadDataMemberShip(null, null);
+                    Clear();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Dữ liệu chưa thanh đổi");
+            }
+        }
     }
 }

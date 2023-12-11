@@ -17,35 +17,29 @@ namespace BUS.Services
             _res = new VoucherRepos();
         }
 
-
         public bool AddVoucher(Voucher voucher)
         {
             return _res.AddVoucher(voucher);
         }
 
-        public void CheckTrangThai(string idVoucher)
+        public void checkTrangThai()
         {
-            _res.CheckTrangThai(idVoucher);
+            _res.checkTrangThai();
         }
 
-        public Voucher GetByCode(string code)
+        public bool checkVoucher(int cbx)
         {
-            return _res.GetByCode(code);
+            return _res.checkVoucher(cbx);
         }
 
-        public Voucher GetByIdVC(string id)
+        public List<Voucher> GetVouchers(string searchText, int cbx)
         {
-            return (_res.GetByIdVC(id));
+            return _res.GetVouchers(searchText,cbx);
         }
 
-        public List<Voucher> GetVouchers(string id, int? trangThai)
+        public int UpdateVocuher(string id,Voucher voucher)
         {
-            return _res.GetVouchers(id, trangThai);
-        }
-
-        public bool UpdateVocuher(Voucher voucher)
-        {
-            return _res.UpdateVocuher(voucher);
+            return _res.UpdateVocuher(id, voucher);
         }
     }
 }

@@ -37,7 +37,7 @@
             txt_IdVocher = new TextBox();
             groupBox1 = new GroupBox();
             label9 = new Label();
-            cmb_TrangThai = new ComboBox();
+            cbx_TrangThai = new ComboBox();
             btn_Update = new Button();
             btn_Add = new Button();
             label1 = new Label();
@@ -64,9 +64,9 @@
             label6.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label6.Location = new Point(49, 460);
             label6.Name = "label6";
-            label6.Size = new Size(179, 24);
+            label6.Size = new Size(175, 24);
             label6.TabIndex = 5;
-            label6.Text = "Điều kiện áp dụng:";
+            label6.Text = "Tổng tiền tối thiểu";
             // 
             // txt_SoLuong
             // 
@@ -123,7 +123,7 @@
             // 
             groupBox1.BackColor = SystemColors.Control;
             groupBox1.Controls.Add(label9);
-            groupBox1.Controls.Add(cmb_TrangThai);
+            groupBox1.Controls.Add(cbx_TrangThai);
             groupBox1.Controls.Add(btn_Update);
             groupBox1.Controls.Add(btn_Add);
             groupBox1.Controls.Add(label3);
@@ -158,14 +158,14 @@
             label9.TabIndex = 20;
             label9.Text = "Trạng thái";
             // 
-            // cmb_TrangThai
+            // cbx_TrangThai
             // 
-            cmb_TrangThai.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            cmb_TrangThai.FormattingEnabled = true;
-            cmb_TrangThai.Location = new Point(287, 533);
-            cmb_TrangThai.Name = "cmb_TrangThai";
-            cmb_TrangThai.Size = new Size(263, 26);
-            cmb_TrangThai.TabIndex = 21;
+            cbx_TrangThai.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            cbx_TrangThai.FormattingEnabled = true;
+            cbx_TrangThai.Location = new Point(287, 533);
+            cbx_TrangThai.Name = "cbx_TrangThai";
+            cbx_TrangThai.Size = new Size(263, 26);
+            cbx_TrangThai.TabIndex = 21;
             // 
             // btn_Update
             // 
@@ -254,7 +254,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label10.Location = new Point(327, 39);
+            label10.Location = new Point(697, 39);
             label10.Name = "label10";
             label10.Size = new Size(102, 24);
             label10.TabIndex = 2;
@@ -275,7 +275,7 @@
             // cbx_TrangThaiFind
             // 
             cbx_TrangThaiFind.FormattingEnabled = true;
-            cbx_TrangThaiFind.Location = new Point(327, 75);
+            cbx_TrangThaiFind.Location = new Point(697, 76);
             cbx_TrangThaiFind.Name = "cbx_TrangThaiFind";
             cbx_TrangThaiFind.Size = new Size(263, 26);
             cbx_TrangThaiFind.TabIndex = 6;
@@ -295,7 +295,8 @@
             // 
             txt_TimKiemVocher.Location = new Point(6, 76);
             txt_TimKiemVocher.Name = "txt_TimKiemVocher";
-            txt_TimKiemVocher.Size = new Size(206, 26);
+            txt_TimKiemVocher.PlaceholderText = "Nhập code để tìm kiếm";
+            txt_TimKiemVocher.Size = new Size(306, 26);
             txt_TimKiemVocher.TabIndex = 5;
             txt_TimKiemVocher.TextChanged += txt_TimKiemVocher_TextChanged;
             // 
@@ -358,7 +359,7 @@
         private TextBox txt_GiamTien;
         private TextBox txt_DKApDung;
         private Label label9;
-        private ComboBox cmb_TrangThai;
+        private ComboBox cbx_TrangThai;
         private Button btn_Update;
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f_TrangChu));
             txt_TraLai = new TextBox();
             txt_Voucher = new TextBox();
             txt_KhachDua = new TextBox();
@@ -66,6 +67,8 @@
             label6 = new Label();
             txt_TimKiemSanPham = new TextBox();
             dgv_HoaDon = new DataGridView();
+            pd_HoaDon = new System.Drawing.Printing.PrintDocument();
+            ppd_HoaDon = new PrintPreviewDialog();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numSL).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgv_Order).BeginInit();
@@ -204,7 +207,7 @@
             // 
             lb_Gia.AutoSize = true;
             lb_Gia.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lb_Gia.Location = new Point(573, 67);
+            lb_Gia.Location = new Point(678, 67);
             lb_Gia.Name = "lb_Gia";
             lb_Gia.Size = new Size(37, 24);
             lb_Gia.TabIndex = 8;
@@ -226,7 +229,7 @@
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label12.Location = new Point(573, 35);
+            label12.Location = new Point(678, 35);
             label12.Name = "label12";
             label12.Size = new Size(46, 24);
             label12.TabIndex = 8;
@@ -419,6 +422,7 @@
             btn_TamTinh.TabIndex = 0;
             btn_TamTinh.Text = "Tạm Tính";
             btn_TamTinh.UseVisualStyleBackColor = true;
+            btn_TamTinh.Click += btn_TamTinh_Click;
             // 
             // btn_Them
             // 
@@ -484,6 +488,20 @@
             dgv_HoaDon.TabIndex = 1;
             dgv_HoaDon.CellClick += dgv_HoaDon_CellClick;
             // 
+            // pd_HoaDon
+            // 
+            pd_HoaDon.PrintPage += pd_HoaDon_PrintPage;
+            // 
+            // ppd_HoaDon
+            // 
+            ppd_HoaDon.AutoScrollMargin = new Size(0, 0);
+            ppd_HoaDon.AutoScrollMinSize = new Size(0, 0);
+            ppd_HoaDon.ClientSize = new Size(400, 300);
+            ppd_HoaDon.Enabled = true;
+            ppd_HoaDon.Icon = (Icon)resources.GetObject("ppd_HoaDon.Icon");
+            ppd_HoaDon.Name = "ppd_HoaDon";
+            ppd_HoaDon.Visible = false;
+            // 
             // f_TrangChu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -546,5 +564,7 @@
         private Label lb_Gia;
         private Label lb_TenSP;
         private Label label12;
+        private System.Drawing.Printing.PrintDocument pd_HoaDon;
+        private PrintPreviewDialog ppd_HoaDon;
     }
 }

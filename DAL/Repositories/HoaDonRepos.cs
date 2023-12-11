@@ -55,11 +55,40 @@ namespace DAL.Repositories
             return search;
         }
 
+        public Voucher SearchVoucher(string code)
+        {
+            var search = _db.Vouchers.FirstOrDefault(x => x.Code.ToLower().Equals(code.ToLower()));
+            return search;
+        }
+
         public HoaDon UpdateHoaDon(HoaDon hoaDon)
         {
             _db.HoaDons.Update(hoaDon);
             _db.SaveChanges();
             return hoaDon;
+        }
+
+        public KhachHang UpdatePointKhachHang(string sdt)
+        {
+            var result = _db.KhachHangs.FirstOrDefault(x => x.Sdt == sdt);
+            result.Point = Convert.ToInt32(_db.HoaDons.Where(x => x.Sdt == sdt).Sum(x => x.TongTien));
+            string RankId = _db.MemberShipRanks.Where(x => x.PointsNeed <= result.Point)
+                                .OrderByDescending(x => x.PointsNeed)
+                                .Select(x => x.Idrank)
+                                .FirstOrDefault();
+            result.Idrank = RankId;
+            _db.KhachHangs.Update(result);
+            _db.SaveChanges(true);
+            return result;
+        }
+
+        public Voucher UpdateSoLuongVC(string code)
+        {
+            var c = SearchVoucher(code);
+            c.SoLuong = c.SoLuong - 1;
+            _db.Vouchers.Update(c);
+            _db.SaveChanges();
+            return c;
         }
     }
 }

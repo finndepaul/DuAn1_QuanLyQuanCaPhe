@@ -7,7 +7,7 @@ public partial class Voucher
 {
     public string Idvoucher { get; set; } = null!;
 
-    public double? GiamTien { get; set; }
+    public double? PhanTram { get; set; }
 
     public DateTime? DateStart { get; set; }
 
@@ -17,7 +17,7 @@ public partial class Voucher
 
     public string? Code { get; set; }
 
-    public string? DieuKienApDung { get; set; }
+    public int? DieuKienApDung { get; set; }
 
     public int? TrangThai { get; set; }
 

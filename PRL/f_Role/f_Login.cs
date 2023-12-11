@@ -36,7 +36,7 @@ namespace PRL
                 MessageBox.Show("Password không được để trống");
                 return;
             }
-            var user = _ser.GetNhanViens().FirstOrDefault(x => x.LoginName == loginName && x.Password == pass);
+            var user = _ser.GetNhanViens().FirstOrDefault(x => x.LoginName == loginName.Trim() && x.Password == pass.Trim());
             if (user == null)
             {
                 MessageBox.Show("Thông tin đăng nhập của b chưa chính xác. Vui lòng nhập lại!");

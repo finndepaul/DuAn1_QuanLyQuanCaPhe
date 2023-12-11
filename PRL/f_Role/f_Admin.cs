@@ -25,7 +25,7 @@ namespace PRL
 
         private void f_Main_Load(object sender, EventArgs e) // form Load
         {
-            f_TrangChu objForm = new f_TrangChu();
+            f_TrangChu objForm = new f_TrangChu(idNhanVien);
             objForm.TopLevel = false;
             pn_Admin.Controls.Add(objForm);
             objForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -66,7 +66,7 @@ namespace PRL
         {
 
 
-            f_TrangChu objForm = new f_TrangChu();
+            f_TrangChu objForm = new f_TrangChu(idNhanVien);
             objForm.TopLevel = false;
             pn_Admin.Controls.Add(objForm);
             objForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
