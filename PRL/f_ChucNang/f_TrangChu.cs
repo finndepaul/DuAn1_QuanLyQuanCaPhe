@@ -323,16 +323,28 @@ namespace PRL
                         lbl.Height = _labelHeight;
                         lbl.Width = _labelWidth;
 
+                        //// Check if Gia is not null or empty before assigning to the label
+                        //if (!string.IsNullOrEmpty(item.SanPham.Gia.ToString()))
+                        //{
+                        //    //lbl.Text = ($"{item.SanPham.TenSanPham}\n{item.SanPham.Gia}" + donvi);
+                        //    lbl.Text = ($"{item.SanPham.TenSanPham}\n{decimal.Parse(item.SanPham.Gia.ToString()):C0}");
+                        //}
+                        //else
+                        //{
+                        //    lbl.Text = $"{item.SanPham.TenSanPham}\nN/A"; // Set a default value if Gia is null or empty
+                        //}
+
                         // Check if Gia is not null or empty before assigning to the label
-                        if (!string.IsNullOrEmpty(item.SanPham.Gia.ToString()))
+                        if (item.SanPham.GiaSale > 0)
                         {
                             //lbl.Text = ($"{item.SanPham.TenSanPham}\n{item.SanPham.Gia}" + donvi);
-                            lbl.Text = ($"{item.SanPham.TenSanPham}\n{decimal.Parse(item.SanPham.Gia.ToString()):C0}");
+                            lbl.Text = ($"{item.SanPham.TenSanPham}\n{decimal.Parse(item.SanPham.GiaSale.ToString()):C0}");
                         }
                         else
                         {
-                            lbl.Text = $"{item.SanPham.TenSanPham}\nN/A"; // Set a default value if Gia is null or empty
+                            lbl.Text = ($"{item.SanPham.TenSanPham}\n{decimal.Parse(item.SanPham.Gia.ToString()):C0}");
                         }
+
                         // Create a Button
                         Button bt = new Button();
                         bt.Tag = item.SanPham.IdsanPham.ToString();
