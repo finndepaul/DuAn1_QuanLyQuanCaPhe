@@ -13,6 +13,9 @@ namespace DAL.IRepositories
 
         HoaDon UpdateHoaDon(HoaDon hoaDon);
 
+        Voucher SearchVoucher(string code);
+
+        Voucher UpdateSoLuongVC(string code);
         HoaDon DeleteHoaDon(HoaDon hoaDon);
 
         HoaDon GetHoaDonById(string IdHoadon);

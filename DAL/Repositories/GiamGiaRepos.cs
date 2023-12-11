@@ -273,7 +273,7 @@ namespace DAL.Repositories
             }
         }
 
-        public void CheckDate()
+        public void CheckDate() //
         {
             foreach (var item in _db.GiamGia.ToList())
             {
@@ -284,9 +284,13 @@ namespace DAL.Repositories
                     _db.Update(item);
                     _db.SaveChanges();
                     var result = _db.GiamGiaChiTiets.FirstOrDefault(x => x.IdgiamGia == item.IdgiamGia);
-                    _db.Remove(result);
+                    _db.Remove(result); // lỗi ở đây khi mới chạy phần mềm lần đầu trong ngày
                     _db.SaveChanges();
                 }
+                //else
+                //{
+                //    return;
+                //}
             }
         }
     }

@@ -197,6 +197,7 @@ namespace PRL.f_ChucNang
                     if (_idGGClick == null)
                     {
                         MessageBox.Show("Chưa chọn chương trình giảm giá");
+                        Load_DGV_SanPham(_idGGClick, null);
                         return;
                     }
                     if (dtp_NgayBatDau.Value.Date < DateTime.Now.Date && dtp_NgayKetThuc.Value.Date < DateTime.Now.Date)
@@ -231,11 +232,13 @@ namespace PRL.f_ChucNang
                 {
                     return;
                 }
-                ClearData();
-                Load_DGV_GiamGia(null, 5);
-                Load_DGV_SanPham(_idGGClick, null);
+                //ClearData();
+                //Load_DGV_GiamGia(null, 5);
+                //Load_DGV_SanPham(_idGGClick, null);
                 Load_cbx_TrangThai();
                 Load_cbx_LocTrangThai();
+                
+
             }
         }
 
@@ -308,6 +311,8 @@ namespace PRL.f_ChucNang
                     Load_DGV_GiamGia(null, 5);
                     Load_DGV_SanPham(null, null);
                     Load_cbx_LocTrangThai();
+                    _idGGClick = null;
+                    _idSPclick = null;
                 }
                 else
                 {
@@ -381,6 +386,8 @@ namespace PRL.f_ChucNang
                     Load_DGV_SanPham(null, null);
                     Load_cbx_LocTrangThai();
                     ClearData();
+                    _idGGClick = null;
+                    _idSPclick = null;
                 }
                 else
                 {

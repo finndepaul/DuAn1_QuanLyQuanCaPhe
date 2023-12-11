@@ -55,29 +55,47 @@ namespace DAL.Repositories
             else
             {
                 var result = _db.KhachHangs.FirstOrDefault(x => x.Sdt == SDT);
-                //if (_db.KhachHangs.Any(x=>x.Sdt != khachHang.Sdt) && _db.HoaDons.Any(x=>x.Sdt != khachHang.Sdt))
-                //{
-                //    _db.Entry(result).State = EntityState.Detached;
-                //    result.Sdt = khachHang.Sdt;
-                //    _db.Entry(result).State = EntityState.Modified;
-                //    result.Name = khachHang.Name;
-                //    result.Email = khachHang.Email;
-                //    result.DiaChi = khachHang.DiaChi;
-                //    result.Point = 0;
-                //    result.IdnhanVien = khachHang.IdnhanVien;
-                //}
-                result.Name = khachHang.Name;
-                result.Email = khachHang.Email;
-                result.DiaChi = khachHang.DiaChi;
-                result.Point = Convert.ToInt32(_db.HoaDons.Where(x => x.Sdt == SDT).Sum(x => x.TongTien));
-                result.IdnhanVien = khachHang.IdnhanVien;
-                string RankId = _db.MemberShipRanks.Where(x => x.PointsNeed <= result.Point)
-                                    .OrderByDescending(x => x.PointsNeed)
-                                    .Select(x => x.Idrank)
-                                    .FirstOrDefault();
-                result.Idrank = RankId;
-                _db.KhachHangs.Update(result);
-                _db.SaveChanges();
+                if (result.Point == 0)
+                {
+
+                    string name = result.Name;
+                    string email = result.Email;
+                    string diaChi = result.DiaChi;
+                    int? point = result.Point;
+                    string idNhanVien = result.IdnhanVien;
+                    string IdRank = result.Idrank;
+
+                    var newKhachHang = new KhachHang
+                    {
+                        Sdt = khachHang.Sdt,
+                        Name = khachHang.Name,
+                        Email = khachHang.Email,
+                        DiaChi = khachHang.DiaChi,
+                        Point = point,
+                        IdnhanVien = khachHang.IdnhanVien
+                    };
+
+                    newKhachHang.Idrank = null;
+
+                    _db.KhachHangs.Remove(result);
+                    _db.KhachHangs.Add(newKhachHang);
+                    _db.SaveChanges();
+                }
+                else
+                {
+                    result.Name = khachHang.Name;
+                    result.Email = khachHang.Email;
+                    result.DiaChi = khachHang.DiaChi;
+                    result.Point = Convert.ToInt32(_db.HoaDons.Where(x => x.Sdt == SDT).Sum(x => x.TongTien));
+                    result.IdnhanVien = khachHang.IdnhanVien;
+                    string RankId = _db.MemberShipRanks.Where(x => x.PointsNeed <= result.Point)
+                                        .OrderByDescending(x => x.PointsNeed)
+                                        .Select(x => x.Idrank)
+                                        .FirstOrDefault();
+                    result.Idrank = RankId;
+                    _db.KhachHangs.Update(result);
+                    _db.SaveChanges();
+                }
                 return true;
             }
         }

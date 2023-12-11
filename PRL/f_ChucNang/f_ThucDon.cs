@@ -150,6 +150,9 @@ namespace PRL.f_ChucNang
                 dgv_SanPham.Rows.Add(stt++, item.SanPham.IdsanPham, item.SanPham.TenSanPham, item.SanPham.Gia,
                     item.SanPham.TrangThai == 1 ? "Đang Bán" : "Ngừng Bán", item.SanPham.Thue, item.TenLoaiSP, item.SanPham.IdloaiSanPham, item.SanPham.HinhAnh, item.SanPham.IdnhanVien);
             }
+            dgv_SanPham.Columns[2].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dgv_SanPham.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_SanPham.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
         }
 
         private void txt_FindSP_TextChanged(object sender, EventArgs e)

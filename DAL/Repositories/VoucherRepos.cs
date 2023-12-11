@@ -12,150 +12,135 @@ namespace DAL.Repositories
     public class VoucherRepos : IVoucherRepos
     {
         Da1CoffeeContext _db;
-        DateTime? _datenow = DateTime.Now.Date;
         public VoucherRepos()
         {
-            _db = new();
-        }
-        public List<Voucher> GetVouchers(string id, int? trangThai)
-        {
-            var get = _db.Vouchers;
-            if (!string.IsNullOrEmpty(id))
-            {
-                return get.Where(x => x.Idvoucher.Contains(id)).ToList();
-            }
-            if (trangThai.HasValue)
-            {
-                if (trangThai == 1) //het han
-                {
-                    return get.Where(c => c.DateEnd.Value.Date < DateTime.Now.Date).ToList();
-                }
-                if (trangThai == 0) //all
-                {
-                    return get.ToList();
-                }
-                if (trangThai == 2) // dang ap dung
-                {
-                    return get.Where(x => x.TrangThai == 1).ToList();
-                }
-                if (trangThai == 3) //chua ap dung
-                {
-                    return get.Where(x => x.TrangThai == 2).ToList();
-                }
-
-
-            }
-            var changeTrangThai = (get.Where(x => x.DateEnd.Value.Date <= _datenow).ToList());
-            if (changeTrangThai.Count > 0)
-            {
-                foreach (var item in changeTrangThai)
-                {
-                    item.TrangThai = 0;
-                    UpdateVocuher(item);
-
-                }
-            }
-            return get.ToList();
+            _db = new Da1CoffeeContext();
         }
 
         public bool AddVoucher(Voucher voucher)
         {
             try
             {
-                // Kiểm tra xem có sản phẩm nào trong cơ sở dữ liệu hay không
                 if (_db.Vouchers.Any())
                 {
-                    // Truy vấn IdsanPham lớn nhất
-                    var maxId = _db.Vouchers.Max(vc => vc.Idvoucher);
+                    var maxId = _db.Vouchers.Max(v => v.Idvoucher);
 
-                    // Tăng giá trị lên 1
                     int nextId = int.Parse(maxId.Substring(2)) + 1;
 
-                    // Tạo IdsanPham mới
                     voucher.Idvoucher = "VC" + nextId.ToString("D3");
+                    voucher.TrangThai = 2;
                 }
                 else
                 {
-                    // Nếu không có sản phẩm, mặc định IdsanPham là "SP001"
                     voucher.Idvoucher = "VC001";
-
+                    voucher.TrangThai = 2;
                 }
-                CheckTrangThai(voucher.Idvoucher);
-                // Thêm sản phẩm và lưu thay đổi
                 _db.Add(voucher);
                 _db.SaveChanges();
-
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 return false;
             }
         }
 
-        public bool UpdateVocuher(Voucher voucher)
-        {
-            if (voucher.DateEnd.Value.Date >= _datenow)
-            {
-                voucher.TrangThai = 1;
-            }
-            //CheckTrangThai(voucher.Idvoucher);
-            _db.Update(voucher);
-            _db.SaveChanges();
-            return true;
-        }
-        
-
-        public bool DeleteVocuher(string id)
-        {
-            try
-            {
-                var result = _db.Vouchers.FirstOrDefault(x => x.Idvoucher == id);
-                if (result == null)
-                {
-                    return false;
-                }
-
-                _db.Remove(result);
-                _db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public Voucher GetByIdVC(string id)
-        {
-            var search = _db.Vouchers.Find(id);
-            return search;
-
-        }
-
-        public Voucher GetByCode(string code)
-        {
-            var search = _db.Vouchers.FirstOrDefault(x => x.Code.Trim().ToLower() == code.Trim().ToLower());
-            return search;
-
-        }
-
-        public void CheckTrangThai(string idVoucher)
+        public void checkTrangThai()
         {
             foreach (var item in _db.Vouchers.ToList())
             {
-                if (item.Idvoucher == idVoucher)
+                if (item.TrangThai == 1 && item.DateEnd.Value.Date < DateTime.Now.Date)
                 {
-                    item.TrangThai = 1;
-                    _db.Update(item);
-                    _db.SaveChanges();
-                }
-                if (item.Idvoucher != idVoucher && item.TrangThai == 1)
-                {
+
                     item.TrangThai = 0;
                     _db.Update(item);
-                    _db.SaveChanges();
+                    _db.SaveChanges();                   
                 }
+                //else
+                //{
+                //    return;
+                //}
+            }
+        }
+
+        public bool checkVoucher(int cbx)
+        {          
+            var tt = _db.Vouchers.Any(x => x.TrangThai == 1);
+            
+            if (cbx == 1 && tt == true)
+            {
+                return true;
+            }
+            if (cbx == 1 && tt == false)
+            {
+                return false;
+            }
+            return false;
+        }
+
+        public List<Voucher> GetVouchers(string searchText, int cbx)
+        {
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                return _db.Vouchers.Where(x => x.Code.Contains(searchText)).ToList();
+            }
+            if (cbx == 0)
+            {
+                return _db.Vouchers.ToList();
+            }
+            else if (cbx == 1)
+            {
+                return _db.Vouchers.Where(x => x.TrangThai == 0).ToList();
+            }
+            else if (cbx == 2)
+            {
+                return _db.Vouchers.Where(x => x.TrangThai == 1).ToList();
+            }
+            else if (cbx == 3)
+            {
+                return _db.Vouchers.Where(x => x.TrangThai == 2).ToList();
+            }
+            return _db.Vouchers.ToList();
+        }
+
+        public int UpdateVocuher(string id, Voucher voucher)
+        {
+            try
+            {
+                var tt = _db.Vouchers.Any(x => x.TrangThai == 1);
+                var tt2 = _db.Vouchers.Any(x => x.TrangThai == 1 && x.Idvoucher == id);
+
+                if (voucher.TrangThai == 1 && tt == true && tt2 == false)
+                {
+                    return 2;
+                }
+                //if (voucher.TrangThai == 1 && tt == true && tt2 == true)
+                //{
+                //    return 0;
+                //}               
+                var result = _db.Vouchers.FirstOrDefault(x => x.Idvoucher == id);
+                if (result == null)
+                {
+                    return 1;
+                }
+                result.Idvoucher = voucher.Idvoucher;
+                result.Code = voucher.Code;
+                result.SoLuong = voucher.SoLuong;
+                result.PhanTram = voucher.PhanTram;
+                result.DateStart = voucher.DateStart;
+                result.DateEnd = voucher.DateEnd;
+                result.DieuKienApDung = voucher.DieuKienApDung;
+                result.TrangThai = voucher.TrangThai;
+
+                _db.Update(result);
+                _db.SaveChanges();
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return 1;
             }
         }
     }

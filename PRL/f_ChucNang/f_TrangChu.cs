@@ -25,6 +25,7 @@ namespace PRL
         private List<DichVuPhatSinh> lstDVPS;
         private List<HoaDon> lstHoaDon;
         private List<HDCT_VM> lstHDCT;
+        KhachHangService _kh = new KhachHangService();
 
         private int _btnHeight = 180;
         private int _btnWidth = 180;
@@ -37,9 +38,13 @@ namespace PRL
         private int SL;
         private string _idHDCTCellClick;
         private string _idHDCellClick = null;
-        public f_TrangChu()
+        double? _tongtienSP = 0;
+
+        string _idNhanVien;
+        public f_TrangChu(string idnhanvien)
         {
             InitializeComponent();
+            this._idNhanVien = idnhanvien;
         }
         private void f_TrangChu_Load(object sender, EventArgs e)
         {
@@ -424,7 +429,7 @@ namespace PRL
                 if (lstHoaDon.Count == 0)
                 {
                     HoaDon hd = new HoaDon();
-                    hd.IdnhanVien = "NV002";
+                    hd.IdnhanVien = _idNhanVien;
                     hd.TrangThai = 0;
                     hd.NgayXuatDon = DateTime.Now;
                     var hds = HDrepos.AddHoaDon(hd);
@@ -456,7 +461,7 @@ namespace PRL
                 if (dgv_Order.Rows.Count == 1)
                 {
                     HoaDon hd = new HoaDon();
-                    hd.IdnhanVien = "NV002";
+                    hd.IdnhanVien = _idNhanVien;
                     hd.TrangThai = 0;
                     hd.NgayXuatDon = DateTime.Now;
                     var hds = HDrepos.AddHoaDon(hd);
@@ -606,22 +611,23 @@ namespace PRL
             {
                 return;
             }
-            var objCellClick = lstHoaDon[index];
-            _idHDCellClick = objCellClick.IdhoaDon;
-
+            var HDCellClick = lstHoaDon[index];
+            _idHDCellClick = HDCellClick.IdhoaDon;
+            _tongtienSP = HDCellClick.TongTien;
             LoadDGVOrder(_idHDCellClick);
             dgv_Order.ClearSelection();
             ClearData();
-            txt_TongTien.Text = objCellClick.TongTien.ToString();
+            txt_TongTien.Text = HDCellClick.TongTien.ToString();
             txt_DichVuPhatSinh.ReadOnly = false;
             txt_KhachDua.ReadOnly = false;
             txt_MaThanhVien.ReadOnly = false;
+            txt_Voucher.ReadOnly = false;
         }
 
         private void btn_ThanhToan_Click(object sender, EventArgs e)
         {
             var confirm1 = MessageBox.Show("Xác nhận thanh toán?", "Xác nhận", MessageBoxButtons.OKCancel);
-
+            var confirm2 = DialogResult;
             if (confirm1 == DialogResult.OK)
             {
                 if (_idHDCellClick == null)
@@ -632,59 +638,142 @@ namespace PRL
                 {
                     if (String.IsNullOrEmpty(txt_KhachDua.Text))
                     {
-                        var confirm2 = MessageBox.Show("Chưa nhập số tiền khách đưa. Chọn OK để tiếp tục hoặc Cancel để quay lại", "Tiếp tục", MessageBoxButtons.OKCancel);
-                        if (confirm2 == DialogResult.OK)
+                        confirm2 = MessageBox.Show("Chưa nhập số tiền khách đưa. Chọn OK để tiếp tục hoặc Cancel để quay lại", "Tiếp tục", MessageBoxButtons.OKCancel);
+                    }
+
+
+                    if (confirm2 == DialogResult.OK)
+                    {
+                        if (txt_ChiTietDVPS.ReadOnly == false)
                         {
-                            if (txt_ChiTietDVPS.ReadOnly == false)
+                            if (String.IsNullOrEmpty(txt_ChiTietDVPS.Text))
                             {
-                                if (String.IsNullOrEmpty(txt_ChiTietDVPS.Text))
-                                {
-                                    MessageBox.Show("Chưa nhập chi tiết dịch vụ phát sinh");
-                                }
-                                else
-                                {
-                                    var search = HDrepos.GetHoaDonById(_idHDCellClick);
-
-                                    search.TrangThai = 1;
-                                    search.TongTien = Convert.ToDouble(txt_TongTien.Text);
-                                    HDrepos.UpdateHoaDon(search);
-
-                                    DichVuPhatSinh dvps = new DichVuPhatSinh();
-                                    dvps.IdhoaDon = _idHDCellClick;
-                                    dvps.ChiTiet = txt_ChiTietDVPS.Text;
-                                    dvps.SoTien = Convert.ToDouble(txt_DichVuPhatSinh.Text);
-                                    DVPSrepos.AddDVPS(dvps);
-
-                                    _idHDCellClick = null;
-                                    dgv_Order.Rows.Clear();
-                                    txt_DichVuPhatSinh.ReadOnly = true;
-                                    LoadDGVHoaDon();
-                                    ClearData();
-                                }
+                                MessageBox.Show("Chưa nhập chi tiết dịch vụ phát sinh");
                             }
                             else
                             {
                                 var search = HDrepos.GetHoaDonById(_idHDCellClick);
+
                                 search.TrangThai = 1;
+                                search.TongTien = Convert.ToDouble(txt_TongTien.Text);
+                                if (!String.IsNullOrEmpty(txt_MaThanhVien.Text))
+                                {
+                                    if (_kh.GetKhachHangs(null).FirstOrDefault(x => x.Sdt.Equals(txt_MaThanhVien.Text)) != null)
+                                    {
+                                        search.Sdt = txt_MaThanhVien.Text;
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Không tìm thấy mã thành viên");
+                                        return;
+                                    }
+
+                                }
                                 HDrepos.UpdateHoaDon(search);
+                                if (!String.IsNullOrEmpty(txt_MaThanhVien.Text))
+                                {
+                                    HDrepos.UpdatePointKhachHang(search.Sdt);
+                                }
+                                if (!String.IsNullOrEmpty(txt_Voucher.Text))
+                                {
+                                    if (HDrepos.SearchVoucher(txt_Voucher.Text) != null)
+                                    {
+                                        HDrepos.UpdateSoLuongVC(txt_Voucher.Text);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Không tìm thấy voucher");
+                                        return;
+                                    }
+
+                                }
+
+                                DichVuPhatSinh dvps = new DichVuPhatSinh();
+                                dvps.IdhoaDon = _idHDCellClick;
+                                dvps.ChiTiet = txt_ChiTietDVPS.Text;
+                                dvps.SoTien = Convert.ToDouble(txt_DichVuPhatSinh.Text);
+                                DVPSrepos.AddDVPS(dvps);
+
                                 _idHDCellClick = null;
                                 dgv_Order.Rows.Clear();
                                 txt_DichVuPhatSinh.ReadOnly = true;
+                                txt_ChiTietDVPS.ReadOnly = true;
+                                txt_MaThanhVien.ReadOnly = true;
+                                txt_MaThanhVien.Text = string.Empty;
+                                txt_Voucher.ReadOnly = true;
                                 LoadDGVHoaDon();
                                 ClearData();
                             }
                         }
                         else
                         {
-                            return;
+                            var search = HDrepos.GetHoaDonById(_idHDCellClick);
+                            search.TrangThai = 1;
+                            if (!String.IsNullOrEmpty(txt_MaThanhVien.Text))
+                            {
+                                if (_kh.GetKhachHangs(null).FirstOrDefault(x => x.Sdt.Equals(txt_MaThanhVien.Text)) != null)
+                                {
+                                    search.Sdt = txt_MaThanhVien.Text;
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Không tìm thấy mã thành viên");
+                                    return;
+                                }
+
+                            }
+                            HDrepos.UpdateHoaDon(search);
+                            if (!String.IsNullOrEmpty(txt_MaThanhVien.Text))
+                            {
+                                HDrepos.UpdatePointKhachHang(search.Sdt);
+                            }
+                            if (!String.IsNullOrEmpty(txt_Voucher.Text))
+                            {
+                                if (HDrepos.SearchVoucher(txt_Voucher.Text) != null)
+                                {
+                                    HDrepos.UpdateSoLuongVC(txt_Voucher.Text);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Không tìm thấy voucher");
+                                    return;
+                                }
+
+                            }
+
+                            _idHDCellClick = null;
+                            dgv_Order.Rows.Clear();
+                            txt_DichVuPhatSinh.ReadOnly = true;
+                            txt_ChiTietDVPS.ReadOnly = true;
+                            txt_MaThanhVien.ReadOnly = true;
+                            txt_MaThanhVien.Text = string.Empty;
+                            txt_Voucher.ReadOnly = true;
+                            LoadDGVHoaDon();
+                            ClearData();
                         }
                     }
+
+                    else
+                    {
+                        return;
+                    }
+
+
                 }
+
+
+
             }
             else
             {
                 return;
             }
+
+            //
+            ppd_HoaDon.Document = pd_HoaDon;
+            ppd_HoaDon.WindowState = FormWindowState.Maximized;
+            ppd_HoaDon.PrintPreviewControl.Zoom = 1.5;
+            ppd_HoaDon.ShowDialog();
         }
 
         private void btn_Cho_Click(object sender, EventArgs e)
@@ -781,19 +870,29 @@ namespace PRL
                 }
                 else
                 {
-                    if (Regex.IsMatch(txt_DichVuPhatSinh.Text, @"^\d+$") && !String.IsNullOrEmpty(txt_DichVuPhatSinh.Text))
+                    if (String.IsNullOrEmpty(txt_Voucher.Text))
                     {
-                        txt_ChiTietDVPS.ReadOnly = false;
-                        double? tienNew = 0;
-                        double dvps = Convert.ToDouble(txt_DichVuPhatSinh.Text);
-                        tienNew = tongtien + dvps;
-                        txt_TongTien.Text = tienNew.ToString();
+                        if (Regex.IsMatch(txt_DichVuPhatSinh.Text, @"^\d+$") && !String.IsNullOrEmpty(txt_DichVuPhatSinh.Text))
+                        {
+                            txt_ChiTietDVPS.ReadOnly = false;
+                            double? tienNew = 0;
+                            double dvps = Convert.ToDouble(txt_DichVuPhatSinh.Text);
+                            tienNew = tongtien + dvps;
+                            txt_TongTien.Text = tienNew.ToString();
+                        }
+                        else
+                        {
+                            txt_ChiTietDVPS.ReadOnly = false;
+                            MessageBox.Show("Dịch vụ phát sinh chưa đúng định dạng");
+                            txt_DichVuPhatSinh.Clear();
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Dịch vụ phát sinh chưa đúng định dạng");
-                        txt_DichVuPhatSinh.Clear();
+                        txt_TongTien.Text = (Convert.ToDouble(CheckVoucher()) + Convert.ToDouble(txt_DichVuPhatSinh.Text)).ToString();
+
                     }
+
                 }
             }
             else
@@ -806,10 +905,147 @@ namespace PRL
         {
 
         }
+        private double? CheckVoucher()
+        {
+            double? kq = _tongtienSP;
+            string code = txt_Voucher.Text;
+            var get = HDrepos.SearchVoucher(code);
+            if (get != null)
+            {
+                if (get.DieuKienApDung <= _tongtienSP && get.TrangThai == 1)
+                {
+                    double? phantram = get.PhanTram;
+                    double? kqphantram = _tongtienSP * phantram;
+                    kq = _tongtienSP - kqphantram;
+                }
+                else
+                {
+                    MessageBox.Show("Voucher nay chua du dieu kien su dung");
+                    txt_Voucher.Text = "";
+                    return _tongtienSP;
+                }
+            }
 
+            return kq;
+        }
         private void txt_Voucher_TextChanged(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(txt_DichVuPhatSinh.Text))
+            {
+                txt_TongTien.Text = CheckVoucher().ToString();
+            }
+            else
+            {
+                txt_TongTien.Text = (CheckVoucher() + Convert.ToDouble(txt_DichVuPhatSinh.Text)).ToString();
+            }
 
+        }
+
+        private void btn_TamTinh_Click(object sender, EventArgs e)
+        {
+            ppd_HoaDon.Document = pd_HoaDon;
+            ppd_HoaDon.WindowState = FormWindowState.Maximized;
+            ppd_HoaDon.PrintPreviewControl.Zoom = 1.5;
+            ppd_HoaDon.ShowDialog();
+        }
+
+        private void pd_HoaDon_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            // lấy thông tin từ bảng cấu hình
+            var tenCuaHang = "Quan ly quan ca phe";
+            var maHoaDon = "HD001";
+            var diaChi = "Số 1 Trịnh Văn Bô";
+            var sdt = "0334 760 668";
+            // lấy hóa đơn dựa vào idhoadon
+
+            // lấy bề rộng của giấy in
+            var w = pd_HoaDon.DefaultPageSettings.PaperSize.Width;
+
+            // vẽ header của bill
+            // 1. tên của hàng
+            e.Graphics.DrawString(
+                tenCuaHang.ToUpper(),
+                new Font("Courier New", 12, FontStyle.Bold),
+                Brushes.Black,
+                new Point(100, 20));
+
+            // 2. mã hóa đơn
+            e.Graphics.DrawString(
+                "Mã Hóa Đơn: " + maHoaDon.ToUpper(),
+                new Font("Courier New", 12, FontStyle.Bold),
+                Brushes.Black,
+                new Point(w / 2 + 140, 20));
+
+
+            // 3. địa chỉ, số điện thoại
+            e.Graphics.DrawString(
+                string.Format("{0} - {1}", diaChi, sdt),
+                new Font("Courier New", 8, FontStyle.Bold),
+                Brushes.Black,
+                new Point(90, 45));
+
+            // 4. ngày giờ xuất hóa đơn
+            e.Graphics.DrawString(
+                string.Format("Ngày Xuất HD: {0}", DateTime.Now.ToString("dd/MM/yyyy HH:mm")),
+                new Font("Courier New", 8, FontStyle.Bold),
+                Brushes.Black,
+                new Point(w / 2 + 140, 45));
+
+            // định dạng bút vẽ
+            Pen blackPen = new Pen(Color.Black, 1);
+
+            // tọa độ theo chiều dọc
+            var y = 70;
+
+            // định nghĩa 2 điểm để vẽ 2 đường thắng
+            // cách lề trái 10, lề phải 10
+            Point p1 = new Point(10, y);
+            Point p2 = new Point(w - 10, y);
+            // kẻ đường thẳng thứ nhất
+            e.Graphics.DrawLine(blackPen, p1, p2);
+
+            y += 10;
+
+            e.Graphics.DrawString("STT", new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, new Point(20, y));
+            e.Graphics.DrawString("Tên Sản Phẩm", new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, new Point(100, y));
+            e.Graphics.DrawString("SL", new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, new Point(w / 2 - 100, y));
+            e.Graphics.DrawString("Đơn Giá", new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, new Point(w / 2 + 50, y));
+            e.Graphics.DrawString("Thành Tiền", new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, new Point(w / 2 + 200, y));
+
+            y += 20;
+            p1 = new Point(10, y);
+            p2 = new Point(w - 10, y);
+            e.Graphics.DrawLine(blackPen, p1, p2);
+
+            int i = 1;
+            y += 10;
+
+            double tongTien = 0;
+            foreach (var item in lstHDCT)
+            {
+                e.Graphics.DrawString($"{i++}", new Font("Courier New", 9, FontStyle.Bold), Brushes.Black, new Point(20, y));
+                e.Graphics.DrawString(item.TenSanPham, new Font("Courier New", 9, FontStyle.Bold), Brushes.Black, new Point(100, y));
+                e.Graphics.DrawString(Convert.ToString(item.SoLuong), new Font("Courier New", 9, FontStyle.Bold), Brushes.Black, new Point(w / 2 - 100, y));
+                e.Graphics.DrawString(Convert.ToString(item.GiaBan), new Font("Courier New", 9, FontStyle.Bold), Brushes.Black, new Point(w / 2 + 50, y));
+                e.Graphics.DrawString(Convert.ToString(item.GiaBan * item.SoLuong), new Font("Courier New", 9, FontStyle.Bold), Brushes.Black, new Point(w / 2 + 200, y));
+
+                tongtien += item.GiaBan * item.SoLuong;
+                y += 20;
+            }
+
+            y += 50;
+            p1 = new Point(10, y);
+            p2 = new Point(w - 10, y);
+            e.Graphics.DrawLine(blackPen, p1, p2);
+
+            // tổng tiền thanh toán
+            y += 20;
+            e.Graphics.DrawString(string.Format($"Tổng tiền: {tongtien} VND"), new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, new Point(w / 2 + 200, y));
+            tongtien = 0;
+
+
+            y += 40;
+            e.Graphics.DrawString(string.Format("Cảm ơn Quý Khách và hẹn gặp lại !"), new Font("Courier New", 9, FontStyle.Bold), Brushes.Black, new Point(w / 2 - 100, y));
         }
     }
 }

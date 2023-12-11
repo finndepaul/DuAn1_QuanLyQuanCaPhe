@@ -94,6 +94,7 @@
             btn_Sua.TabIndex = 15;
             btn_Sua.Text = "Sửa";
             btn_Sua.UseVisualStyleBackColor = true;
+            btn_Sua.Click += btn_Sua_Click_1;
             // 
             // btn_Them
             // 
@@ -110,6 +111,7 @@
             // 
             txt_IDRank.Location = new Point(235, 325);
             txt_IDRank.Name = "txt_IDRank";
+            txt_IDRank.ReadOnly = true;
             txt_IDRank.Size = new Size(349, 27);
             txt_IDRank.TabIndex = 13;
             // 
@@ -117,6 +119,7 @@
             // 
             txt_Point.Location = new Point(235, 269);
             txt_Point.Name = "txt_Point";
+            txt_Point.ReadOnly = true;
             txt_Point.Size = new Size(349, 27);
             txt_Point.TabIndex = 12;
             // 
@@ -124,6 +127,7 @@
             // 
             txt_IDNhanVien.Location = new Point(235, 387);
             txt_IDNhanVien.Name = "txt_IDNhanVien";
+            txt_IDNhanVien.ReadOnly = true;
             txt_IDNhanVien.Size = new Size(349, 27);
             txt_IDNhanVien.TabIndex = 11;
             // 

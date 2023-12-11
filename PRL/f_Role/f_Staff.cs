@@ -22,7 +22,7 @@ namespace PRL
         }
         private void btn_Home_Click(object sender, EventArgs e) //
         {
-            f_TrangChu objForm = new f_TrangChu();
+            f_TrangChu objForm = new f_TrangChu(idNhanVien);
             objForm.TopLevel = false;
             pn_Staff.Controls.Add(objForm);
             objForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -46,7 +46,7 @@ namespace PRL
 
         private void f_Staff_Load(object sender, EventArgs e)
         {
-            f_TrangChu objForm = new f_TrangChu();
+            f_TrangChu objForm = new f_TrangChu(idNhanVien);
             objForm.TopLevel = false;
             pn_Staff.Controls.Add(objForm);
             objForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
