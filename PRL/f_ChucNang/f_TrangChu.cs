@@ -371,7 +371,14 @@ namespace PRL
                             _tenSPWhenClick = bt.Name;
                             lb_TenSP.Visible = true;
                             lb_TenSP.Text = bt.Name;
-                            lb_Gia.Text = item.SanPham.Gia.ToString();
+                            if (item.SanPham.GiaSale > 0)
+                            {
+                                lb_Gia.Text = item.SanPham.GiaSale.ToString();
+                            }
+                            else if (item.SanPham.GiaSale <= 0)
+                            {
+                                lb_Gia.Text = item.SanPham.Gia.ToString();
+                            }
                             lb_Gia.Visible = true;
                         };
 
@@ -654,7 +661,7 @@ namespace PRL
                     }
 
 
-                    if (confirm2 == DialogResult.OK)
+                    if (confirm2 == DialogResult.OK || confirm1 == DialogResult.OK)
                     {
                         if (txt_ChiTietDVPS.ReadOnly == false)
                         {
@@ -854,13 +861,13 @@ namespace PRL
             if (txt_TongTien.Text == null)
             {
                 return;
-            }
+            }           
             string khachdua = txt_KhachDua.Text.ToString();
             if (Regex.IsMatch(khachdua, @"^\d+$") && !String.IsNullOrEmpty(khachdua))
             {
                 string tratien = (Convert.ToInt32(txt_KhachDua.Text.Trim()) - Convert.ToInt32(txt_TongTien.Text.Trim())).ToString();
                 txt_TraLai.Text = tratien.ToString();
-            }
+            }           
             else
             {
                 txt_TraLai.Text = "Không tính được";
